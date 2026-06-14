@@ -1,0 +1,3510 @@
+{
+ "meta": {
+  "league": "FIFA World Cup",
+  "season": "2026 FIFA World Cup",
+  "eventCount": 100,
+  "note": "SLIMMED projection of the fields worldcup.ts consumes; not a raw API response"
+ },
+ "events": [
+  {
+   "id": "760415",
+   "utcDate": "2026-06-11T19:00Z",
+   "shortName": "RSA @ MEX",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group A",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+8'",
+   "period": 2,
+   "venue": {
+    "name": "Estadio Banorte",
+    "city": "Mexico City",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Mexico",
+     "tla": "MEX",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
+     "score": "2",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "South Africa",
+     "tla": "RSA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760414",
+   "utcDate": "2026-06-12T02:00Z",
+   "shortName": "CZE @ KOR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group A",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+7'",
+   "period": 2,
+   "venue": {
+    "name": "Estadio Akron",
+    "city": "Guadalajara",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "South Korea",
+     "tla": "KOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/kors.png",
+     "score": "2",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Czechia",
+     "tla": "CZE",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760416",
+   "utcDate": "2026-06-12T19:00Z",
+   "shortName": "BIH @ CAN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group B",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+7'",
+   "period": 2,
+   "venue": {
+    "name": "BMO Field",
+    "city": "Toronto",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Canada",
+     "tla": "CAN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/can.png",
+     "score": "1",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Bosnia-Herzegovina",
+     "tla": "BIH",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760417",
+   "utcDate": "2026-06-13T01:00Z",
+   "shortName": "PAR @ USA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group D",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+9'",
+   "period": 2,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "United States",
+     "tla": "USA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png",
+     "score": "4",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Paraguay",
+     "tla": "PAR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/par.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760420",
+   "utcDate": "2026-06-13T19:00Z",
+   "shortName": "SUI @ QAT",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group B",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+7'",
+   "period": 2,
+   "venue": {
+    "name": "Levi's Stadium",
+    "city": "Santa Clara, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Qatar",
+     "tla": "QAT",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/qat.png",
+     "score": "1",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Switzerland",
+     "tla": "SUI",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760419",
+   "utcDate": "2026-06-13T22:00Z",
+   "shortName": "MAR @ BRA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group C",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+25'",
+   "period": 2,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Brazil",
+     "tla": "BRA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bra.png",
+     "score": "1",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Morocco",
+     "tla": "MAR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/mar.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760418",
+   "utcDate": "2026-06-14T01:00Z",
+   "shortName": "SCO @ HAI",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group C",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+8'",
+   "period": 2,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Haiti",
+     "tla": "HAI",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Scotland",
+     "tla": "SCO",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760421",
+   "utcDate": "2026-06-14T04:00Z",
+   "shortName": "TUR @ AUS",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group D",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+6'",
+   "period": 2,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Australia",
+     "tla": "AUS",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/aus.png",
+     "score": "2",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Türkiye",
+     "tla": "TUR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760422",
+   "utcDate": "2026-06-14T17:00Z",
+   "shortName": "CUW @ GER",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group E",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+6'",
+   "period": 2,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Germany",
+     "tla": "GER",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+     "score": "7",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Curaçao",
+     "tla": "CUW",
+     "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/11678.png",
+     "score": "1",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760425",
+   "utcDate": "2026-06-14T20:00Z",
+   "shortName": "JPN @ NED",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group F",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+6'",
+   "period": 2,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Netherlands",
+     "tla": "NED",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+     "score": "2",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Japan",
+     "tla": "JPN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/jpn.png",
+     "score": "2",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760423",
+   "utcDate": "2026-06-14T23:00Z",
+   "shortName": "ECU @ CIV",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group E",
+   "statusName": "STATUS_FULL_TIME",
+   "state": "post",
+   "completed": true,
+   "displayClock": "90'+8'",
+   "period": 2,
+   "venue": {
+    "name": "Lincoln Financial Field",
+    "city": "Philadelphia, Pennsylvania",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Ivory Coast",
+     "tla": "CIV",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/civ.png",
+     "score": "1",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Ecuador",
+     "tla": "ECU",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ecu.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760424",
+   "utcDate": "2026-06-15T02:00Z",
+   "shortName": "TUN @ SWE",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group F",
+   "statusName": "STATUS_FIRST_HALF",
+   "state": "in",
+   "completed": false,
+   "displayClock": "31'",
+   "period": 1,
+   "venue": {
+    "name": "Estadio BBVA",
+    "city": "Guadalupe",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Sweden",
+     "tla": "SWE",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
+     "score": "2",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Tunisia",
+     "tla": "TUN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/tun.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760428",
+   "utcDate": "2026-06-15T16:00Z",
+   "shortName": "CPV @ ESP",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group H",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Spain",
+     "tla": "ESP",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Cape Verde",
+     "tla": "CPV",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cpv.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760426",
+   "utcDate": "2026-06-15T19:00Z",
+   "shortName": "EGY @ BEL",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group G",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lumen Field",
+    "city": "Seattle, Washington",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Belgium",
+     "tla": "BEL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Egypt",
+     "tla": "EGY",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/egy.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760429",
+   "utcDate": "2026-06-15T22:00Z",
+   "shortName": "URU @ KSA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group H",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Hard Rock Stadium",
+    "city": "Miami Gardens, Florida",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Saudi Arabia",
+     "tla": "KSA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ksa.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Uruguay",
+     "tla": "URU",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/uru.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760427",
+   "utcDate": "2026-06-16T01:00Z",
+   "shortName": "NZL @ IRN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group G",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Iran",
+     "tla": "IRN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/irn.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "New Zealand",
+     "tla": "NZL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/nzl.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760432",
+   "utcDate": "2026-06-16T19:00Z",
+   "shortName": "SEN @ FRA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group I",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "France",
+     "tla": "FRA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Senegal",
+     "tla": "SEN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sen.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760430",
+   "utcDate": "2026-06-16T22:00Z",
+   "shortName": "NOR @ IRQ",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group I",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Iraq",
+     "tla": "IRQ",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/irq.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Norway",
+     "tla": "NOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760433",
+   "utcDate": "2026-06-17T01:00Z",
+   "shortName": "ALG @ ARG",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group J",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City, Missouri",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Argentina",
+     "tla": "ARG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/arg.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Algeria",
+     "tla": "ALG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/alg.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760431",
+   "utcDate": "2026-06-17T04:00Z",
+   "shortName": "JOR @ AUT",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group J",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Levi's Stadium",
+    "city": "Santa Clara, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Austria",
+     "tla": "AUT",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Jordan",
+     "tla": "JOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/jor.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760435",
+   "utcDate": "2026-06-17T17:00Z",
+   "shortName": "COD @ POR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group K",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Portugal",
+     "tla": "POR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Congo DR",
+     "tla": "COD",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/rdc.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760437",
+   "utcDate": "2026-06-17T20:00Z",
+   "shortName": "CRO @ ENG",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group L",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "England",
+     "tla": "ENG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Croatia",
+     "tla": "CRO",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760434",
+   "utcDate": "2026-06-17T23:00Z",
+   "shortName": "PAN @ GHA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group L",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BMO Field",
+    "city": "Toronto",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Ghana",
+     "tla": "GHA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/gha.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Panama",
+     "tla": "PAN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/pan.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760436",
+   "utcDate": "2026-06-18T02:00Z",
+   "shortName": "COL @ UZB",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group K",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Banorte",
+    "city": "Mexico City",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Uzbekistan",
+     "tla": "UZB",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/uzb.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Colombia",
+     "tla": "COL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/col.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760438",
+   "utcDate": "2026-06-18T16:00Z",
+   "shortName": "RSA @ CZE",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group A",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Czechia",
+     "tla": "CZE",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "South Africa",
+     "tla": "RSA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760439",
+   "utcDate": "2026-06-18T19:00Z",
+   "shortName": "BIH @ SUI",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group B",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Switzerland",
+     "tla": "SUI",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Bosnia-Herzegovina",
+     "tla": "BIH",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760440",
+   "utcDate": "2026-06-18T22:00Z",
+   "shortName": "QAT @ CAN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group B",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Canada",
+     "tla": "CAN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/can.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Qatar",
+     "tla": "QAT",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/qat.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760441",
+   "utcDate": "2026-06-19T01:00Z",
+   "shortName": "KOR @ MEX",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group A",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Akron",
+    "city": "Guadalajara",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Mexico",
+     "tla": "MEX",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "South Korea",
+     "tla": "KOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/kors.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760442",
+   "utcDate": "2026-06-19T19:00Z",
+   "shortName": "AUS @ USA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group D",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lumen Field",
+    "city": "Seattle, Washington",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "United States",
+     "tla": "USA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Australia",
+     "tla": "AUS",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/aus.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760445",
+   "utcDate": "2026-06-19T22:00Z",
+   "shortName": "MAR @ SCO",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group C",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Scotland",
+     "tla": "SCO",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Morocco",
+     "tla": "MAR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/mar.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760444",
+   "utcDate": "2026-06-20T00:30Z",
+   "shortName": "HAI @ BRA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group C",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lincoln Financial Field",
+    "city": "Philadelphia, Pennsylvania",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Brazil",
+     "tla": "BRA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bra.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Haiti",
+     "tla": "HAI",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760443",
+   "utcDate": "2026-06-20T03:00Z",
+   "shortName": "PAR @ TUR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group D",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Levi's Stadium",
+    "city": "Santa Clara, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Türkiye",
+     "tla": "TUR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Paraguay",
+     "tla": "PAR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/par.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760447",
+   "utcDate": "2026-06-20T17:00Z",
+   "shortName": "SWE @ NED",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group F",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Netherlands",
+     "tla": "NED",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Sweden",
+     "tla": "SWE",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760448",
+   "utcDate": "2026-06-20T20:00Z",
+   "shortName": "CIV @ GER",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group E",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BMO Field",
+    "city": "Toronto",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Germany",
+     "tla": "GER",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Ivory Coast",
+     "tla": "CIV",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/civ.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760446",
+   "utcDate": "2026-06-21T00:00Z",
+   "shortName": "CUW @ ECU",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group E",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City, Missouri",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Ecuador",
+     "tla": "ECU",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ecu.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Curaçao",
+     "tla": "CUW",
+     "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/11678.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760449",
+   "utcDate": "2026-06-21T04:00Z",
+   "shortName": "JPN @ TUN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group F",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio BBVA",
+    "city": "Guadalupe",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Tunisia",
+     "tla": "TUN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/tun.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Japan",
+     "tla": "JPN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/jpn.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760453",
+   "utcDate": "2026-06-21T16:00Z",
+   "shortName": "KSA @ ESP",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group H",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Spain",
+     "tla": "ESP",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Saudi Arabia",
+     "tla": "KSA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ksa.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760451",
+   "utcDate": "2026-06-21T19:00Z",
+   "shortName": "IRN @ BEL",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group G",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Belgium",
+     "tla": "BEL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Iran",
+     "tla": "IRN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/irn.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760450",
+   "utcDate": "2026-06-21T22:00Z",
+   "shortName": "CPV @ URU",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group H",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Hard Rock Stadium",
+    "city": "Miami Gardens, Florida",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Uruguay",
+     "tla": "URU",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/uru.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Cape Verde",
+     "tla": "CPV",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cpv.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760452",
+   "utcDate": "2026-06-22T01:00Z",
+   "shortName": "EGY @ NZL",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group G",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "New Zealand",
+     "tla": "NZL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/nzl.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Egypt",
+     "tla": "EGY",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/egy.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760456",
+   "utcDate": "2026-06-22T17:00Z",
+   "shortName": "AUT @ ARG",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group J",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Argentina",
+     "tla": "ARG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/arg.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Austria",
+     "tla": "AUT",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760457",
+   "utcDate": "2026-06-22T21:00Z",
+   "shortName": "IRQ @ FRA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group I",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lincoln Financial Field",
+    "city": "Philadelphia, Pennsylvania",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "France",
+     "tla": "FRA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Iraq",
+     "tla": "IRQ",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/irq.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760454",
+   "utcDate": "2026-06-23T00:00Z",
+   "shortName": "SEN @ NOR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group I",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Norway",
+     "tla": "NOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Senegal",
+     "tla": "SEN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sen.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760455",
+   "utcDate": "2026-06-23T03:00Z",
+   "shortName": "ALG @ JOR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group J",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Levi's Stadium",
+    "city": "Santa Clara, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Jordan",
+     "tla": "JOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/jor.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Algeria",
+     "tla": "ALG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/alg.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760461",
+   "utcDate": "2026-06-23T17:00Z",
+   "shortName": "UZB @ POR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group K",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Portugal",
+     "tla": "POR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Uzbekistan",
+     "tla": "UZB",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/uzb.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760458",
+   "utcDate": "2026-06-23T20:00Z",
+   "shortName": "GHA @ ENG",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group L",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "England",
+     "tla": "ENG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Ghana",
+     "tla": "GHA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/gha.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760460",
+   "utcDate": "2026-06-23T23:00Z",
+   "shortName": "CRO @ PAN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group L",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BMO Field",
+    "city": "Toronto",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Panama",
+     "tla": "PAN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/pan.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Croatia",
+     "tla": "CRO",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760459",
+   "utcDate": "2026-06-24T02:00Z",
+   "shortName": "COD @ COL",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group K",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Akron",
+    "city": "Guadalajara",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Colombia",
+     "tla": "COL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/col.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Congo DR",
+     "tla": "COD",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/rdc.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760462",
+   "utcDate": "2026-06-24T19:00Z",
+   "shortName": "QAT @ BIH",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group B",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lumen Field",
+    "city": "Seattle, Washington",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Bosnia-Herzegovina",
+     "tla": "BIH",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Qatar",
+     "tla": "QAT",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/qat.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760463",
+   "utcDate": "2026-06-24T19:00Z",
+   "shortName": "CAN @ SUI",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group B",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Switzerland",
+     "tla": "SUI",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Canada",
+     "tla": "CAN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/can.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760464",
+   "utcDate": "2026-06-24T22:00Z",
+   "shortName": "HAI @ MAR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group C",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Morocco",
+     "tla": "MAR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/mar.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Haiti",
+     "tla": "HAI",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760465",
+   "utcDate": "2026-06-24T22:00Z",
+   "shortName": "BRA @ SCO",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group C",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Hard Rock Stadium",
+    "city": "Miami Gardens, Florida",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Scotland",
+     "tla": "SCO",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Brazil",
+     "tla": "BRA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bra.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760467",
+   "utcDate": "2026-06-25T01:00Z",
+   "shortName": "MEX @ CZE",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group A",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Banorte",
+    "city": "Mexico City",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Czechia",
+     "tla": "CZE",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Mexico",
+     "tla": "MEX",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760466",
+   "utcDate": "2026-06-25T01:00Z",
+   "shortName": "KOR @ RSA",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group A",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio BBVA",
+    "city": "Guadalupe",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "South Africa",
+     "tla": "RSA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "South Korea",
+     "tla": "KOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/kors.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760473",
+   "utcDate": "2026-06-25T20:00Z",
+   "shortName": "CIV @ CUW",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group E",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lincoln Financial Field",
+    "city": "Philadelphia, Pennsylvania",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Curaçao",
+     "tla": "CUW",
+     "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/11678.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Ivory Coast",
+     "tla": "CIV",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/civ.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760468",
+   "utcDate": "2026-06-25T20:00Z",
+   "shortName": "GER @ ECU",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group E",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Ecuador",
+     "tla": "ECU",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ecu.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Germany",
+     "tla": "GER",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760471",
+   "utcDate": "2026-06-25T23:00Z",
+   "shortName": "SWE @ JPN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group F",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Japan",
+     "tla": "JPN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/jpn.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Sweden",
+     "tla": "SWE",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760472",
+   "utcDate": "2026-06-25T23:00Z",
+   "shortName": "NED @ TUN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group F",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City, Missouri",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Tunisia",
+     "tla": "TUN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/tun.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Netherlands",
+     "tla": "NED",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760469",
+   "utcDate": "2026-06-26T02:00Z",
+   "shortName": "AUS @ PAR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group D",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Levi's Stadium",
+    "city": "Santa Clara, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Paraguay",
+     "tla": "PAR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/par.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Australia",
+     "tla": "AUS",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/aus.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760470",
+   "utcDate": "2026-06-26T02:00Z",
+   "shortName": "USA @ TUR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group D",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Türkiye",
+     "tla": "TUR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "United States",
+     "tla": "USA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760475",
+   "utcDate": "2026-06-26T19:00Z",
+   "shortName": "FRA @ NOR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group I",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Norway",
+     "tla": "NOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "France",
+     "tla": "FRA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760474",
+   "utcDate": "2026-06-26T19:00Z",
+   "shortName": "IRQ @ SEN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group I",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BMO Field",
+    "city": "Toronto",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Senegal",
+     "tla": "SEN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/sen.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Iraq",
+     "tla": "IRQ",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/irq.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760478",
+   "utcDate": "2026-06-27T00:00Z",
+   "shortName": "KSA @ CPV",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group H",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Cape Verde",
+     "tla": "CPV",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cpv.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Saudi Arabia",
+     "tla": "KSA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/ksa.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760479",
+   "utcDate": "2026-06-27T00:00Z",
+   "shortName": "ESP @ URU",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group H",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Akron",
+    "city": "Guadalajara",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Uruguay",
+     "tla": "URU",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/uru.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Spain",
+     "tla": "ESP",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760476",
+   "utcDate": "2026-06-27T03:00Z",
+   "shortName": "IRN @ EGY",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group G",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lumen Field",
+    "city": "Seattle, Washington",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Egypt",
+     "tla": "EGY",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/egy.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Iran",
+     "tla": "IRN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/irn.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760477",
+   "utcDate": "2026-06-27T03:00Z",
+   "shortName": "BEL @ NZL",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group G",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "New Zealand",
+     "tla": "NZL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/nzl.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Belgium",
+     "tla": "BEL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760480",
+   "utcDate": "2026-06-27T21:00Z",
+   "shortName": "GHA @ CRO",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group L",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lincoln Financial Field",
+    "city": "Philadelphia, Pennsylvania",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Croatia",
+     "tla": "CRO",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Ghana",
+     "tla": "GHA",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/gha.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760485",
+   "utcDate": "2026-06-27T21:00Z",
+   "shortName": "ENG @ PAN",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group L",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Panama",
+     "tla": "PAN",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/pan.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "England",
+     "tla": "ENG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760481",
+   "utcDate": "2026-06-27T23:30Z",
+   "shortName": "POR @ COL",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group K",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Hard Rock Stadium",
+    "city": "Miami Gardens, Florida",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Colombia",
+     "tla": "COL",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/col.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Portugal",
+     "tla": "POR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760482",
+   "utcDate": "2026-06-27T23:30Z",
+   "shortName": "UZB @ COD",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group K",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Congo DR",
+     "tla": "COD",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/rdc.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Uzbekistan",
+     "tla": "UZB",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/uzb.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760484",
+   "utcDate": "2026-06-28T02:00Z",
+   "shortName": "AUT @ ALG",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group J",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City, Missouri",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Algeria",
+     "tla": "ALG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/alg.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Austria",
+     "tla": "AUT",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760483",
+   "utcDate": "2026-06-28T02:00Z",
+   "shortName": "ARG @ JOR",
+   "stage": "group-stage",
+   "note": "FIFA World Cup, Group J",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Jordan",
+     "tla": "JOR",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/jor.png",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": false
+    },
+    {
+     "name": "Argentina",
+     "tla": "ARG",
+     "crest": "https://a.espncdn.com/i/teamlogos/countries/500/arg.png",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": false
+    }
+   ]
+  },
+  {
+   "id": "760486",
+   "utcDate": "2026-06-28T19:00Z",
+   "shortName": "2B @ 2A",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group A 2nd Place",
+     "tla": "2A",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group B 2nd Place",
+     "tla": "2B",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760487",
+   "utcDate": "2026-06-29T17:00Z",
+   "shortName": "2F @ 1C",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group C Winner",
+     "tla": "1C",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group F 2nd Place",
+     "tla": "2F",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760489",
+   "utcDate": "2026-06-29T20:30Z",
+   "shortName": "3RD @ 1E",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group E Winner",
+     "tla": "1E",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group A/B/C/D/F",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760488",
+   "utcDate": "2026-06-30T01:00Z",
+   "shortName": "2C @ 1F",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio BBVA",
+    "city": "Guadalupe",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Group F Winner",
+     "tla": "1F",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group C 2nd Place",
+     "tla": "2C",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760490",
+   "utcDate": "2026-06-30T17:00Z",
+   "shortName": "2I @ 2E",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group E 2nd Place",
+     "tla": "2E",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group I 2nd Place",
+     "tla": "2I",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760492",
+   "utcDate": "2026-06-30T21:00Z",
+   "shortName": "3RD @ 1I",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group I Winner",
+     "tla": "1I",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group C/D/F/G/H",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760491",
+   "utcDate": "2026-07-01T01:00Z",
+   "shortName": "3RD @ 1A",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Banorte",
+    "city": "Mexico City",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Group A Winner",
+     "tla": "1A",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group C/E/F/H/I",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760495",
+   "utcDate": "2026-07-01T16:00Z",
+   "shortName": "3RD @ 1L",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group L Winner",
+     "tla": "1L",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group E/H/I/J/K",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760493",
+   "utcDate": "2026-07-01T20:00Z",
+   "shortName": "3RD @ 1G",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lumen Field",
+    "city": "Seattle, Washington",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group G Winner",
+     "tla": "1G",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group A/E/H/I/J",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760494",
+   "utcDate": "2026-07-02T00:00Z",
+   "shortName": "3RD @ 1D",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Levi's Stadium",
+    "city": "Santa Clara, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group D Winner",
+     "tla": "1D",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group B/E/F/I/J",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760497",
+   "utcDate": "2026-07-02T19:00Z",
+   "shortName": "2J @ 1H",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group H Winner",
+     "tla": "1H",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group J 2nd Place",
+     "tla": "2J",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760496",
+   "utcDate": "2026-07-02T23:00Z",
+   "shortName": "2L @ 2K",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BMO Field",
+    "city": "Toronto",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Group K 2nd Place",
+     "tla": "2K",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group L 2nd Place",
+     "tla": "2L",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760498",
+   "utcDate": "2026-07-03T03:00Z",
+   "shortName": "3RD @ 1B",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Group B Winner",
+     "tla": "1B",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group E/F/G/I/J",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760499",
+   "utcDate": "2026-07-03T18:00Z",
+   "shortName": "2G @ 2D",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group D 2nd Place",
+     "tla": "2D",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group G 2nd Place",
+     "tla": "2G",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760500",
+   "utcDate": "2026-07-03T22:00Z",
+   "shortName": "2H @ 1J",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Hard Rock Stadium",
+    "city": "Miami Gardens, Florida",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group J Winner",
+     "tla": "1J",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Group H 2nd Place",
+     "tla": "2H",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760501",
+   "utcDate": "2026-07-04T01:30Z",
+   "shortName": "3RD @ 1K",
+   "stage": "round-of-32",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City, Missouri",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Group K Winner",
+     "tla": "1K",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Third Place Group D/E/I/J/L",
+     "tla": "3RD",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760502",
+   "utcDate": "2026-07-04T17:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "NRG Stadium",
+    "city": "Houston, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 1 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 3 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760503",
+   "utcDate": "2026-07-04T21:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lincoln Financial Field",
+    "city": "Philadelphia, Pennsylvania",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 2 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 5 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760504",
+   "utcDate": "2026-07-05T20:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "MetLife Stadium",
+    "city": "East Rutherford, New Jersey",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 4 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 6 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760505",
+   "utcDate": "2026-07-06T00:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Estadio Banorte",
+    "city": "Mexico City",
+    "country": "Mexico"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 7 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 8 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760506",
+   "utcDate": "2026-07-06T19:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "AT&T Stadium",
+    "city": "Arlington, Texas",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 11 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 12 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760507",
+   "utcDate": "2026-07-07T00:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Lumen Field",
+    "city": "Seattle, Washington",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 9 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 10 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760509",
+   "utcDate": "2026-07-07T16:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Mercedes-Benz Stadium",
+    "city": "Atlanta, Georgia",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 14 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 16 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760508",
+   "utcDate": "2026-07-07T20:00Z",
+   "shortName": "RD32 @ RD32",
+   "stage": "round-of-16",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "BC Place",
+    "city": "Vancouver",
+    "country": "Canada"
+   },
+   "competitors": [
+    {
+     "name": "Round of 32 13 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 32 15 Winner",
+     "tla": "RD32",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760510",
+   "utcDate": "2026-07-09T20:00Z",
+   "shortName": "RD16 W2 @ RD16 W1",
+   "stage": "quarterfinals",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Gillette Stadium",
+    "city": "Foxborough, Massachusetts",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 16 1 Winner",
+     "tla": "RD16 W1",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 16 2 Winner",
+     "tla": "RD16 W2",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760511",
+   "utcDate": "2026-07-10T19:00Z",
+   "shortName": "RD16 W6 @ RD16 W5",
+   "stage": "quarterfinals",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "SoFi Stadium",
+    "city": "Inglewood, California",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 16 5 Winner",
+     "tla": "RD16 W5",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 16 6 Winner",
+     "tla": "RD16 W6",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760512",
+   "utcDate": "2026-07-11T21:00Z",
+   "shortName": "RD16 W4 @ RD16 W3",
+   "stage": "quarterfinals",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "Hard Rock Stadium",
+    "city": "Miami Gardens, Florida",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 16 3 Winner",
+     "tla": "RD16 W3",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 16 4 Winner",
+     "tla": "RD16 W4",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  },
+  {
+   "id": "760513",
+   "utcDate": "2026-07-12T01:00Z",
+   "shortName": "RD16 W8 @ RD16 W7",
+   "stage": "quarterfinals",
+   "note": "FIFA World Cup",
+   "statusName": "STATUS_SCHEDULED",
+   "state": "pre",
+   "completed": false,
+   "displayClock": "0'",
+   "period": null,
+   "venue": {
+    "name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City, Missouri",
+    "country": "USA"
+   },
+   "competitors": [
+    {
+     "name": "Round of 16 7 Winner",
+     "tla": "RD16 W7",
+     "crest": "",
+     "score": "0",
+     "homeAway": "home",
+     "placeholder": true
+    },
+    {
+     "name": "Round of 16 8 Winner",
+     "tla": "RD16 W8",
+     "crest": "",
+     "score": "0",
+     "homeAway": "away",
+     "placeholder": true
+    }
+   ]
+  }
+ ]
+}

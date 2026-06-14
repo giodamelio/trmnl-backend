@@ -1,0 +1,46 @@
+# ESPN (undocumented) site.api — FIFA World Cup (league slug `fifa.world`)
+#
+# Run with:  nix run nixpkgs#httpyac -- apis/espn/worldcup.http --all
+# Or a single request by name:  nix run nixpkgs#httpyac -- apis/espn/worldcup.http --name today
+#
+# Auth: NONE. No API key, no token, no header. Plain HTTPS GET -> JSON.
+# This is ESPN's unofficial/undocumented "hidden" API (the one that backs
+# espn.com scoreboards). No published terms, no SLA, no documented rate limit.
+# Treat it as best-effort and cache aggressively (see src/lib/cache.ts).
+
+@host = https://site.api.espn.com/apis/site/v2/sports/soccer
+@league = fifa.world
+
+# Compute "today" in UTC as YYYYMMDD (ESPN's ?dates= format, no dashes).
+# As with football-data, matches are UTC-stamped -> the Worker still converts to
+# the viewer's timezone before deciding which day is "today".
+{{
+  const pad = (n) => String(n).padStart(2, "0");
+  const d = new Date();
+  exports.today = `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`;
+}}
+
+###
+# @name today
+# Scoreboard for a single UTC day. Primary feed for the "games today" page.
+# Returns { leagues:[...], events:[...], provider }.
+GET {{host}}/{{league}}/scoreboard?dates={{today}}
+
+###
+# @name scoreboardNoDate
+# Scoreboard with no date param -> ESPN's default window (roughly "now"). Useful
+# to confirm the league slug and see which matches ESPN considers current/live.
+GET {{host}}/{{league}}/scoreboard
+
+###
+# @name tournament
+# Whole-tournament window. dateTo is inclusive; range form is YYYYMMDD-YYYYMMDD.
+# NOTE: as of 2026-06-14 this returns 100 of 104 matches — the semi-finals,
+# third-place playoff, and final are not yet published (see NOTES.md gap).
+GET {{host}}/{{league}}/scoreboard?dates=20260611-20260719
+
+###
+# @name leagueMeta
+# League/season metadata + the `calendar` block (stage date ranges: Group,
+# Round of 32, Rd of 16, Quarterfinals, ...). Same payload as `leagues[0]` above.
+GET {{host}}/{{league}}/scoreboard?dates={{today}}

@@ -1,0 +1,817 @@
+{
+  "id": "760415",
+  "uid": "s:600~l:606~e:760415",
+  "date": "2026-06-11T19:00Z",
+  "name": "South Africa at Mexico",
+  "shortName": "RSA @ MEX",
+  "season": {
+    "year": 2026,
+    "type": 13802,
+    "slug": "group-stage"
+  },
+  "competitions": [
+    {
+      "id": "760415",
+      "uid": "s:600~l:606~e:760415~c:760415",
+      "date": "2026-06-11T19:00Z",
+      "startDate": "2026-06-11T19:00Z",
+      "attendance": 80824,
+      "timeValid": true,
+      "recent": false,
+      "status": {
+        "clock": 5400.0,
+        "displayClock": "90'+8'",
+        "period": 2,
+        "type": {
+          "id": "28",
+          "name": "STATUS_FULL_TIME",
+          "state": "post",
+          "completed": true,
+          "description": "Full Time",
+          "detail": "FT",
+          "shortDetail": "FT"
+        }
+      },
+      "venue": {
+        "id": "1672",
+        "fullName": "Estadio Banorte",
+        "address": {
+          "city": "Mexico City",
+          "country": "Mexico"
+        }
+      },
+      "format": {
+        "regulation": {
+          "periods": 2
+        }
+      },
+      "altGameNote": "FIFA World Cup, Group A",
+      "notes": [],
+      "geoBroadcasts": [
+        {
+          "type": {
+            "id": "1",
+            "shortName": "TV"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "FOX"
+          },
+          "lang": "en",
+          "region": "us"
+        },
+        {
+          "type": {
+            "id": "1",
+            "shortName": "TV"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "Tele"
+          },
+          "lang": "en",
+          "region": "us"
+        },
+        {
+          "type": {
+            "id": "4",
+            "shortName": "STREAMING"
+          },
+          "market": {
+            "id": "1",
+            "type": "National"
+          },
+          "media": {
+            "shortName": "Peacock"
+          },
+          "lang": "en",
+          "region": "us"
+        }
+      ],
+      "broadcasts": [
+        {
+          "market": "national",
+          "names": [
+            "FOX",
+            "Tele",
+            "Peacock"
+          ]
+        }
+      ],
+      "broadcast": "",
+      "competitors": [
+        {
+          "id": "203",
+          "uid": "s:600~t:203",
+          "type": "team",
+          "order": 0,
+          "homeAway": "home",
+          "winner": true,
+          "advance": true,
+          "form": "WWWWD",
+          "score": "2",
+          "records": [
+            {
+              "name": "All Splits",
+              "type": "total",
+              "summary": "1-0-0",
+              "abbreviation": "Total"
+            }
+          ],
+          "team": {
+            "id": "203",
+            "uid": "s:600~t:203",
+            "abbreviation": "MEX",
+            "displayName": "Mexico",
+            "shortDisplayName": "Mexico",
+            "name": "Mexico",
+            "location": "Mexico",
+            "color": "006847",
+            "alternateColor": "ffffff",
+            "isActive": true,
+            "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/_/id/203/mexico",
+                "text": "Clubhouse",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              },
+              {
+                "rel": [
+                  "stats",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/stats/_/id/203/mexico",
+                "text": "Stats",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              },
+              {
+                "rel": [
+                  "schedule",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/fixtures/_/id/203/mexico",
+                "text": "Fixtures",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              },
+              {
+                "rel": [
+                  "squad",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/squad/_/id/203/mexico",
+                "text": "Squad",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              }
+            ],
+            "venue": {
+              "id": "4685"
+            }
+          },
+          "statistics": [
+            {
+              "name": "appearances",
+              "abbreviation": "APP",
+              "displayValue": "0"
+            },
+            {
+              "name": "foulsCommitted",
+              "abbreviation": "FC",
+              "displayValue": "12"
+            },
+            {
+              "name": "wonCorners",
+              "abbreviation": "CW",
+              "displayValue": "3"
+            },
+            {
+              "name": "goalAssists",
+              "abbreviation": "A",
+              "displayValue": "2"
+            },
+            {
+              "name": "possessionPct",
+              "abbreviation": "PP",
+              "displayValue": "60.5"
+            },
+            {
+              "name": "shotAssists",
+              "abbreviation": "SHAST",
+              "displayValue": "13"
+            },
+            {
+              "name": "shotsOnTarget",
+              "abbreviation": "SOG",
+              "displayValue": "4"
+            },
+            {
+              "name": "totalGoals",
+              "abbreviation": "G",
+              "displayValue": "2"
+            },
+            {
+              "name": "totalShots",
+              "abbreviation": "SHOT",
+              "displayValue": "16"
+            }
+          ]
+        },
+        {
+          "id": "467",
+          "uid": "s:600~t:467",
+          "type": "team",
+          "order": 1,
+          "homeAway": "away",
+          "winner": false,
+          "advance": false,
+          "form": "LWDLD",
+          "score": "0",
+          "records": [
+            {
+              "name": "All Splits",
+              "type": "total",
+              "summary": "0-0-1",
+              "abbreviation": "Total"
+            }
+          ],
+          "team": {
+            "id": "467",
+            "uid": "s:600~t:467",
+            "abbreviation": "RSA",
+            "displayName": "South Africa",
+            "shortDisplayName": "South Africa",
+            "name": "South Africa",
+            "location": "South Africa",
+            "color": "087d5a",
+            "alternateColor": "fbb516",
+            "isActive": true,
+            "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
+            "links": [
+              {
+                "rel": [
+                  "clubhouse",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/_/id/467/south-africa",
+                "text": "Clubhouse",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              },
+              {
+                "rel": [
+                  "stats",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/stats/_/id/467/south-africa",
+                "text": "Stats",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              },
+              {
+                "rel": [
+                  "schedule",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/fixtures/_/id/467/south-africa",
+                "text": "Fixtures",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              },
+              {
+                "rel": [
+                  "squad",
+                  "desktop",
+                  "team"
+                ],
+                "href": "https://www.espn.com/soccer/team/squad/_/id/467/south-africa",
+                "text": "Squad",
+                "isExternal": false,
+                "isPremium": false,
+                "isHidden": false
+              }
+            ],
+            "venue": {
+              "id": "4164"
+            }
+          },
+          "statistics": [
+            {
+              "name": "appearances",
+              "abbreviation": "APP",
+              "displayValue": "0"
+            },
+            {
+              "name": "foulsCommitted",
+              "abbreviation": "FC",
+              "displayValue": "11"
+            },
+            {
+              "name": "wonCorners",
+              "abbreviation": "CW",
+              "displayValue": "1"
+            },
+            {
+              "name": "goalAssists",
+              "abbreviation": "A",
+              "displayValue": "0"
+            },
+            {
+              "name": "possessionPct",
+              "abbreviation": "PP",
+              "displayValue": "39.5"
+            },
+            {
+              "name": "shotAssists",
+              "abbreviation": "SHAST",
+              "displayValue": "2"
+            },
+            {
+              "name": "shotsOnTarget",
+              "abbreviation": "SOG",
+              "displayValue": "2"
+            },
+            {
+              "name": "totalGoals",
+              "abbreviation": "G",
+              "displayValue": "0"
+            },
+            {
+              "name": "totalShots",
+              "abbreviation": "SHOT",
+              "displayValue": "3"
+            }
+          ]
+        }
+      ],
+      "details": [
+        {
+          "type": {
+            "id": "70",
+            "text": "Goal"
+          },
+          "clock": {
+            "value": 513.0,
+            "displayValue": "9'"
+          },
+          "team": {
+            "id": "203"
+          },
+          "scoreValue": 1,
+          "scoringPlay": true,
+          "redCard": false,
+          "yellowCard": false,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "233075",
+              "displayName": "Julián Quiñones",
+              "shortName": "J. Quiñones",
+              "fullName": "Julián Quiñones",
+              "jersey": "16",
+              "team": {
+                "id": "203"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/233075/julian-quinones",
+                  "isHidden": false
+                }
+              ],
+              "position": "LM"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "94",
+            "text": "Yellow Card"
+          },
+          "clock": {
+            "value": 981.0,
+            "displayValue": "17'"
+          },
+          "team": {
+            "id": "467"
+          },
+          "scoreValue": 0,
+          "scoringPlay": false,
+          "redCard": false,
+          "yellowCard": true,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "256691",
+              "displayName": "Teboho Mokoena",
+              "shortName": "T. Mokoena",
+              "fullName": "Teboho Mokoena",
+              "jersey": "4",
+              "team": {
+                "id": "467"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/256691/teboho-mokoena",
+                  "isHidden": false
+                }
+              ],
+              "position": "CM-R"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "94",
+            "text": "Yellow Card"
+          },
+          "clock": {
+            "value": 1356.0,
+            "displayValue": "23'"
+          },
+          "team": {
+            "id": "203"
+          },
+          "scoreValue": 0,
+          "scoringPlay": false,
+          "redCard": false,
+          "yellowCard": true,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "303577",
+              "displayName": "Brian Gutiérrez",
+              "shortName": "B. Gutiérrez",
+              "fullName": "Brian Gutiérrez",
+              "jersey": "26",
+              "team": {
+                "id": "203"
+              },
+              "headshot": "https://a.espncdn.com/i/headshots/soccer/players/full/303577.png",
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/303577/brian-gutierrez",
+                  "isHidden": false
+                }
+              ],
+              "position": "CM-R"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "93",
+            "text": "Red Card"
+          },
+          "clock": {
+            "value": 2940.0,
+            "displayValue": "49'"
+          },
+          "team": {
+            "id": "467"
+          },
+          "scoreValue": 0,
+          "scoringPlay": false,
+          "redCard": true,
+          "yellowCard": false,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "228595",
+              "displayName": "Sphephelo Sithole",
+              "shortName": "S. Sithole",
+              "fullName": "Sphephelo Sithole",
+              "jersey": "13",
+              "team": {
+                "id": "467"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/228595/sphephelo-sithole",
+                  "isHidden": false
+                }
+              ],
+              "position": "CM"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "137",
+            "text": "Goal - Header"
+          },
+          "clock": {
+            "value": 3996.0,
+            "displayValue": "67'"
+          },
+          "team": {
+            "id": "203"
+          },
+          "scoreValue": 1,
+          "scoringPlay": true,
+          "redCard": false,
+          "yellowCard": false,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "167060",
+              "displayName": "Raúl Jiménez",
+              "shortName": "R. Jiménez",
+              "fullName": "Raúl Jiménez",
+              "jersey": "9",
+              "team": {
+                "id": "203"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/167060/raul-jimenez",
+                  "isHidden": false
+                }
+              ],
+              "position": "F"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "94",
+            "text": "Yellow Card"
+          },
+          "clock": {
+            "value": 4396.0,
+            "displayValue": "74'"
+          },
+          "team": {
+            "id": "467"
+          },
+          "scoreValue": 0,
+          "scoringPlay": false,
+          "redCard": false,
+          "yellowCard": true,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "266125",
+              "displayName": "Nkosinathi Sibisi",
+              "shortName": "N. Sibisi",
+              "fullName": "Nkosinathi Sibisi",
+              "jersey": "19",
+              "team": {
+                "id": "467"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/266125/nkosinathi-sibisi",
+                  "isHidden": false
+                }
+              ],
+              "position": "CD-R"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "93",
+            "text": "Red Card"
+          },
+          "clock": {
+            "value": 5003.0,
+            "displayValue": "84'"
+          },
+          "team": {
+            "id": "467"
+          },
+          "scoreValue": 0,
+          "scoringPlay": false,
+          "redCard": true,
+          "yellowCard": false,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "157046",
+              "displayName": "Themba Zwane",
+              "shortName": "T. Zwane",
+              "fullName": "Themba Zwane",
+              "jersey": "11",
+              "team": {
+                "id": "467"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/157046/themba-zwane",
+                  "isHidden": false
+                }
+              ],
+              "position": "SUB"
+            }
+          ]
+        },
+        {
+          "type": {
+            "id": "93",
+            "text": "Red Card"
+          },
+          "clock": {
+            "value": 5400.0,
+            "displayValue": "90'+2'"
+          },
+          "team": {
+            "id": "203"
+          },
+          "scoreValue": 0,
+          "scoringPlay": false,
+          "redCard": true,
+          "yellowCard": false,
+          "penaltyKick": false,
+          "ownGoal": false,
+          "shootout": false,
+          "athletesInvolved": [
+            {
+              "id": "224323",
+              "displayName": "César Montes",
+              "shortName": "C. Montes",
+              "fullName": "César Montes",
+              "jersey": "3",
+              "team": {
+                "id": "203"
+              },
+              "links": [
+                {
+                  "rel": [
+                    "playercard",
+                    "desktop",
+                    "athlete"
+                  ],
+                  "href": "https://www.espn.com/soccer/player/_/id/224323/cesar-montes",
+                  "isHidden": false
+                }
+              ],
+              "position": "CD-R"
+            }
+          ]
+        }
+      ],
+      "headlines": [
+        {
+          "description": "Mexico's misery in World Cup opening games was finally ended as they secured a 2-0 win over South Africa at the Estadio Azteca in a match featuring three red cards.",
+          "type": "Recap",
+          "shortLinkText": "Mexico kick off WC with win over SA ft. 3 red cards"
+        }
+      ],
+      "odds": [
+        null
+      ],
+      "wasSuspended": false,
+      "playByPlayAvailable": true,
+      "playByPlayAthletes": true
+    }
+  ],
+  "status": {
+    "clock": 5400.0,
+    "displayClock": "90'+8'",
+    "period": 2,
+    "type": {
+      "id": "28",
+      "name": "STATUS_FULL_TIME",
+      "state": "post",
+      "completed": true,
+      "description": "Full Time",
+      "detail": "FT",
+      "shortDetail": "FT"
+    }
+  },
+  "venue": {
+    "displayName": "Estadio Banorte"
+  },
+  "links": [
+    {
+      "language": "en-US",
+      "rel": [
+        "summary",
+        "desktop",
+        "event"
+      ],
+      "href": "https://www.espn.com/soccer/match/_/gameId/760415/south-africa-mexico",
+      "text": "Summary",
+      "shortText": "Summary",
+      "isExternal": false,
+      "isPremium": false,
+      "isHidden": false
+    },
+    {
+      "language": "en-US",
+      "rel": [
+        "highlights",
+        "desktop"
+      ],
+      "href": "https://www.espn.com/soccer/video/_/gameId/760415",
+      "text": "Highlights",
+      "shortText": "Highlights",
+      "isExternal": false,
+      "isPremium": false
+    },
+    {
+      "language": "en-US",
+      "rel": [
+        "recap",
+        "desktop",
+        "event"
+      ],
+      "href": "https://www.espn.com/soccer/report/_/gameId/760415",
+      "text": "Report",
+      "shortText": "Report",
+      "isExternal": false,
+      "isPremium": false,
+      "isHidden": false
+    },
+    {
+      "language": "en-US",
+      "rel": [
+        "stats",
+        "desktop",
+        "event"
+      ],
+      "href": "https://www.espn.com/soccer/matchstats/_/gameId/760415",
+      "text": "Statistics",
+      "shortText": "Statistics",
+      "isExternal": false,
+      "isPremium": false,
+      "isHidden": false
+    }
+  ]
+}
