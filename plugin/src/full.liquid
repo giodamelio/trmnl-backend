@@ -1,0 +1,287 @@
+{% comment %} World Cup — full view. Data is the Worker's JSON: meta / current / matches / nextUpcoming. {% endcomment %}
+<div class="layout">
+
+  {% if meta.todayCount > 0 %}
+    {% comment %}
+      Left side: a full-height column of today's games, in kickoff order.
+      Past/future games are small rows; the current-or-next game is enlarged
+      to ~half the column height and shown in its chronological position.
+    {% endcomment %}
+    <div class="columns" style="align-self: stretch;">
+      <div class="column" style="height: 100%; justify-content: flex-start; gap: 0;">
+        {% for m in matches %}
+          {% unless forloop.first %}
+            <hr style="border: 0; border-top: 1px solid; margin: 0; width: 100%;" />
+          {% endunless %}
+          {% if m.id == current.id %}
+            {% comment %}
+              Current / next game — large featured card. Grows to fill the
+              column's slack so there's no dead space below. Status + group on
+              top, big flags / small left-aligned name+code / score in the
+              middle, venue on the bottom.
+            {% endcomment %}
+            <div style="flex: 0 0 50%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; padding: 6px 12px;">
+              {% comment %} Status + group {% endcomment %}
+              <span class="label label--small">
+                {% if m.isLive %}
+                  LIVE{% if m.minute %} · {{ m.minute }}'{% endif %}
+                {% elsif m.isFinished %}
+                  FINISHED
+                {% else %}
+                  Starts {{ m.kickoffLocal }}
+                {% endif %}
+                {% if m.group %} · {{ m.group | replace: "GROUP_", "Group " }}{% endif %}
+              </span>
+
+              {% comment %} Teams + score — big flag on top, tiny left-aligned name above the code.
+                 Modest gap + the card's horizontal padding keep the row inside the
+                 clipping .columns box so the outer-aligned names never get cut off. {% endcomment %}
+              <div class="flex flex--center items--center" style="gap: 16px; max-width: 100%;">
+                {% comment %} Home {% endcomment %}
+                <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px;">
+                  {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 120px; width: 172px; object-fit: cover;" />{% endif %}
+                  <span class="label" style="font-size: 12px; white-space: nowrap;">{{ m.home.name }}</span>
+                  <span class="value" style="font-size: 38px; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
+                </div>
+
+                {% comment %} Score / vs — never wrap; don't let the flags squeeze it {% endcomment %}
+                <span class="value" style="font-size: 46px; font-weight: 700; white-space: nowrap; flex: 0 0 auto;">
+                  {% if m.isLive or m.isFinished %}
+                    {{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}
+                  {% else %}
+                    vs
+                  {% endif %}
+                </span>
+
+                {% comment %} Away — name/code aligned to the outside (right) {% endcomment %}
+                <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 3px;">
+                  {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 120px; width: 172px; object-fit: cover;" />{% endif %}
+                  <span class="label" style="font-size: 12px; white-space: nowrap;">{{ m.away.name }}</span>
+                  <span class="value" style="font-size: 38px; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
+                </div>
+              </div>
+
+              {% comment %} Venue — World Cup stadium name + city/country {% endcomment %}
+              {% if m.venue %}
+                <span class="label label--small">
+                  {{ m.venue.fifaName }} · {{ m.venue.city }}, {{ m.venue.country }}
+                </span>
+              {% endif %}
+            </div>
+          {% else %}
+            {% comment %}
+              Other game — 5 equal flex sections, evenly spaced:
+                [home flag] [home name/code] [centre score/status] [away name/code] [away flag]
+              Equal sections keep the centre at the exact row centre, so scores line
+              up down the list. Flags sit on the outside of their section; the name/code
+              aligns to the outside of its side too — left for home, right for away.
+            {% endcomment %}
+            <div style="flex: 1 1 0; display: flex; align-items: center; padding: 6px 8px;">
+              {% comment %} 1 — home flag, outside (left) {% endcomment %}
+              <div style="flex: 1 1 0; display: flex; justify-content: flex-start;">
+                {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 56px; width: 80px; object-fit: cover;" />{% endif %}
+              </div>
+              {% comment %} 2 — home name/code, aligned to the outside (left) {% endcomment %}
+              <div style="flex: 1 1 0; display: flex; justify-content: flex-start;">
+                <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px;">
+                  <span class="label" style="font-size: 14px; white-space: nowrap;">{{ m.home.name }}</span>
+                  <span class="value" style="font-size: 30px; font-weight: 700;">{{ m.home.tla }}</span>
+                </div>
+              </div>
+              {% comment %} 3 — centre: status above score, or status alone when no score {% endcomment %}
+              <div style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; line-height: 1; gap: 3px;">
+                {% if m.isLive or m.isFinished %}
+                  <span class="label label--small" style="font-size: 11px;">
+                    {% if m.isLive %}LIVE{% if m.minute %} {{ m.minute }}'{% endif %}{% else %}FT{% endif %}
+                  </span>
+                  <span class="value" style="font-size: 26px; font-weight: 700;">{{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}</span>
+                {% else %}
+                  <span class="value" style="font-size: 19px; font-weight: 700; white-space: nowrap;">{{ m.kickoffLocal }}</span>
+                {% endif %}
+              </div>
+              {% comment %} 4 — away name/code, aligned to the outside (right) {% endcomment %}
+              <div style="flex: 1 1 0; display: flex; justify-content: flex-end;">
+                <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 2px;">
+                  <span class="label" style="font-size: 14px; white-space: nowrap;">{{ m.away.name }}</span>
+                  <span class="value" style="font-size: 30px; font-weight: 700;">{{ m.away.tla }}</span>
+                </div>
+              </div>
+              {% comment %} 5 — away flag, outside (right) {% endcomment %}
+              <div style="flex: 1 1 0; display: flex; justify-content: flex-end;">
+                {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 56px; width: 80px; object-fit: cover;" />{% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% comment %} Right side: stacked sections, each led by a title + rule header {% endcomment %}
+  <div class="columns">
+    <div class="column" style="justify-content: flex-start; gap: 11px;">
+
+      {% comment %} ── Section: Tomorrow ─────────────────────────────── {% endcomment %}
+      <div style="display: flex; flex-direction: column; gap: 3px;">
+        {% comment %} Section header: title then a rule filling the rest of the line {% endcomment %}
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="title title--small" style="white-space: nowrap;">Tomorrow</span>
+          <hr style="flex: 1 1 auto; border: 0; border-top: 1px solid; margin: 0;" />
+        </div>
+
+        {% comment %} 2x2 grid of tomorrow's matches: tiny two-team cell + time/location {% endcomment %}
+        {% if meta.tomorrowCount > 0 %}
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 11px 16px;">
+            {% for m in tomorrow limit: 4 %}
+              {% comment %}
+                One match: the two teams stacked (each on its own line gets the full
+                cell width, so full names never get clipped), then kickoff + venue.
+                One base font-size; flag and code sized in em off it; nowrap throughout.
+              {% endcomment %}
+              <div style="font-size: 11px; display: flex; flex-direction: column; gap: 0; line-height: 1.1;">
+                {% comment %} kickoff + venue, above the matchup {% endcomment %}
+                <span class="label" style="font-size: 1em; white-space: nowrap;">
+                  {{ m.kickoffLocal }}{% if m.venue %} · {{ m.venue.city }}{% endif %}
+                </span>
+                {% comment %} home — grid columns [flag | code | name] align across all games; flags keep aspect {% endcomment %}
+                <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
+                  <span style="display: flex; align-items: center;">{% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 1.5em; width: 2.2em; object-fit: cover;" />{% endif %}</span>
+                  <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
+                  <span class="label" style="font-size: 1em;">{{ m.home.name }}</span>
+                </div>
+                {% comment %} small vs between the two teams {% endcomment %}
+                <span class="label" style="font-size: 0.8em; align-self: flex-start; padding-left: 0.6em; line-height: 1; margin: -1px 0;">vs</span>
+                {% comment %} away — same grid so its flag/code/name line up with home's {% endcomment %}
+                <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
+                  <span style="display: flex; align-items: center;">{% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 1.5em; width: 2.2em; object-fit: cover;" />{% endif %}</span>
+                  <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
+                  <span class="label" style="font-size: 1em;">{{ m.away.name }}</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <span class="label label--small">No matches tomorrow</span>
+        {% endif %}
+      </div>
+
+      {% comment %} ── Section: Standings — all 12 groups, compact ─────────── {% endcomment %}
+      {% if standings.size > 0 %}
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          {% comment %} Section header {% endcomment %}
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="title title--small" style="white-space: nowrap;">Standings</span>
+            <hr style="flex: 1 1 auto; border: 0; border-top: 1px solid; margin: 0;" />
+          </div>
+
+          {% comment %}
+            12 mini group tables in a 3-column grid. Each team row is its own
+            small grid [rank · flag · code · GD · Pts] so the columns line up
+            within a group. line-height:1 everywhere to beat the framework's
+            tall .value line-height.
+          {% endcomment %}
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 12px; row-gap: 8px; font-size: 10px;">
+            {% for g in standings %}
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                <span class="title" style="font-size: 1.3em; white-space: nowrap; line-height: 1; text-decoration: underline; text-underline-offset: 2px;">{{ g.group }}</span>
+                {% for r in g.rows %}
+                  <div style="display: grid; grid-template-columns: 1em 1.6em 1fr 1.7em 1.4em; align-items: center; column-gap: 4px; white-space: nowrap; line-height: 1;">
+                    <span class="label" style="text-align: center;">{{ r.rank }}</span>
+                    <span style="display: flex; align-items: center;">{% if r.crest %}<img class="image" src="{{ r.crest }}" style="height: 1em; width: 1.5em; object-fit: cover;" />{% endif %}</span>
+                    <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1;">{{ r.tla }}</span>
+                    <span style="font-size: 1.3em; line-height: 1; text-align: right;">{% if r.gd > 0 %}+{% endif %}{{ r.gd }}</span>
+                    <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1; text-align: right;">{{ r.points }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% comment %} ── Section: Favorites — next game for each favorite team ── {% endcomment %}
+      {% if favorites.size > 0 %}
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          {% comment %} Section header {% endcomment %}
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="title title--small" style="white-space: nowrap;">Favorites</span>
+            <hr style="flex: 1 1 auto; border: 0; border-top: 1px solid; margin: 0;" />
+          </div>
+
+          {% for f in favorites %}
+            <div style="font-size: 12px; display: flex; flex-direction: column; gap: 1px; line-height: 1.05;">
+              {% if f.hasGame %}
+                {% comment %}
+                  Matchup: flag + name grouped as a unit on each side, pinned to the
+                  outer edge (names sit right next to their flag); vs/score centred by
+                  the two equal flex:1 side groups.
+                {% endcomment %}
+                <div style="display: flex; align-items: center;">
+                  <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 0.4em; white-space: nowrap;">
+                    {% if f.fav.crest %}<img class="image" src="{{ f.fav.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+                    <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ f.fav.name }}</span>
+                  </div>
+                  <span class="label" style="flex: 0 0 auto; font-size: 0.95em; padding: 0 0.5em; white-space: nowrap;">{% if f.isLive %}{{ f.fav.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ f.opp.score | default: 0 }}{% else %}vs{% endif %}</span>
+                  <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 0.4em; white-space: nowrap;">
+                    <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ f.opp.name }}</span>
+                    {% if f.opp.crest %}<img class="image" src="{{ f.opp.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+                  </div>
+                </div>
+                {% comment %} info: when+time (left) · group (centred under the vs) · venue (right) {% endcomment %}
+                <div style="display: flex; align-items: baseline; font-size: 10px;">
+                  <span class="label" style="flex: 1 1 0; min-width: 0; display: flex; justify-content: flex-start; font-size: 1em; white-space: nowrap;">{% if f.isLive %}LIVE{% if f.minute %} {{ f.minute }}'{% endif %}{% else %}{{ f.when }} {{ f.kickoffLocal }}{% endif %}</span>
+                  <span class="label" style="flex: 0 0 auto; font-size: 1em; text-align: center; padding: 0 0.5em; white-space: nowrap;">{% if f.group %}{{ f.group }}{% endif %}</span>
+                  <span class="label" style="flex: 1 1 0; min-width: 0; display: flex; justify-content: flex-end; font-size: 1em; white-space: nowrap;">{% if f.venue %}{{ f.venue.fifaName }}{% endif %}</span>
+                </div>
+              {% else %}
+                <span class="label">{{ f.team }} · no upcoming game</span>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% comment %} ── Section: Next two games in Seattle (same row style) ── {% endcomment %}
+      {% if seattleGames.size > 0 %}
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="title title--small" style="white-space: nowrap;">In Seattle</span>
+            <hr style="flex: 1 1 auto; border: 0; border-top: 1px solid; margin: 0;" />
+          </div>
+          {% for sg in seattleGames %}
+            <div style="font-size: 12px; display: flex; flex-direction: column; gap: 1px; line-height: 1.05;">
+              {% comment %} matchup — flag + name grouped, pinned to the outer edges, vs centred {% endcomment %}
+              <div style="display: flex; align-items: center;">
+                <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 0.4em; white-space: nowrap;">
+                  {% if sg.home.crest %}<img class="image" src="{{ sg.home.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+                  <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ sg.home.name }}</span>
+                </div>
+                <span class="label" style="flex: 0 0 auto; font-size: 0.95em; padding: 0 0.5em; white-space: nowrap;">{% if sg.isLive %}{{ sg.home.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ sg.away.score | default: 0 }}{% else %}vs{% endif %}</span>
+                <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 0.4em; white-space: nowrap;">
+                  <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ sg.away.name }}</span>
+                  {% if sg.away.crest %}<img class="image" src="{{ sg.away.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+                </div>
+              </div>
+              {% comment %} info: when+time (left) · group (centred under the vs) · venue (right) {% endcomment %}
+              <div style="display: flex; align-items: baseline; font-size: 10px;">
+                <span class="label" style="flex: 1 1 0; min-width: 0; display: flex; justify-content: flex-start; font-size: 1em; white-space: nowrap;">{% if sg.isLive %}LIVE{% if sg.minute %} {{ sg.minute }}'{% endif %}{% else %}{{ sg.when }} {{ sg.kickoffLocal }}{% endif %}</span>
+                <span class="label" style="flex: 0 0 auto; font-size: 1em; text-align: center; padding: 0 0.5em; white-space: nowrap;">{% if sg.group %}{{ sg.group }}{% endif %}</span>
+                <span class="label" style="flex: 1 1 0; min-width: 0; display: flex; justify-content: flex-end; font-size: 1em; white-space: nowrap;">{% if sg.venue %}{{ sg.venue.fifaName }}{% endif %}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</div>
+
+<div class="title_bar">
+  <img class="image" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
+  <span class="title">{{ meta.competition }}</span>
+  <span class="instance">{{ meta.localDate }}</span>
+</div>
+
+

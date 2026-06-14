@@ -15,3 +15,9 @@ node_modules/
 
 # wrangler build output
 dist/
+
+# trmnlp build output
+plugin/_build/
+
+# nix
+/result

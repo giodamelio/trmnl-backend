@@ -1,0 +1,27 @@
+# Local dev-server config for trmnlp — NOT uploaded to TRMNL.
+#
+# Timezone in local preview is the tricky bit. trmnlp renders the polling_url
+# through Liquid against *custom_fields only*, NOT the `trmnl.*` context — so
+# settings.yml's `?tz={{ trmnl.user.time_zone_iana }}` collapses to an empty
+# string here, the Worker sees no tz and falls back to UTC, and we get the
+# wrong local day's games. (In production, TRMNL renders the URL against the
+# full trmnl context, so it works there.)
+#
+# Fix: override the polling_url locally with the timezone hardcoded, so local
+# preview receives exactly what a real America/Los_Angeles device would.
+# `time_zone` also sets trmnl.user.* for any in-template use.
+#
+# Points at the local `wrangler dev` (localhost:8787) so in-progress Worker
+# changes show in preview without deploying. Swap back to the workers.dev URL
+# to preview against production.
+---
+watch:
+  - .trmnlp.yml
+  - src
+
+time_zone: America/Los_Angeles
+
+variables:
+  trmnl:
+    plugin_settings:
+      polling_url: http://localhost:8787/v1/worldcup?tz=America/Los_Angeles&offset=-25200

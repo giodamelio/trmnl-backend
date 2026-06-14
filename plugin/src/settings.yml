@@ -1,0 +1,14 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: latest
+serverless_language: ''
+polling_url: https://trmnl-backend.giodamelio.workers.dev/v1/worldcup?tz={{ trmnl.user.time_zone_iana }}&offset={{ trmnl.user.utc_offset }}
+polling_headers: ''
+polling_body: ''
+id: 336674
+name: World Cup
+refresh_interval: 15
