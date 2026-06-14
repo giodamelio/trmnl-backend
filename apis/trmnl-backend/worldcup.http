@@ -1,0 +1,40 @@
+# Our own Worker API — World Cup endpoint.
+#
+# Environments are defined in ../../http-client.env.json:
+#   dev  -> http://localhost:8787 (wrangler dev)
+#   prod -> the deployed workers.dev URL (edit YOUR_SUBDOMAIN)
+#
+# Run against local dev server:
+#   nix develop -c wrangler dev            # in one terminal
+#   httpyac apis/trmnl-backend/worldcup.http --env dev --all
+# Run against production:
+#   httpyac apis/trmnl-backend/worldcup.http --env prod --all
+# Single request:
+#   httpyac apis/trmnl-backend/worldcup.http --env dev --name worldcup
+
+# Default test params (host comes from the selected environment).
+@tz = America/Los_Angeles
+@offset = -28800
+
+###
+# @name health
+GET {{host}}/health
+
+###
+# @name worldcup
+# Mirrors what TRMNL sends:
+#   /v1/worldcup?tz={{ trmnl.user.time_zone_iana }}&offset={{ trmnl.user.utc_offset }}
+GET {{host}}/v1/worldcup?tz={{tz}}&offset={{offset}}
+
+###
+# @name worldcupUtc
+# Override the timezone per-request to sanity-check the "local today" filter.
+GET {{host}}/v1/worldcup?tz=UTC
+
+###
+# @name worldcupTokyo
+GET {{host}}/v1/worldcup?tz=Asia/Tokyo
+
+###
+# @name worldcupAuckland
+GET {{host}}/v1/worldcup?tz=Pacific/Auckland
