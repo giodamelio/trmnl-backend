@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "trmnl-backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-05-25",
+  "observability": {
+    "enabled": true
+  }
+  // Secret (set with `wrangler secret put FOOTBALL_DATA_TOKEN`, or .dev.vars locally):
+  //   FOOTBALL_DATA_TOKEN — football-data.org API token
+}
