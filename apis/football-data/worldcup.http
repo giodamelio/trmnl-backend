@@ -1,0 +1,51 @@
+# football-data.org — FIFA World Cup (WC, id 2000) exploration
+#
+# Run with:  nix run nixpkgs#httpyac -- apis/football-data/worldcup.http --all
+# Or a single request by name:  nix run nixpkgs#httpyac -- apis/football-data/worldcup.http --name today
+#
+# Auth: free key from https://www.football-data.org/client/register
+# Token is read from .env (FOOTBALL_DATA_TOKEN) at the project root.
+# Free tier: 10 calls/minute, scores slightly delayed.
+
+@host = https://api.football-data.org/v4
+@competition = WC
+
+# Compute "today" in UTC. NOTE: the API's dateTo is INCLUSIVE, so for a single
+# day use dateFrom == dateTo. (Matches are stamped in UTC -> the backend will
+# need to convert to the viewer's timezone before deciding what "today" means.)
+{{
+  const pad = (n) => String(n).padStart(2, "0");
+  const d = new Date();
+  exports.today = `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+}}
+
+###
+# @name competition
+# Competition metadata: current season, matchday, dates.
+GET {{host}}/competitions/{{competition}}
+X-Auth-Token: {{FOOTBALL_DATA_TOKEN}}
+
+###
+# @name today
+# All World Cup matches scheduled today (dateTo is inclusive -> from==to).
+# This is the primary feed for the "games today" page.
+GET {{host}}/competitions/{{competition}}/matches?dateFrom={{today}}&dateTo={{today}}
+X-Auth-Token: {{FOOTBALL_DATA_TOKEN}}
+
+###
+# @name allMatches
+# Every match in the current World Cup season (group stage + knockout).
+GET {{host}}/competitions/{{competition}}/matches
+X-Auth-Token: {{FOOTBALL_DATA_TOKEN}}
+
+###
+# @name standings
+# Group standings table (useful for the "standings" section later).
+GET {{host}}/competitions/{{competition}}/standings
+X-Auth-Token: {{FOOTBALL_DATA_TOKEN}}
+
+###
+# @name scorers
+# Top scorers — possible extra widget.
+GET {{host}}/competitions/{{competition}}/scorers
+X-Auth-Token: {{FOOTBALL_DATA_TOKEN}}
