@@ -1,0 +1,3247 @@
+{
+  "tournament": {
+    "name": "FIFA World Cup 2026",
+    "hosts": [
+      "USA",
+      "Canada",
+      "Mexico"
+    ],
+    "start": "2026-06-11",
+    "end": "2026-07-19",
+    "matchCount": 104,
+    "venueCount": 16,
+    "teamCount": 48
+  },
+  "sources": {
+    "schedule": "openfootball/worldcup.json (public domain, no key)",
+    "artwork": "TheSportsDB free API (key 123), national teams",
+    "venues": "authored constants, stadium names cross-checked vs TheSportsDB league 4429",
+    "note": "Static build artifact — not fetched at runtime. Regenerate with scripts/build-worldcup-data.mjs"
+  },
+  "venues": [
+    {
+      "id": "mexico-city",
+      "stadium": "Estadio Azteca",
+      "fifaName": "Estadio Banorte",
+      "city": "Mexico City",
+      "cityLabel": "Mexico City",
+      "country": "Mexico",
+      "capacity": 83264,
+      "lat": 19.303,
+      "lng": -99.1505,
+      "timezone": "America/Mexico_City"
+    },
+    {
+      "id": "guadalajara",
+      "stadium": "Estadio Akron",
+      "fifaName": "Estadio Guadalajara",
+      "city": "Guadalajara (Zapopan)",
+      "cityLabel": "Guadalajara",
+      "country": "Mexico",
+      "capacity": 48071,
+      "lat": 20.6819,
+      "lng": -103.4628,
+      "timezone": "America/Mexico_City"
+    },
+    {
+      "id": "monterrey",
+      "stadium": "Estadio BBVA",
+      "fifaName": "Estadio Monterrey",
+      "city": "Monterrey (Guadalupe)",
+      "country": "Mexico",
+      "cityLabel": "Monterrey",
+      "capacity": 53500,
+      "lat": 25.6692,
+      "lng": -100.244,
+      "timezone": "America/Monterrey"
+    },
+    {
+      "id": "toronto",
+      "stadium": "BMO Field",
+      "fifaName": "Toronto Stadium",
+      "city": "Toronto",
+      "cityLabel": "Toronto",
+      "country": "Canada",
+      "capacity": 45500,
+      "lat": 43.6332,
+      "lng": -79.4185,
+      "timezone": "America/Toronto"
+    },
+    {
+      "id": "vancouver",
+      "stadium": "BC Place",
+      "fifaName": "Vancouver Stadium",
+      "city": "Vancouver",
+      "cityLabel": "Vancouver",
+      "country": "Canada",
+      "capacity": 54500,
+      "lat": 49.2768,
+      "lng": -123.1119,
+      "timezone": "America/Vancouver"
+    },
+    {
+      "id": "atlanta",
+      "stadium": "Mercedes-Benz Stadium",
+      "fifaName": "Atlanta Stadium",
+      "city": "Atlanta",
+      "cityLabel": "Atlanta",
+      "country": "USA",
+      "capacity": 71000,
+      "lat": 33.7553,
+      "lng": -84.4006,
+      "timezone": "America/New_York"
+    },
+    {
+      "id": "foxborough",
+      "stadium": "Gillette Stadium",
+      "fifaName": "Boston Stadium",
+      "city": "Boston (Foxborough)",
+      "cityLabel": "Boston",
+      "country": "USA",
+      "capacity": 65878,
+      "lat": 42.0909,
+      "lng": -71.2643,
+      "timezone": "America/New_York"
+    },
+    {
+      "id": "arlington",
+      "stadium": "AT&T Stadium",
+      "fifaName": "Dallas Stadium",
+      "city": "Dallas (Arlington)",
+      "cityLabel": "Dallas",
+      "country": "USA",
+      "capacity": 80000,
+      "lat": 32.7473,
+      "lng": -97.0945,
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "houston",
+      "stadium": "NRG Stadium",
+      "fifaName": "Houston Stadium",
+      "city": "Houston",
+      "cityLabel": "Houston",
+      "country": "USA",
+      "capacity": 72220,
+      "lat": 29.6847,
+      "lng": -95.4107,
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "kansas-city",
+      "stadium": "Arrowhead Stadium",
+      "fifaName": "Kansas City Stadium",
+      "city": "Kansas City",
+      "cityLabel": "Kansas City",
+      "country": "USA",
+      "capacity": 76416,
+      "lat": 39.0489,
+      "lng": -94.4839,
+      "timezone": "America/Chicago"
+    },
+    {
+      "id": "inglewood",
+      "stadium": "SoFi Stadium",
+      "fifaName": "Los Angeles Stadium",
+      "city": "Los Angeles (Inglewood)",
+      "cityLabel": "Los Angeles",
+      "country": "USA",
+      "capacity": 70240,
+      "lat": 33.9535,
+      "lng": -118.3392,
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "id": "miami",
+      "stadium": "Hard Rock Stadium",
+      "fifaName": "Miami Stadium",
+      "city": "Miami (Miami Gardens)",
+      "cityLabel": "Miami",
+      "country": "USA",
+      "capacity": 65326,
+      "lat": 25.958,
+      "lng": -80.2389,
+      "timezone": "America/New_York"
+    },
+    {
+      "id": "east-rutherford",
+      "stadium": "MetLife Stadium",
+      "fifaName": "New York New Jersey Stadium",
+      "city": "New York/New Jersey (East Rutherford)",
+      "cityLabel": "New York / New Jersey",
+      "country": "USA",
+      "capacity": 82500,
+      "lat": 40.8135,
+      "lng": -74.0745,
+      "timezone": "America/New_York"
+    },
+    {
+      "id": "philadelphia",
+      "stadium": "Lincoln Financial Field",
+      "fifaName": "Philadelphia Stadium",
+      "city": "Philadelphia",
+      "cityLabel": "Philadelphia",
+      "country": "USA",
+      "capacity": 69328,
+      "lat": 39.9008,
+      "lng": -75.1675,
+      "timezone": "America/New_York"
+    },
+    {
+      "id": "santa-clara",
+      "stadium": "Levi's Stadium",
+      "fifaName": "San Francisco Bay Area Stadium",
+      "city": "San Francisco Bay Area (Santa Clara)",
+      "cityLabel": "San Francisco Bay Area",
+      "country": "USA",
+      "capacity": 68500,
+      "lat": 37.403,
+      "lng": -121.97,
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "id": "seattle",
+      "stadium": "Lumen Field",
+      "fifaName": "Seattle Stadium",
+      "city": "Seattle",
+      "cityLabel": "Seattle",
+      "country": "USA",
+      "capacity": 68740,
+      "lat": 47.5952,
+      "lng": -122.3316,
+      "timezone": "America/Los_Angeles"
+    }
+  ],
+  "teams": {
+    "Algeria": {
+      "name": "Algeria",
+      "tsdbId": "134516",
+      "tsdbName": "Algeria",
+      "shortCode": "ALG",
+      "country": "Algeria",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/rrwpry1455460218.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/9faygn1725671229.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/kgtrn71777370059.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/jiavvu1725673094.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/y1tzpn1777369942.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/jjdi5a1777369947.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/8bkrtu1777369952.jpg"
+      ],
+      "alternateNames": "Algerien"
+    },
+    "Argentina": {
+      "name": "Argentina",
+      "tsdbId": "134509",
+      "tsdbName": "Argentina",
+      "shortCode": "ARG",
+      "country": "Argentina",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/3zplhu1726167477.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/r7pn8c1726167467.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/qsekrw1630938838.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/3x3om01725673220.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/crk8b31777370127.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/kr0rr21777370132.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/vg1mjw1777370138.jpg"
+      ],
+      "alternateNames": "Argentinien, Аргентина, アルゼンチン, الأرجنتين"
+    },
+    "Australia": {
+      "name": "Australia",
+      "tsdbId": "134500",
+      "tsdbName": "Australia",
+      "shortCode": "AUS",
+      "country": "Australia",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/lark6k1661780848.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/pmbrbx1597946657.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/bkgnzi1777370336.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/cipyxq1725673468.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ob69ne1777370244.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/zd84rd1777370249.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/8f4nh61777370255.jpg"
+      ],
+      "alternateNames": "Australien, 澳大利亚, Австралия, オーストラリア, أستراليا"
+    },
+    "Austria": {
+      "name": "Austria",
+      "tsdbId": "135986",
+      "tsdbName": "Austria",
+      "shortCode": "AST",
+      "country": "Austria",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/874p631628721400.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/9cas5n1622190843.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/xizanh1622190626.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/9p4kr91725673617.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/fsld5b1622189933.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/24o0r11622189939.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/amjols1622189961.jpg"
+      ],
+      "alternateNames": "Österreich, Autriche, オーストリア, Австрия, النمسا"
+    },
+    "Belgium": {
+      "name": "Belgium",
+      "tsdbId": "134515",
+      "tsdbName": "Belgium",
+      "shortCode": "BEL",
+      "country": "Belgium",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/8xlvxv1592062265.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/0kz0ai1592062266.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/p9v5x91592065491.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/4y8o2n1727329982.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/y4cqhc1532422470.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/yqre3a1532422483.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/jre48e1545912235.jpg"
+      ],
+      "alternateNames": "België, Belgien, Belgique, Бельгия, "
+    },
+    "Bosnia & Herzegovina": {
+      "name": "Bosnia & Herzegovina",
+      "tsdbId": "134510",
+      "tsdbName": "Bosnia-Herzegovina",
+      "shortCode": "BOS",
+      "country": "Bosnia and Herzegovina",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/wtqqst1455463120.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/706c091599315264.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/xpvler1777370886.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/3ln2cm1777370576.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/z6f7vi1777370581.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/b110dk1777370586.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/c5w4yx1777370591.jpg"
+      ],
+      "alternateNames": "Bosna i Hercegovina, Босна и Херцеговина, Bosnia Hercegovina, Bosnia And Herzegovina, Bosnia Herzegovina"
+    },
+    "Brazil": {
+      "name": "Brazil",
+      "tsdbId": "134496",
+      "tsdbName": "Brazil",
+      "shortCode": "BRA",
+      "country": "Brazil",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/jl6dip1726167280.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/isajst1668434350.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/ryskjz1777720201.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/wa103u1668434474.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/b7ea1v1668434509.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/x3249u1668434541.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/eabn691668434576.jpg"
+      ],
+      "alternateNames": "Brasil"
+    },
+    "Canada": {
+      "name": "Canada",
+      "tsdbId": "140073",
+      "tsdbName": "Canada",
+      "shortCode": "CAN",
+      "country": "Canada",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/2t631f1595154867.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/kvexmu1595154868.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/scfgjz1777919866.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/zb2jyh1777919804.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/877fox1777919810.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/as13hp1777919816.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/wpbt2o1777919821.jpg"
+      ],
+      "alternateNames": "Kanada, Канада, 加拿大, קנדה, كندا"
+    },
+    "Cape Verde": {
+      "name": "Cape Verde",
+      "tsdbId": "136477",
+      "tsdbName": "Cape Verde",
+      "shortCode": "CAP",
+      "country": "Cape Verde",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/5jn0o71593280376.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/osoruq1740100324.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/eyplqz1777920055.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/bxr9ge1740100326.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/z5uv5l1777919954.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/q0lvw21777919960.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/g5wpfi1777919965.jpg"
+      ],
+      "alternateNames": "Cabo Verde"
+    },
+    "Colombia": {
+      "name": "Colombia",
+      "tsdbId": "134501",
+      "tsdbName": "Colombia",
+      "shortCode": "COL",
+      "country": "Colombia",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/4ymyku1691180081.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/216ygz1691180247.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/4q0hly1777984287.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/zedbt41777984179.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ji0jv61777984185.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/7rcss11777984190.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/5vu20t1777984196.jpg"
+      ],
+      "alternateNames": "Kolumbien, Colombie, Колумбия, コロンビア, كولومبيا"
+    },
+    "Croatia": {
+      "name": "Croatia",
+      "tsdbId": "133912",
+      "tsdbName": "Croatia",
+      "shortCode": "CRO",
+      "country": "Croatia",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/vvtsyu1455465317.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/s3gxxc1720451284.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/egbs5p1720451918.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/6esmoq1720451796.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/1xyg3x1720451802.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/13heds1720451809.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/vuxxyx1720451815.jpg"
+      ],
+      "alternateNames": "Croácia"
+    },
+    "Curaçao": {
+      "name": "Curaçao",
+      "tsdbId": "140271",
+      "tsdbName": "Curaçao",
+      "shortCode": "CUW",
+      "country": "Curacao",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/itygvb1600955363.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/x5uzc11600955378.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/o27a8b1779194707.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/sfqeik1779194393.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/8qh3yj1779194398.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/lu2vvv1779194403.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/4q2c651779194408.jpg"
+      ],
+      "alternateNames": "ABC, Netherlands Antilles, "
+    },
+    "Czech Republic": {
+      "name": "Czech Republic",
+      "tsdbId": "133904",
+      "tsdbName": "Czech Republic",
+      "shortCode": "CZE",
+      "country": "Czechia",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/1o0cx31654205806.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/1xhb921780306249.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/822z891780409251.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/49oskn1780409177.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ecm7uy1780409185.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/nvnlc91780409190.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/jg7dv41780409195.jpg"
+      ],
+      "alternateNames": "República Tcheca"
+    },
+    "DR Congo": {
+      "name": "DR Congo",
+      "tsdbId": "136475",
+      "tsdbName": "DR Congo",
+      "shortCode": "DRC",
+      "country": "DR Congo",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/s85jjw1728749022.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/3kj9y61740102240.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/ay2trb1779195228.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/blkspx1740102242.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/0o5e321779195107.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/udrmyc1779195113.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/h62gvs1779195119.jpg"
+      ],
+      "alternateNames": null
+    },
+    "Ecuador": {
+      "name": "Ecuador",
+      "tsdbId": "134507",
+      "tsdbName": "Ecuador",
+      "shortCode": "ECU",
+      "country": "Ecuador",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/47wv2y1591989301.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/suv9my1591989309.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/iy2zlf1780409437.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/8abc771780409343.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/fpzrzj1780409347.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/2l1tv71780409352.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/nj1dmu1780409359.jpg"
+      ],
+      "alternateNames": "Équateur, Equador, Эквадор, エクアドル, الإكوادور"
+    },
+    "Egypt": {
+      "name": "Egypt",
+      "tsdbId": "136138",
+      "tsdbName": "Egypt",
+      "shortCode": "EGY",
+      "country": "Egypt",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/uheyzo1742102234.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/0ewzff1740102372.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/pa7bwc1780568753.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/o9vxz41780568696.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/1felzs1780568701.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ctjlqe1780568706.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/he0r5d1780568711.jpg"
+      ],
+      "alternateNames": "مُنتخب مَــصـر‎"
+    },
+    "England": {
+      "name": "England",
+      "tsdbId": "133914",
+      "tsdbName": "England",
+      "shortCode": "ENG",
+      "country": "England",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/vf5ttc1726166739.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/3eklex1591997885.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/v4wfj41527722087.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/xvvxws1420840850.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/rvwwss1420841033.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/fl8v7i1622121024.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/hgn0e11622121016.jpg"
+      ],
+      "alternateNames": "Angleterre, Англия, イングランド, إنجلترا"
+    },
+    "France": {
+      "name": "France",
+      "tsdbId": "133913",
+      "tsdbName": "France",
+      "shortCode": "FRA",
+      "country": "France",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/p3n0z51726166851.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/a9iwwu1590266006.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/gwq86o1592040475.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/hzqkcg1565185909.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/vgjt391592038717.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/brbq5s1592038921.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/tpbm9o1592039132.jpg"
+      ],
+      "alternateNames": "Frankreich, Francija, Франция, フランス, فرنسا"
+    },
+    "Germany": {
+      "name": "Germany",
+      "tsdbId": "133907",
+      "tsdbName": "Germany",
+      "shortCode": "GER",
+      "country": "Germany",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/1xysi51726167152.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/1048po1718110681.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/o6pp5v1718113338.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/1lrzhg1718112975.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/m738ls1718113033.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/k386om1718113073.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/vu4wq31718113166.jpg"
+      ],
+      "alternateNames": "Deutschland, Allemagne, Германия, ドイツ, ألمانيا"
+    },
+    "Ghana": {
+      "name": "Ghana",
+      "tsdbId": "134513",
+      "tsdbName": "Ghana",
+      "shortCode": "GHA",
+      "country": "Ghana",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/j589xw1751526124.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/jhalsc1740105058.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/2kds0w1780490873.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/bww3ep1740105057.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/48oiqf1780490149.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/8b5e7t1780490155.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/48jeuz1780490160.jpg"
+      ],
+      "alternateNames": null
+    },
+    "Haiti": {
+      "name": "Haiti",
+      "tsdbId": "140175",
+      "tsdbName": "Haiti",
+      "shortCode": null,
+      "country": "Haiti",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/gml8wx1598135302.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/hla5gm1740070974.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/ig0pi41779189863.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/vf79d01740070975.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/3da9ji1779189765.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/r1zht71779189774.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/5ialya1779189770.jpg"
+      ],
+      "alternateNames": "Hayti, Ayiti, هايتي, Гаити, 海地"
+    },
+    "Iran": {
+      "name": "Iran",
+      "tsdbId": "134511",
+      "tsdbName": "Iran",
+      "shortCode": "IRA",
+      "country": "Iran",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/uttpvw1455465617.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/qjzw4e1597860577.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/4w6n1f1780472017.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/i7krc21780471909.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/72i3hf1780471914.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ak20i51780471919.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/v2snmh1780471925.jpg"
+      ],
+      "alternateNames": "ایران, Persia, إيران, Irão, Иран, 伊朗"
+    },
+    "Iraq": {
+      "name": "Iraq",
+      "tsdbId": "140148",
+      "tsdbName": "Iraq",
+      "shortCode": null,
+      "country": "Iraq",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/aqidfn1742100110.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/14jl2g1761234378.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/by4wlo1780490065.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/2427w01780489990.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ccpbun1780489995.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/mqv1x81780490001.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/a23gq91780490007.jpg"
+      ],
+      "alternateNames": "اَلْعِرَاق‎, عێراق‎, Irak, Iraque, Ирак, 伊拉克"
+    },
+    "Ivory Coast": {
+      "name": "Ivory Coast",
+      "tsdbId": "134502",
+      "tsdbName": "Ivory Coast",
+      "shortCode": "IVO",
+      "country": "Ivory Coast",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/rwxuuu1455465643.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/nm5l8x1740105862.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/v8i3vt1779194962.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/wob0x21740105865.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ofsbfe1779194901.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/zsg86x1779194920.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ciwovj1779194911.jpg"
+      ],
+      "alternateNames": null
+    },
+    "Japan": {
+      "name": "Japan",
+      "tsdbId": "134503",
+      "tsdbName": "Japan",
+      "shortCode": "JPN",
+      "country": "Japan",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/ffsyxz1591989843.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/i6gb8y1779185584.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/dvkzme1779189458.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/oudj651779189350.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/9pn5u61779189355.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/lv94uk1779189359.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/6jczf11779189364.jpg"
+      ],
+      "alternateNames": "日本国, Japon, Japão, Япония, اليابان"
+    },
+    "Jordan": {
+      "name": "Jordan",
+      "tsdbId": null,
+      "tsdbName": null,
+      "shortCode": null,
+      "country": null,
+      "badge": null,
+      "logo": null,
+      "banner": null,
+      "fanart": [],
+      "alternateNames": null
+    },
+    "Mexico": {
+      "name": "Mexico",
+      "tsdbId": "134497",
+      "tsdbName": "Mexico",
+      "shortCode": "MEX",
+      "country": "Mexico",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/3rmosi1748525208.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/76mvr81597946801.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/ntd9w81780424621.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/vvwxxs1473333592.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/tppwwx1473333723.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/sqprrs1473333468.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/xrppwq1473333810.jpg"
+      ],
+      "alternateNames": "المكسيك, Mexiko, Meksyk, Мексика, 墨西哥"
+    },
+    "Morocco": {
+      "name": "Morocco",
+      "tsdbId": "136139",
+      "tsdbName": "Morocco",
+      "shortCode": "MOR",
+      "country": "Morocco",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/hbmwkj1731791275.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/4yyad31742006394.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/c5uj231781003087.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/ycfwoq1742006397.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/c3ffvs1781002189.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ajqw2k1781002195.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/7djlso1781002201.jpg"
+      ],
+      "alternateNames": "المغرب‎, ⵍⵎⵖⵔⵉⴱ, Maroc, Marokko, Maroko, Marrocos, Марокко"
+    },
+    "Netherlands": {
+      "name": "Netherlands",
+      "tsdbId": "133905",
+      "tsdbName": "Netherlands",
+      "shortCode": "NET",
+      "country": "The Netherlands",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/1p0hr41593787110.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/eo30rc1668866416.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/1i0ce91781002933.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/ncmj9u1781002271.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/wdu9qn1781002275.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/d1ien21781002280.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/2grb0x1781002284.jpg"
+      ],
+      "alternateNames": "The Netherlands, Holland, Nederlands, Pays-Bas, Niederlande, Países Baixos, Nizozemska"
+    },
+    "New Zealand": {
+      "name": "New Zealand",
+      "tsdbId": "137449",
+      "tsdbName": "New Zealand",
+      "shortCode": "NZL",
+      "country": "New Zealand",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/91xpk81742982935.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/dyqm6g1740186929.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/ry5wbv1781002987.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/wy5x1i1781002373.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/dxrics1781002378.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ciht6n1781002383.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/uvh1cv1781002387.jpg"
+      ],
+      "alternateNames": "Aotearoa, Neuseeland, Новая Зеландия, 新西兰, Nouvelle-Zélande, Wiki Loves Monuments: fotografa un monumento, aiuta Wikipedia e vinci! Saperne di più Nuova Zelanda, Nueva Zeland, ニュージーランド, "
+    },
+    "Norway": {
+      "name": "Norway",
+      "tsdbId": "136516",
+      "tsdbName": "Norway",
+      "shortCode": "NOR",
+      "country": "Norway",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/gyfn811591973155.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/lfdoca1599315067.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/ipvu7c1781003192.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/js97k51781002462.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/n4yjav1781002468.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/zo1jd41781002472.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/r5pi821781002477.jpg"
+      ],
+      "alternateNames": "Norge, Noreg, Norwegen, Norvège, Noruega, Норвегия, ノルウェー,  النرويج"
+    },
+    "Panama": {
+      "name": "Panama",
+      "tsdbId": "136141",
+      "tsdbName": "Panama",
+      "shortCode": "PAN",
+      "country": "Panama",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/asp2ck1715849700.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/cu6g8j1597947384.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/uhjqu11781003252.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/3u8f321781002556.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/jpvdqy1781002561.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/4vxisk1781002566.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ig2mlu1781002571.jpg"
+      ],
+      "alternateNames": null
+    },
+    "Paraguay": {
+      "name": "Paraguay",
+      "tsdbId": "136471",
+      "tsdbName": "Paraguay",
+      "shortCode": "PAR",
+      "country": "Paraguay",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/khgav41553419195.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/9oax241780472108.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/dcjlgv1780472263.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/pnjtzn1780472219.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/izqarn1780472224.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/djgzjs1780472230.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/exit4v1780472235.jpg"
+      ],
+      "alternateNames": "Paraguái, Парагвай, パラグアイ, باراغواي"
+    },
+    "Portugal": {
+      "name": "Portugal",
+      "tsdbId": "133908",
+      "tsdbName": "Portugal",
+      "shortCode": "POR",
+      "country": "Portugal",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/swqvpy1455466083.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/4jwa1i1599314931.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/f3b0fm1781003425.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/p6jomm1781002728.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/h16elf1731702661.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/zrifb11731702599.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/qt6gm91781002734.jpg"
+      ],
+      "alternateNames": "Португалия, 葡萄牙, ポルトガル, البرتغال"
+    },
+    "Qatar": {
+      "name": "Qatar",
+      "tsdbId": "136472",
+      "tsdbName": "Qatar",
+      "shortCode": "QAT",
+      "country": "Qatar",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/rs3ir31642708685.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/syrgig1597936164.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/say7gf1781003510.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/jaotcu1781002646.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/yz6k4o1781002650.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/3ruch71781002655.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/1tig3i1781002659.jpg"
+      ],
+      "alternateNames": "قطر, Katar, Catar, Катар, カタール"
+    },
+    "Saudi Arabia": {
+      "name": "Saudi Arabia",
+      "tsdbId": "136137",
+      "tsdbName": "Saudi Arabia",
+      "shortCode": "SAU",
+      "country": "Saudi Arabia",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/24xwpq1594125742.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/12u0bb1668856387.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/lbtvrp1781003558.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/qlnryq1781002803.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/shwkqk1781002811.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/pprxuo1781002818.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/4wkd661781002825.jpg"
+      ],
+      "alternateNames": "المنتخب العربي السعودي لكرة القدم‎"
+    },
+    "Scotland": {
+      "name": "Scotland",
+      "tsdbId": "136450",
+      "tsdbName": "Scotland",
+      "shortCode": "SCO",
+      "country": "Scotland",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/3691i11552945146.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/kz9e6m1718110195.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/if3ycn1718110572.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/einsjg1718110475.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/0zbf391718110482.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/me9wsx1718110489.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/6w6dkg1718110495.jpg"
+      ],
+      "alternateNames": "Alba, Schottland, Écosse, Escócia, Шотландия, スコットランド, اسكتلندا"
+    },
+    "Senegal": {
+      "name": "Senegal",
+      "tsdbId": "136143",
+      "tsdbName": "Senegal",
+      "shortCode": "SEN",
+      "country": "Senegal",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/slayb01780546342.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/bhfal41780546384.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/hc5imc1780567805.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/iu5chu1780567762.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/mdq8tn1780567768.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/o8u2ty1780567773.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/2lkizw1780567778.jpg"
+      ],
+      "alternateNames": null
+    },
+    "South Africa": {
+      "name": "South Africa",
+      "tsdbId": "136482",
+      "tsdbName": "South Africa",
+      "shortCode": "SAF",
+      "country": "South Africa",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/xjz9j91553368824.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/65pfft1779967232.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/6mzsgc1780649154.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/hpr66f1780649013.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/76mlmc1780649019.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/nvhuek1780649024.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/hgwymk1780649029.jpg"
+      ],
+      "alternateNames": null
+    },
+    "South Korea": {
+      "name": "South Korea",
+      "tsdbId": "134517",
+      "tsdbName": "South Korea",
+      "shortCode": "SKO",
+      "country": "South Korea",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/a8nqfs1589564916.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/4r9qrc1597947773.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/cwbizx1779189681.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/ume21d1779189532.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/a40wsw1779189537.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/thwz8w1779189543.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/wcuj6a1779189547.jpg"
+      ],
+      "alternateNames": "كوريا الجنوبية, 한국, 韓國, 대한민국m 大韓民國, Südkorea, Republic of Korea, קוריאה הדרומית, Korea Południowa, Coreia do Sul, Республика Корея, 大韩民国, Korea Republic"
+    },
+    "Spain": {
+      "name": "Spain",
+      "tsdbId": "133909",
+      "tsdbName": "Spain",
+      "shortCode": "SPA",
+      "country": "Spain",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/ncgqyr1726166942.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/5p8fhy1616514698.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/pap5my1622884446.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/0i95441670576167.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/vocdkj1670576146.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/xpqxxy1424011204.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/d3qwrr1670576252.jpg"
+      ],
+      "alternateNames": "España, Spanien, Espagne, Espanha, Испания, スペイン, إسبانيا"
+    },
+    "Sweden": {
+      "name": "Sweden",
+      "tsdbId": "133916",
+      "tsdbName": "Sweden",
+      "shortCode": "SWE",
+      "country": "Sweden",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/h5adzg1591981772.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/cm7iew1591981773.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/3ozjh81780651306.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/oh12z01780651247.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/0cc87n1780651254.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/qwvrqw1421709042.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/gm1d6p1780651259.jpg"
+      ],
+      "alternateNames": "Sverige, Schweden, Suède, Suécia, Швеция, スウェーデン, السويد"
+    },
+    "Switzerland": {
+      "name": "Switzerland",
+      "tsdbId": "134506",
+      "tsdbName": "Switzerland",
+      "shortCode": "SWI",
+      "country": "Switzerland",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/mb7yqe1717365808.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/8rptij1599314635.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/hk21hi1779275394.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/enpget1779275339.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/tz6feo1779275345.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/wfgdom1779275350.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/vtgryh1779275355.jpg"
+      ],
+      "alternateNames": "Helvetia, Suisse, Schweiz, Svizzera, Suíça, Швейцария, スイス, سويسرا"
+    },
+    "Tunisia": {
+      "name": "Tunisia",
+      "tsdbId": "136142",
+      "tsdbName": "Tunisia",
+      "shortCode": "TUN",
+      "country": "Tunisia",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/7r89rg1526727277.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/ghk06z1742004672.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/4gr67f1779188894.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/8l8dfh1742004674.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/d7qlrn1779188764.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/emkc9p1779188769.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/x87lbp1779188774.jpg"
+      ],
+      "alternateNames": null
+    },
+    "Turkey": {
+      "name": "Turkey",
+      "tsdbId": "135985",
+      "tsdbName": "Turkey",
+      "shortCode": "TUR",
+      "country": "Turkey",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/70c4oo1591982459.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/lwrfk61780503784.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/c1zsyx1780648815.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/1zwh851780648730.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/8wav0a1780648735.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ayjx7p1780648740.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/448wi21780648745.jpg"
+      ],
+      "alternateNames": "Türkiye, Türkei, Turquie, Turquie, Турция, トルコ, تركيا"
+    },
+    "USA": {
+      "name": "USA",
+      "tsdbId": "134514",
+      "tsdbName": "USA",
+      "shortCode": "USA",
+      "country": "United States",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/21f0oi1597948195.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/b09tk51597948183.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/k4mls81773846954.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/vrvhmr1719511890.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/njf8891719512184.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/2g8lt41719512202.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/bayi4j1719512219.jpg"
+      ],
+      "alternateNames": "Estados Unidos, USMNT, United States of America, الولايات المتحدة, Vereinigte Staaten, ארצות הברית, Stany Zjednoczone, Соединённые Штаты Америки, США, 美国, United States"
+    },
+    "Uruguay": {
+      "name": "Uruguay",
+      "tsdbId": "134504",
+      "tsdbName": "Uruguay",
+      "shortCode": "URU",
+      "country": "Uruguay",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/6vjbr11726167756.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/3mg0fp1780257477.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/uolhxc1780648550.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/xtqot61780648463.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/uwdz2r1780648468.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/rkeb5w1780648472.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/ntesq41780648478.jpg"
+      ],
+      "alternateNames": "Uruguai, Уругвай, ウルグアイ, الأوروغواي"
+    },
+    "Uzbekistan": {
+      "name": "Uzbekistan",
+      "tsdbId": "140151",
+      "tsdbName": "Uzbekistan",
+      "shortCode": null,
+      "country": "Uzbekistan",
+      "badge": "https://r2.thesportsdb.com/images/media/team/badge/u5bgze1597943605.png",
+      "logo": "https://r2.thesportsdb.com/images/media/team/logo/sd891j1597943605.png",
+      "banner": "https://r2.thesportsdb.com/images/media/team/banner/uv97n11780475330.jpg",
+      "fanart": [
+        "https://r2.thesportsdb.com/images/media/team/fanart/vtcxyh1780475138.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/1atdu31780475142.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/04tx9r1780475147.jpg",
+        "https://r2.thesportsdb.com/images/media/team/fanart/cp36ev1780475152.jpg"
+      ],
+      "alternateNames": "Oʻzbekiston, Узбекистан, 乌兹别克斯坦, Uzbequistão, Usbekistan, أوزبكستان"
+    }
+  },
+  "matches": [
+    {
+      "num": 1,
+      "round": "Matchday 1",
+      "group": "Group A",
+      "date": "2026-06-11",
+      "time": "13:00 UTC-6",
+      "venueId": "mexico-city",
+      "home": {
+        "name": "Mexico",
+        "teamId": "134497"
+      },
+      "away": {
+        "name": "South Africa",
+        "teamId": "136482"
+      },
+      "score": {
+        "ft": [
+          2,
+          0
+        ],
+        "ht": [
+          1,
+          0
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Julián Quiñones",
+            "minute": "9"
+          },
+          {
+            "name": "Raúl Jiménez",
+            "minute": "67"
+          }
+        ],
+        "away": []
+      }
+    },
+    {
+      "num": 2,
+      "round": "Matchday 1",
+      "group": "Group A",
+      "date": "2026-06-11",
+      "time": "20:00 UTC-6",
+      "venueId": "guadalajara",
+      "home": {
+        "name": "South Korea",
+        "teamId": "134517"
+      },
+      "away": {
+        "name": "Czech Republic",
+        "teamId": "133904"
+      },
+      "score": {
+        "ft": [
+          2,
+          1
+        ],
+        "ht": [
+          0,
+          0
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Hwang In-Beom",
+            "minute": "67"
+          },
+          {
+            "name": "Oh Hyeon-Gyu",
+            "minute": "80"
+          }
+        ],
+        "away": [
+          {
+            "name": "Ladislav Krejcí",
+            "minute": "59"
+          }
+        ]
+      }
+    },
+    {
+      "num": 3,
+      "round": "Matchday 8",
+      "group": "Group A",
+      "date": "2026-06-18",
+      "time": "12:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "Czech Republic",
+        "teamId": "133904"
+      },
+      "away": {
+        "name": "South Africa",
+        "teamId": "136482"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 4,
+      "round": "Matchday 8",
+      "group": "Group A",
+      "date": "2026-06-18",
+      "time": "19:00 UTC-6",
+      "venueId": "guadalajara",
+      "home": {
+        "name": "Mexico",
+        "teamId": "134497"
+      },
+      "away": {
+        "name": "South Korea",
+        "teamId": "134517"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 5,
+      "round": "Matchday 14",
+      "group": "Group A",
+      "date": "2026-06-24",
+      "time": "19:00 UTC-6",
+      "venueId": "mexico-city",
+      "home": {
+        "name": "Czech Republic",
+        "teamId": "133904"
+      },
+      "away": {
+        "name": "Mexico",
+        "teamId": "134497"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 6,
+      "round": "Matchday 14",
+      "group": "Group A",
+      "date": "2026-06-24",
+      "time": "19:00 UTC-6",
+      "venueId": "monterrey",
+      "home": {
+        "name": "South Africa",
+        "teamId": "136482"
+      },
+      "away": {
+        "name": "South Korea",
+        "teamId": "134517"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 7,
+      "round": "Matchday 2",
+      "group": "Group B",
+      "date": "2026-06-12",
+      "time": "15:00 UTC-4",
+      "venueId": "toronto",
+      "home": {
+        "name": "Canada",
+        "teamId": "140073"
+      },
+      "away": {
+        "name": "Bosnia & Herzegovina",
+        "teamId": "134510"
+      },
+      "score": {
+        "ft": [
+          1,
+          1
+        ],
+        "ht": [
+          0,
+          1
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Cyle Larin",
+            "minute": "78"
+          }
+        ],
+        "away": [
+          {
+            "name": "Jovo Lukić",
+            "minute": "21"
+          }
+        ]
+      }
+    },
+    {
+      "num": 8,
+      "round": "Matchday 3",
+      "group": "Group B",
+      "date": "2026-06-13",
+      "time": "12:00 UTC-7",
+      "venueId": "santa-clara",
+      "home": {
+        "name": "Qatar",
+        "teamId": "136472"
+      },
+      "away": {
+        "name": "Switzerland",
+        "teamId": "134506"
+      },
+      "score": {
+        "ft": [
+          1,
+          1
+        ],
+        "ht": [
+          0,
+          1
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Boualem Khoukhi",
+            "minute": "90+4"
+          }
+        ],
+        "away": [
+          {
+            "name": "Breel Embolo",
+            "minute": "17",
+            "penalty": true
+          }
+        ]
+      }
+    },
+    {
+      "num": 9,
+      "round": "Matchday 8",
+      "group": "Group B",
+      "date": "2026-06-18",
+      "time": "12:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "Switzerland",
+        "teamId": "134506"
+      },
+      "away": {
+        "name": "Bosnia & Herzegovina",
+        "teamId": "134510"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 10,
+      "round": "Matchday 8",
+      "group": "Group B",
+      "date": "2026-06-18",
+      "time": "15:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "Canada",
+        "teamId": "140073"
+      },
+      "away": {
+        "name": "Qatar",
+        "teamId": "136472"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 11,
+      "round": "Matchday 14",
+      "group": "Group B",
+      "date": "2026-06-24",
+      "time": "12:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "Switzerland",
+        "teamId": "134506"
+      },
+      "away": {
+        "name": "Canada",
+        "teamId": "140073"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 12,
+      "round": "Matchday 14",
+      "group": "Group B",
+      "date": "2026-06-24",
+      "time": "12:00 UTC-7",
+      "venueId": "seattle",
+      "home": {
+        "name": "Bosnia & Herzegovina",
+        "teamId": "134510"
+      },
+      "away": {
+        "name": "Qatar",
+        "teamId": "136472"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 13,
+      "round": "Matchday 3",
+      "group": "Group C",
+      "date": "2026-06-13",
+      "time": "18:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "Brazil",
+        "teamId": "134496"
+      },
+      "away": {
+        "name": "Morocco",
+        "teamId": "136139"
+      },
+      "score": {
+        "ft": [
+          1,
+          1
+        ],
+        "ht": [
+          1,
+          1
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Vinícius Júnior",
+            "minute": "32"
+          }
+        ],
+        "away": [
+          {
+            "name": "Ismael Saibari",
+            "minute": "21"
+          }
+        ]
+      }
+    },
+    {
+      "num": 14,
+      "round": "Matchday 3",
+      "group": "Group C",
+      "date": "2026-06-13",
+      "time": "21:00 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "Haiti",
+        "teamId": "140175"
+      },
+      "away": {
+        "name": "Scotland",
+        "teamId": "136450"
+      },
+      "score": {
+        "ft": [
+          0,
+          1
+        ],
+        "ht": [
+          0,
+          1
+        ]
+      },
+      "goals": {
+        "home": [],
+        "away": [
+          {
+            "name": "John McGinn",
+            "minute": "28"
+          }
+        ]
+      }
+    },
+    {
+      "num": 15,
+      "round": "Matchday 9",
+      "group": "Group C",
+      "date": "2026-06-19",
+      "time": "18:00 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "Scotland",
+        "teamId": "136450"
+      },
+      "away": {
+        "name": "Morocco",
+        "teamId": "136139"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 16,
+      "round": "Matchday 9",
+      "group": "Group C",
+      "date": "2026-06-19",
+      "time": "20:30 UTC-4",
+      "venueId": "philadelphia",
+      "home": {
+        "name": "Brazil",
+        "teamId": "134496"
+      },
+      "away": {
+        "name": "Haiti",
+        "teamId": "140175"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 17,
+      "round": "Matchday 14",
+      "group": "Group C",
+      "date": "2026-06-24",
+      "time": "18:00 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "Scotland",
+        "teamId": "136450"
+      },
+      "away": {
+        "name": "Brazil",
+        "teamId": "134496"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 18,
+      "round": "Matchday 14",
+      "group": "Group C",
+      "date": "2026-06-24",
+      "time": "18:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "Morocco",
+        "teamId": "136139"
+      },
+      "away": {
+        "name": "Haiti",
+        "teamId": "140175"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 19,
+      "round": "Matchday 2",
+      "group": "Group D",
+      "date": "2026-06-12",
+      "time": "18:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "USA",
+        "teamId": "134514"
+      },
+      "away": {
+        "name": "Paraguay",
+        "teamId": "136471"
+      },
+      "score": {
+        "ft": [
+          4,
+          1
+        ],
+        "ht": [
+          3,
+          0
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Damian Bobadilla",
+            "minute": "7",
+            "owngoal": true
+          },
+          {
+            "name": "Folarin Balogun",
+            "minute": "31"
+          },
+          {
+            "name": "Folarin Balogun",
+            "minute": "45+5"
+          },
+          {
+            "name": "Giovanni Reyna",
+            "minute": "90+8"
+          }
+        ],
+        "away": [
+          {
+            "name": "Mauricio",
+            "minute": "73"
+          }
+        ]
+      }
+    },
+    {
+      "num": 20,
+      "round": "Matchday 3",
+      "group": "Group D",
+      "date": "2026-06-13",
+      "time": "21:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "Australia",
+        "teamId": "134500"
+      },
+      "away": {
+        "name": "Turkey",
+        "teamId": "135985"
+      },
+      "score": {
+        "ft": [
+          2,
+          0
+        ],
+        "ht": [
+          1,
+          0
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Nestory Irankunda",
+            "minute": "27"
+          },
+          {
+            "name": "Connor Metcalfe",
+            "minute": "75"
+          }
+        ],
+        "away": []
+      }
+    },
+    {
+      "num": 21,
+      "round": "Matchday 9",
+      "group": "Group D",
+      "date": "2026-06-19",
+      "time": "12:00 UTC-7",
+      "venueId": "seattle",
+      "home": {
+        "name": "USA",
+        "teamId": "134514"
+      },
+      "away": {
+        "name": "Australia",
+        "teamId": "134500"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 22,
+      "round": "Matchday 9",
+      "group": "Group D",
+      "date": "2026-06-19",
+      "time": "20:00 UTC-7",
+      "venueId": "santa-clara",
+      "home": {
+        "name": "Turkey",
+        "teamId": "135985"
+      },
+      "away": {
+        "name": "Paraguay",
+        "teamId": "136471"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 23,
+      "round": "Matchday 15",
+      "group": "Group D",
+      "date": "2026-06-25",
+      "time": "19:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "Turkey",
+        "teamId": "135985"
+      },
+      "away": {
+        "name": "USA",
+        "teamId": "134514"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 24,
+      "round": "Matchday 15",
+      "group": "Group D",
+      "date": "2026-06-25",
+      "time": "19:00 UTC-7",
+      "venueId": "santa-clara",
+      "home": {
+        "name": "Paraguay",
+        "teamId": "136471"
+      },
+      "away": {
+        "name": "Australia",
+        "teamId": "134500"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 25,
+      "round": "Matchday 4",
+      "group": "Group E",
+      "date": "2026-06-14",
+      "time": "12:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "Germany",
+        "teamId": "133907"
+      },
+      "away": {
+        "name": "Curaçao",
+        "teamId": "140271"
+      },
+      "score": {
+        "ft": [
+          7,
+          1
+        ],
+        "ht": [
+          3,
+          1
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Felix Nmecha",
+            "minute": "6"
+          },
+          {
+            "name": "Nico Schlotterbeck",
+            "minute": "38"
+          },
+          {
+            "name": "Kai Havertz",
+            "minute": "45+5",
+            "penalty": true
+          },
+          {
+            "name": "Kai Havertz",
+            "minute": "88"
+          },
+          {
+            "name": "Jamal Musiala",
+            "minute": "47"
+          },
+          {
+            "name": "Nathaniel Brown",
+            "minute": "68"
+          },
+          {
+            "name": "Deniz Undav",
+            "minute": "78"
+          }
+        ],
+        "away": [
+          {
+            "name": "Livano Comenencia",
+            "minute": "21"
+          }
+        ]
+      }
+    },
+    {
+      "num": 26,
+      "round": "Matchday 4",
+      "group": "Group E",
+      "date": "2026-06-14",
+      "time": "19:00 UTC-4",
+      "venueId": "philadelphia",
+      "home": {
+        "name": "Ivory Coast",
+        "teamId": "134502"
+      },
+      "away": {
+        "name": "Ecuador",
+        "teamId": "134507"
+      },
+      "score": {
+        "ft": [
+          1,
+          0
+        ],
+        "ht": [
+          0,
+          0
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Amad Diallo",
+            "minute": "90"
+          }
+        ],
+        "away": []
+      }
+    },
+    {
+      "num": 27,
+      "round": "Matchday 10",
+      "group": "Group E",
+      "date": "2026-06-20",
+      "time": "16:00 UTC-4",
+      "venueId": "toronto",
+      "home": {
+        "name": "Germany",
+        "teamId": "133907"
+      },
+      "away": {
+        "name": "Ivory Coast",
+        "teamId": "134502"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 28,
+      "round": "Matchday 10",
+      "group": "Group E",
+      "date": "2026-06-20",
+      "time": "19:00 UTC-5",
+      "venueId": "kansas-city",
+      "home": {
+        "name": "Ecuador",
+        "teamId": "134507"
+      },
+      "away": {
+        "name": "Curaçao",
+        "teamId": "140271"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 29,
+      "round": "Matchday 15",
+      "group": "Group E",
+      "date": "2026-06-25",
+      "time": "16:00 UTC-4",
+      "venueId": "philadelphia",
+      "home": {
+        "name": "Curaçao",
+        "teamId": "140271"
+      },
+      "away": {
+        "name": "Ivory Coast",
+        "teamId": "134502"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 30,
+      "round": "Matchday 15",
+      "group": "Group E",
+      "date": "2026-06-25",
+      "time": "16:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "Ecuador",
+        "teamId": "134507"
+      },
+      "away": {
+        "name": "Germany",
+        "teamId": "133907"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 31,
+      "round": "Matchday 4",
+      "group": "Group F",
+      "date": "2026-06-14",
+      "time": "15:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "Netherlands",
+        "teamId": "133905"
+      },
+      "away": {
+        "name": "Japan",
+        "teamId": "134503"
+      },
+      "score": {
+        "ft": [
+          2,
+          2
+        ],
+        "ht": [
+          0,
+          0
+        ]
+      },
+      "goals": {
+        "home": [
+          {
+            "name": "Virgil van Dijk",
+            "minute": "51"
+          },
+          {
+            "name": "Crysencio Summerville",
+            "minute": "64"
+          }
+        ],
+        "away": [
+          {
+            "name": "Keito Nakamura",
+            "minute": "57"
+          },
+          {
+            "name": "Daichi Kamada",
+            "minute": "88"
+          }
+        ]
+      }
+    },
+    {
+      "num": 32,
+      "round": "Matchday 4",
+      "group": "Group F",
+      "date": "2026-06-14",
+      "time": "20:00 UTC-6",
+      "venueId": "monterrey",
+      "home": {
+        "name": "Sweden",
+        "teamId": "133916"
+      },
+      "away": {
+        "name": "Tunisia",
+        "teamId": "136142"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 33,
+      "round": "Matchday 10",
+      "group": "Group F",
+      "date": "2026-06-20",
+      "time": "12:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "Netherlands",
+        "teamId": "133905"
+      },
+      "away": {
+        "name": "Sweden",
+        "teamId": "133916"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 34,
+      "round": "Matchday 10",
+      "group": "Group F",
+      "date": "2026-06-20",
+      "time": "22:00 UTC-6",
+      "venueId": "monterrey",
+      "home": {
+        "name": "Tunisia",
+        "teamId": "136142"
+      },
+      "away": {
+        "name": "Japan",
+        "teamId": "134503"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 35,
+      "round": "Matchday 15",
+      "group": "Group F",
+      "date": "2026-06-25",
+      "time": "18:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "Japan",
+        "teamId": "134503"
+      },
+      "away": {
+        "name": "Sweden",
+        "teamId": "133916"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 36,
+      "round": "Matchday 15",
+      "group": "Group F",
+      "date": "2026-06-25",
+      "time": "18:00 UTC-5",
+      "venueId": "kansas-city",
+      "home": {
+        "name": "Tunisia",
+        "teamId": "136142"
+      },
+      "away": {
+        "name": "Netherlands",
+        "teamId": "133905"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 37,
+      "round": "Matchday 5",
+      "group": "Group G",
+      "date": "2026-06-15",
+      "time": "12:00 UTC-7",
+      "venueId": "seattle",
+      "home": {
+        "name": "Belgium",
+        "teamId": "134515"
+      },
+      "away": {
+        "name": "Egypt",
+        "teamId": "136138"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 38,
+      "round": "Matchday 5",
+      "group": "Group G",
+      "date": "2026-06-15",
+      "time": "18:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "Iran",
+        "teamId": "134511"
+      },
+      "away": {
+        "name": "New Zealand",
+        "teamId": "137449"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 39,
+      "round": "Matchday 11",
+      "group": "Group G",
+      "date": "2026-06-21",
+      "time": "12:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "Belgium",
+        "teamId": "134515"
+      },
+      "away": {
+        "name": "Iran",
+        "teamId": "134511"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 40,
+      "round": "Matchday 11",
+      "group": "Group G",
+      "date": "2026-06-21",
+      "time": "18:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "New Zealand",
+        "teamId": "137449"
+      },
+      "away": {
+        "name": "Egypt",
+        "teamId": "136138"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 41,
+      "round": "Matchday 16",
+      "group": "Group G",
+      "date": "2026-06-26",
+      "time": "20:00 UTC-7",
+      "venueId": "seattle",
+      "home": {
+        "name": "Egypt",
+        "teamId": "136138"
+      },
+      "away": {
+        "name": "Iran",
+        "teamId": "134511"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 42,
+      "round": "Matchday 16",
+      "group": "Group G",
+      "date": "2026-06-26",
+      "time": "20:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "New Zealand",
+        "teamId": "137449"
+      },
+      "away": {
+        "name": "Belgium",
+        "teamId": "134515"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 43,
+      "round": "Matchday 5",
+      "group": "Group H",
+      "date": "2026-06-15",
+      "time": "12:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "Spain",
+        "teamId": "133909"
+      },
+      "away": {
+        "name": "Cape Verde",
+        "teamId": "136477"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 44,
+      "round": "Matchday 5",
+      "group": "Group H",
+      "date": "2026-06-15",
+      "time": "18:00 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "Saudi Arabia",
+        "teamId": "136137"
+      },
+      "away": {
+        "name": "Uruguay",
+        "teamId": "134504"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 45,
+      "round": "Matchday 11",
+      "group": "Group H",
+      "date": "2026-06-21",
+      "time": "12:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "Spain",
+        "teamId": "133909"
+      },
+      "away": {
+        "name": "Saudi Arabia",
+        "teamId": "136137"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 46,
+      "round": "Matchday 11",
+      "group": "Group H",
+      "date": "2026-06-21",
+      "time": "18:00 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "Uruguay",
+        "teamId": "134504"
+      },
+      "away": {
+        "name": "Cape Verde",
+        "teamId": "136477"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 47,
+      "round": "Matchday 16",
+      "group": "Group H",
+      "date": "2026-06-26",
+      "time": "19:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "Cape Verde",
+        "teamId": "136477"
+      },
+      "away": {
+        "name": "Saudi Arabia",
+        "teamId": "136137"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 48,
+      "round": "Matchday 16",
+      "group": "Group H",
+      "date": "2026-06-26",
+      "time": "18:00 UTC-6",
+      "venueId": "guadalajara",
+      "home": {
+        "name": "Uruguay",
+        "teamId": "134504"
+      },
+      "away": {
+        "name": "Spain",
+        "teamId": "133909"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 49,
+      "round": "Matchday 6",
+      "group": "Group I",
+      "date": "2026-06-16",
+      "time": "15:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "France",
+        "teamId": "133913"
+      },
+      "away": {
+        "name": "Senegal",
+        "teamId": "136143"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 50,
+      "round": "Matchday 6",
+      "group": "Group I",
+      "date": "2026-06-16",
+      "time": "18:00 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "Iraq",
+        "teamId": "140148"
+      },
+      "away": {
+        "name": "Norway",
+        "teamId": "136516"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 51,
+      "round": "Matchday 12",
+      "group": "Group I",
+      "date": "2026-06-22",
+      "time": "17:00 UTC-4",
+      "venueId": "philadelphia",
+      "home": {
+        "name": "France",
+        "teamId": "133913"
+      },
+      "away": {
+        "name": "Iraq",
+        "teamId": "140148"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 52,
+      "round": "Matchday 12",
+      "group": "Group I",
+      "date": "2026-06-22",
+      "time": "20:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "Norway",
+        "teamId": "136516"
+      },
+      "away": {
+        "name": "Senegal",
+        "teamId": "136143"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 53,
+      "round": "Matchday 16",
+      "group": "Group I",
+      "date": "2026-06-26",
+      "time": "15:00 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "Norway",
+        "teamId": "136516"
+      },
+      "away": {
+        "name": "France",
+        "teamId": "133913"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 54,
+      "round": "Matchday 16",
+      "group": "Group I",
+      "date": "2026-06-26",
+      "time": "15:00 UTC-4",
+      "venueId": "toronto",
+      "home": {
+        "name": "Senegal",
+        "teamId": "136143"
+      },
+      "away": {
+        "name": "Iraq",
+        "teamId": "140148"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 55,
+      "round": "Matchday 6",
+      "group": "Group J",
+      "date": "2026-06-16",
+      "time": "20:00 UTC-5",
+      "venueId": "kansas-city",
+      "home": {
+        "name": "Argentina",
+        "teamId": "134509"
+      },
+      "away": {
+        "name": "Algeria",
+        "teamId": "134516"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 56,
+      "round": "Matchday 6",
+      "group": "Group J",
+      "date": "2026-06-16",
+      "time": "21:00 UTC-7",
+      "venueId": "santa-clara",
+      "home": {
+        "name": "Austria",
+        "teamId": "135986"
+      },
+      "away": {
+        "name": "Jordan",
+        "teamId": null
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 57,
+      "round": "Matchday 12",
+      "group": "Group J",
+      "date": "2026-06-22",
+      "time": "12:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "Argentina",
+        "teamId": "134509"
+      },
+      "away": {
+        "name": "Austria",
+        "teamId": "135986"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 58,
+      "round": "Matchday 12",
+      "group": "Group J",
+      "date": "2026-06-22",
+      "time": "20:00 UTC-7",
+      "venueId": "santa-clara",
+      "home": {
+        "name": "Jordan",
+        "teamId": null
+      },
+      "away": {
+        "name": "Algeria",
+        "teamId": "134516"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 59,
+      "round": "Matchday 17",
+      "group": "Group J",
+      "date": "2026-06-27",
+      "time": "21:00 UTC-5",
+      "venueId": "kansas-city",
+      "home": {
+        "name": "Algeria",
+        "teamId": "134516"
+      },
+      "away": {
+        "name": "Austria",
+        "teamId": "135986"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 60,
+      "round": "Matchday 17",
+      "group": "Group J",
+      "date": "2026-06-27",
+      "time": "21:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "Jordan",
+        "teamId": null
+      },
+      "away": {
+        "name": "Argentina",
+        "teamId": "134509"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 61,
+      "round": "Matchday 7",
+      "group": "Group K",
+      "date": "2026-06-17",
+      "time": "12:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "Portugal",
+        "teamId": "133908"
+      },
+      "away": {
+        "name": "DR Congo",
+        "teamId": "136475"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 62,
+      "round": "Matchday 7",
+      "group": "Group K",
+      "date": "2026-06-17",
+      "time": "20:00 UTC-6",
+      "venueId": "mexico-city",
+      "home": {
+        "name": "Uzbekistan",
+        "teamId": "140151"
+      },
+      "away": {
+        "name": "Colombia",
+        "teamId": "134501"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 63,
+      "round": "Matchday 13",
+      "group": "Group K",
+      "date": "2026-06-23",
+      "time": "12:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "Portugal",
+        "teamId": "133908"
+      },
+      "away": {
+        "name": "Uzbekistan",
+        "teamId": "140151"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 64,
+      "round": "Matchday 13",
+      "group": "Group K",
+      "date": "2026-06-23",
+      "time": "20:00 UTC-6",
+      "venueId": "guadalajara",
+      "home": {
+        "name": "Colombia",
+        "teamId": "134501"
+      },
+      "away": {
+        "name": "DR Congo",
+        "teamId": "136475"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 65,
+      "round": "Matchday 17",
+      "group": "Group K",
+      "date": "2026-06-27",
+      "time": "19:30 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "Colombia",
+        "teamId": "134501"
+      },
+      "away": {
+        "name": "Portugal",
+        "teamId": "133908"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 66,
+      "round": "Matchday 17",
+      "group": "Group K",
+      "date": "2026-06-27",
+      "time": "19:30 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "DR Congo",
+        "teamId": "136475"
+      },
+      "away": {
+        "name": "Uzbekistan",
+        "teamId": "140151"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 67,
+      "round": "Matchday 7",
+      "group": "Group L",
+      "date": "2026-06-17",
+      "time": "15:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "England",
+        "teamId": "133914"
+      },
+      "away": {
+        "name": "Croatia",
+        "teamId": "133912"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 68,
+      "round": "Matchday 7",
+      "group": "Group L",
+      "date": "2026-06-17",
+      "time": "19:00 UTC-4",
+      "venueId": "toronto",
+      "home": {
+        "name": "Ghana",
+        "teamId": "134513"
+      },
+      "away": {
+        "name": "Panama",
+        "teamId": "136141"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 69,
+      "round": "Matchday 13",
+      "group": "Group L",
+      "date": "2026-06-23",
+      "time": "16:00 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "England",
+        "teamId": "133914"
+      },
+      "away": {
+        "name": "Ghana",
+        "teamId": "134513"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 70,
+      "round": "Matchday 13",
+      "group": "Group L",
+      "date": "2026-06-23",
+      "time": "19:00 UTC-4",
+      "venueId": "toronto",
+      "home": {
+        "name": "Panama",
+        "teamId": "136141"
+      },
+      "away": {
+        "name": "Croatia",
+        "teamId": "133912"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 71,
+      "round": "Matchday 17",
+      "group": "Group L",
+      "date": "2026-06-27",
+      "time": "17:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "Panama",
+        "teamId": "136141"
+      },
+      "away": {
+        "name": "England",
+        "teamId": "133914"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 72,
+      "round": "Matchday 17",
+      "group": "Group L",
+      "date": "2026-06-27",
+      "time": "17:00 UTC-4",
+      "venueId": "philadelphia",
+      "home": {
+        "name": "Croatia",
+        "teamId": "133912"
+      },
+      "away": {
+        "name": "Ghana",
+        "teamId": "134513"
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 73,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-28",
+      "time": "12:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "2A",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2B",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 74,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-29",
+      "time": "16:30 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "1E",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3A/B/C/D/F",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 75,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-29",
+      "time": "19:00 UTC-6",
+      "venueId": "monterrey",
+      "home": {
+        "name": "1F",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2C",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 76,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-29",
+      "time": "12:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "1C",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2F",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 77,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-30",
+      "time": "17:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "1I",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3C/D/F/G/H",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 78,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-30",
+      "time": "12:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "2E",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2I",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 79,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-06-30",
+      "time": "19:00 UTC-6",
+      "venueId": "mexico-city",
+      "home": {
+        "name": "1A",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3C/E/F/H/I",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 80,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-01",
+      "time": "12:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "1L",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3E/H/I/J/K",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 81,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-01",
+      "time": "17:00 UTC-7",
+      "venueId": "santa-clara",
+      "home": {
+        "name": "1D",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3B/E/F/I/J",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 82,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-01",
+      "time": "13:00 UTC-7",
+      "venueId": "seattle",
+      "home": {
+        "name": "1G",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3A/E/H/I/J",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 83,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-02",
+      "time": "19:00 UTC-4",
+      "venueId": "toronto",
+      "home": {
+        "name": "2K",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2L",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 84,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-02",
+      "time": "12:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "1H",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2J",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 85,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-02",
+      "time": "20:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "1B",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3E/F/G/I/J",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 86,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-03",
+      "time": "18:00 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "1J",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2H",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 87,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-03",
+      "time": "20:30 UTC-5",
+      "venueId": "kansas-city",
+      "home": {
+        "name": "1K",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "3D/E/I/J/L",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 88,
+      "round": "Round of 32",
+      "group": null,
+      "date": "2026-07-03",
+      "time": "13:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "2D",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "2G",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 89,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-04",
+      "time": "17:00 UTC-4",
+      "venueId": "philadelphia",
+      "home": {
+        "name": "W74",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W77",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 90,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-04",
+      "time": "12:00 UTC-5",
+      "venueId": "houston",
+      "home": {
+        "name": "W73",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W75",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 91,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-05",
+      "time": "16:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "W76",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W78",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 92,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-05",
+      "time": "18:00 UTC-6",
+      "venueId": "mexico-city",
+      "home": {
+        "name": "W79",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W80",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 93,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-06",
+      "time": "14:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "W83",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W84",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 94,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-06",
+      "time": "17:00 UTC-7",
+      "venueId": "seattle",
+      "home": {
+        "name": "W81",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W82",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 95,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-07",
+      "time": "12:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "W86",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W88",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 96,
+      "round": "Round of 16",
+      "group": null,
+      "date": "2026-07-07",
+      "time": "13:00 UTC-7",
+      "venueId": "vancouver",
+      "home": {
+        "name": "W85",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W87",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 97,
+      "round": "Quarter-final",
+      "group": null,
+      "date": "2026-07-09",
+      "time": "16:00 UTC-4",
+      "venueId": "foxborough",
+      "home": {
+        "name": "W89",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W90",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 98,
+      "round": "Quarter-final",
+      "group": null,
+      "date": "2026-07-10",
+      "time": "12:00 UTC-7",
+      "venueId": "inglewood",
+      "home": {
+        "name": "W93",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W94",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 99,
+      "round": "Quarter-final",
+      "group": null,
+      "date": "2026-07-11",
+      "time": "17:00 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "W91",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W92",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 100,
+      "round": "Quarter-final",
+      "group": null,
+      "date": "2026-07-11",
+      "time": "20:00 UTC-5",
+      "venueId": "kansas-city",
+      "home": {
+        "name": "W95",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W96",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 101,
+      "round": "Semi-final",
+      "group": null,
+      "date": "2026-07-14",
+      "time": "14:00 UTC-5",
+      "venueId": "arlington",
+      "home": {
+        "name": "W97",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W98",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 102,
+      "round": "Semi-final",
+      "group": null,
+      "date": "2026-07-15",
+      "time": "15:00 UTC-4",
+      "venueId": "atlanta",
+      "home": {
+        "name": "W99",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W100",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 103,
+      "round": "Match for third place",
+      "group": null,
+      "date": "2026-07-18",
+      "time": "17:00 UTC-4",
+      "venueId": "miami",
+      "home": {
+        "name": "L101",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "L102",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    },
+    {
+      "num": 104,
+      "round": "Final",
+      "group": null,
+      "date": "2026-07-19",
+      "time": "15:00 UTC-4",
+      "venueId": "east-rutherford",
+      "home": {
+        "name": "W101",
+        "teamId": null,
+        "placeholder": true
+      },
+      "away": {
+        "name": "W102",
+        "teamId": null,
+        "placeholder": true
+      },
+      "score": null,
+      "goals": null
+    }
+  ]
+}
