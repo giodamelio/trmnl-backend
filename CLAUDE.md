@@ -48,15 +48,18 @@ respect:
   tournament feed) and filters each item by its **local** date via `Intl.DateTimeFormat('en-CA',
   {timeZone})`, never by raw UTC date. football-data's `dateTo` is *inclusive* — see
   `apis/football-data/NOTES.md`.
-- **The upstream feed is identical for every viewer**, so it is edge-cached (`cf.cacheTtl`) once
-  and filtered per-request by timezone. This matters because the football-data free tier allows
-  only **10 calls/min** while many TRMNL devices may poll concurrently.
+- **The upstream feed is identical for every viewer**, so it is cached once (keyed on URL, headers
+  ignored) and filtered per-request by timezone. The cache lives in `src/lib/cache.ts`: a per-host
+  **requests-per-minute budget** (default 3) becomes a cache TTL (`60/rpm` seconds), so the
+  upstream is hit at most N times/min regardless of device count. This matters because the
+  football-data free tier allows only **10 calls/min**. The cache is per-colo, so the budget is
+  per Cloudflare data center. Override a host via `HOST_REQUESTS_PER_MINUTE` in that file.
 
 **Code is organized for adding unrelated feeds, not just more football.** `src/index.ts` is a
 thin versioned router; each feed is one self-contained module under `src/features/` that owns its
 own upstream client, query-param parsing, and secrets. Generic, feed-agnostic helpers live in
-`src/lib/` (`timezone.ts` — `resolveTimeZone`/`localDate`/`localTime`; `response.ts` — `json`,
-`errorResponse`, and `fetchJsonCached` for the cached-upstream pattern). A new feed = a new
+`src/lib/` (`timezone.ts` — `resolveTimeZone`/`localDate`/`localTime`; `cache.ts` —
+`cachedFetchJson`, the rate-limited upstream cache; `response.ts` — `json`/`errorResponse`). A new feed = a new
 `features/<name>.ts` exporting a handler + one route line; it opts into `lib/` only as needed (a
 non-time-based feed need not touch `timezone.ts`). Adding a feed's secret means extending the
 `Env` interface in `src/env.ts`. The worldcup module's response shape is `meta` / `current` /
@@ -80,7 +83,7 @@ non-time-based feed need not touch `timezone.ts`). Adding a feed's secret means 
 ## Layout
 
 - `src/index.ts` — versioned router; `src/env.ts` — Worker bindings.
-- `src/lib/` — generic, feed-agnostic helpers (timezone, response/fetch).
+- `src/lib/` — generic, feed-agnostic helpers (timezone, rate-limited upstream cache, responses).
 - `src/features/` — one module per feed (currently `worldcup.ts`).
 - `apis/football-data/` — upstream API exploration: `NOTES.md` (auth, codes, field shapes,
   date-filter gotchas), `worldcup.http`, and captured `samples/*.json`.

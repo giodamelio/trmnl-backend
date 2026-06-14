@@ -7,11 +7,12 @@
 
 import type { Env } from "../env";
 import { localDate, localTime, resolveTimeZone } from "../lib/timezone";
-import { errorResponse, fetchJsonCached, json } from "../lib/response";
+import { cachedFetchJson } from "../lib/cache";
+import { errorResponse, json } from "../lib/response";
 
 const FD_BASE = "https://api.football-data.org/v4";
 const WC = "WC";
-const UPSTREAM_CACHE_TTL = 60; // seconds; the tournament feed is identical for every viewer
+const RESPONSE_MAX_AGE = 60; // seconds; downstream cache hint for TRMNL/CDN
 
 // ---- football-data response shapes (only the fields we use) ----
 interface FdTeam {
@@ -109,9 +110,9 @@ export async function handleWorldCup(url: URL, env: Env): Promise<Response> {
   }
 
   const tz = resolveTimeZone(url.searchParams.get("tz"));
-  const data = await fetchJsonCached<FdMatchesResponse>(
+  const data = await cachedFetchJson<FdMatchesResponse>(
     `${FD_BASE}/competitions/${WC}/matches`,
-    { headers: { "X-Auth-Token": env.FOOTBALL_DATA_TOKEN }, cacheTtl: UPSTREAM_CACHE_TTL },
+    { headers: { "X-Auth-Token": env.FOOTBALL_DATA_TOKEN } },
   );
 
   const now = new Date();
@@ -145,6 +146,6 @@ export async function handleWorldCup(url: URL, env: Env): Promise<Response> {
   };
 
   return json(body, {
-    headers: { "Cache-Control": `public, max-age=${UPSTREAM_CACHE_TTL}` },
+    headers: { "Cache-Control": `public, max-age=${RESPONSE_MAX_AGE}` },
   });
 }
