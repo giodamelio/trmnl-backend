@@ -1,0 +1,17 @@
+# Secrets — never commit real API tokens
+.env
+.env.local
+
+# httpyac
+.httpyac*
+
+# direnv
+.direnv/
+
+# node / wrangler
+node_modules/
+.dev.vars
+.wrangler/
+
+# wrangler build output
+dist/
