@@ -71,3 +71,16 @@ cd plugin && trmnlp push     # upload to the private plugin
 
 The worldcup feed needs no secrets. See [`CLAUDE.md`](CLAUDE.md) for architecture details and
 gotchas, including the timezone contract and the upstream cache budget.
+
+## Deploying your own
+
+This repo is wired to my own Worker and TRMNL plugin. To run your own instance, change:
+
+- `name` in `wrangler.jsonc` (your Worker name) → `npm run deploy`.
+- `prod.host` in `http-client.env.json` (your `*.workers.dev` URL).
+- `polling_url` and `id` in `plugin/src/settings.yml` (point at your Worker; `id` is your own
+  private plugin's, set after `trmnlp` creates it).
+
+## License
+
+[MIT](LICENSE).

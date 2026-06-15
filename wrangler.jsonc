@@ -6,6 +6,7 @@
   "observability": {
     "enabled": true
   }
-  // Secret (set with `wrangler secret put FOOTBALL_DATA_TOKEN`, or .dev.vars locally):
-  //   FOOTBALL_DATA_TOKEN — football-data.org API token
+  // No secrets: the worldcup feed uses ESPN unauthenticated. A future
+  // authenticated feed would set its token with `wrangler secret put <NAME>`
+  // (or .dev.vars locally) and add it to the Env interface in src/env.ts.
 }

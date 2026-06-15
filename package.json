@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "description": "Cloudflare Workers backend for TRMNL plugins",
+  "license": "MIT",
+  "author": "Giovanni d'Amelio",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
