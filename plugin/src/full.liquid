@@ -241,14 +241,14 @@
         </div>
       {% endif %}
 
-      {% comment %} ── Section: Next two games in Seattle (same row style) ── {% endcomment %}
-      {% if seattleGames.size > 0 %}
+      {% comment %} ── Section: Next two games in the viewer's chosen host city ── {% endcomment %}
+      {% if cityGames.size > 0 %}
         <div style="display: flex; flex-direction: column; gap: 3px;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span class="title title--small" style="white-space: nowrap;">In Seattle</span>
+            <span class="title title--small" style="white-space: nowrap;">In {{ city }}</span>
             <hr style="flex: 1 1 auto; border: 0; border-top: 1px solid; margin: 0;" />
           </div>
-          {% for sg in seattleGames %}
+          {% for sg in cityGames %}
             <div style="font-size: 12px; display: flex; flex-direction: column; gap: 1px; line-height: 1.05;">
               {% comment %} matchup — flag + name grouped, pinned to the outer edges, vs centred {% endcomment %}
               <div style="display: flex; align-items: center;">

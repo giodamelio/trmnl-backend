@@ -38,3 +38,15 @@ GET {{host}}/v1/worldcup?tz=Asia/Tokyo
 ###
 # @name worldcupAuckland
 GET {{host}}/v1/worldcup?tz=Pacific/Auckland
+
+###
+# @name worldcupConfigured
+# Per-viewer config the TRMNL settings form fills in: two favorite teams + a host
+# city. Note `&` in a team name is url-encoded by the plugin (Bosnia & Herzegovina
+# -> Bosnia%20%26%20Herzegovina). Expect populated `favorites` and `cityGames`.
+GET {{host}}/v1/worldcup?tz={{tz}}&team1=USA&team2=Netherlands&city=Seattle
+
+###
+# @name worldcupConfigNone
+# The "None" sentinel (and absent params) must yield empty favorites/cityGames.
+GET {{host}}/v1/worldcup?tz={{tz}}&team1=None&team2=None&city=None

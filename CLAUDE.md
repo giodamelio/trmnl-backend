@@ -72,10 +72,21 @@ own upstream client, query-param parsing, and secrets. Generic, feed-agnostic he
 `features/<name>.ts` exporting a handler + one route line; it opts into `lib/` only as needed (a
 non-time-based feed need not touch `timezone.ts`). Adding a feed's secret means extending the
 `Env` interface in `src/env.ts` (currently empty — the worldcup feed is unauthenticated). The
-worldcup module's response shape is `meta` / `current` / `matches` / `tomorrow` / `nextUpcoming`.
+worldcup module's response shape is `meta` / `current` / `matches` / `tomorrow` / `nextUpcoming` /
+`standings` / `favorites` / `city` + `cityGames`.
 Venues come from the static `src/data/worldcup-2026.json` (joined on the team pair, giving
 fifaName/lat/lng/capacity), falling back to ESPN's inline venue for knockout matches whose teams
 are still placeholders in the database.
+
+**Viewer config is per-device, passed via the polling URL — no server state.** The `favorites`
+and `cityGames` sections are driven by TRMNL `custom_fields` (`plugin/src/settings.yml`): two
+favorite-team dropdowns (`team1`/`team2`) and a host-city dropdown (`city`), each with a `None`
+sentinel that hides the section. TRMNL interpolates the choices into the polling URL
+(`&team1={{ favorite_team_1 | url_encode }}&...`, `url_encode` because team/city labels contain
+spaces and `&`), and `handleWorldCup` reads them as query params. Team labels are the *database*
+names (e.g. `USA`, `Czech Republic`); matching against live ESPN names goes through the same
+`dbName()` normalization the venue join uses. Config never touches the upstream cache — ESPN is
+fetched once per window and filtered per-request, so adding viewers/configs costs no extra ESPN hits.
 
 ## Conventions & gotchas
 

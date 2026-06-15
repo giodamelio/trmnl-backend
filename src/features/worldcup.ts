@@ -22,8 +22,6 @@ const ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer";
 // A–L, four teams each, with rank / points / W-D-L / GF-GA-GD.
 const ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer";
 const LEAGUE = "fifa.world";
-// Favorite teams (ESPN displayNames) whose next fixture gets a detailed row.
-const FAVORITE_TEAMS = ["Netherlands", "United States"];
 // Whole-tournament UTC window (inclusive range). ESPN's no-date scoreboard only
 // returns a narrow "current" slice, so we always fetch the full range and filter
 // per-request by the viewer's local date. 2026-06-11 → 2026-07-19.
@@ -381,11 +379,23 @@ function favWhen(m: Match, todayStr: string, tomorrowStr: string, tz: string): s
 
 // Each favorite's next non-finished fixture (their live game if one is on now,
 // else the soonest upcoming), with the favorite's side resolved as `fav`.
-function favoritesOf(all: Match[], todayStr: string, tomorrowStr: string, tz: string): Favorite[] {
-  return FAVORITE_TEAMS.map((team) => {
+// Teams arrive as viewer-chosen labels (see plugin settings.yml); match them
+// against live ESPN names through the same dbName() normalization the venue
+// join uses, so e.g. a "USA" pick lines up with ESPN's "United States".
+function favoritesOf(
+  teams: string[],
+  all: Match[],
+  todayStr: string,
+  tomorrowStr: string,
+  tz: string,
+): Favorite[] {
+  return teams.map((team) => {
+    const want = dbName(team);
     const m =
-      all.find((x) => !x.isFinished && (x.home.name === team || x.away.name === team)) ?? null;
-    const favHome = m != null && m.home.name === team;
+      all.find(
+        (x) => !x.isFinished && (dbName(x.home.name) === want || dbName(x.away.name) === want),
+      ) ?? null;
+    const favHome = m != null && dbName(m.home.name) === want;
     return {
       team,
       hasGame: m != null,
@@ -428,6 +438,13 @@ function nextGamesAtCity(
     }));
 }
 
+// A viewer-config query param, normalized: a trimmed value, or null when unset
+// or the dropdown's "None" sentinel (which disables that section entirely).
+function configValue(raw: string | null): string | null {
+  const v = raw?.trim();
+  return v && v.toLowerCase() !== "none" ? v : null;
+}
+
 export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
   const tz = resolveTimeZone(url.searchParams.get("tz"));
   // Scoreboard is required; standings are a best-effort enrichment — a standings
@@ -455,8 +472,21 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
   const tomorrow = all.filter((m) => m.localDate === tomorrowStr);
 
   const current = pickCurrent(today, now);
-  const favorites = favoritesOf(all, todayStr, tomorrowStr, tz);
-  const seattleGames = nextGamesAtCity("Seattle", all, todayStr, tomorrowStr, tz, 2);
+
+  // Viewer config the TRMNL settings form fills into the polling URL (see
+  // plugin/src/settings.yml): up to two favorite teams and one host city, each
+  // "None"/absent to hide its section. Dedupe in case the same team is picked twice.
+  const favTeams = [
+    ...new Set(
+      [url.searchParams.get("team1"), url.searchParams.get("team2")]
+        .map(configValue)
+        .filter((t): t is string => t !== null),
+    ),
+  ];
+  const homeCity = configValue(url.searchParams.get("city"));
+
+  const favorites = favoritesOf(favTeams, all, todayStr, tomorrowStr, tz);
+  const cityGames = homeCity ? nextGamesAtCity(homeCity, all, todayStr, tomorrowStr, tz, 2) : [];
 
   // When nothing is on today, surface the next match in the tournament.
   const nextUpcoming =
@@ -480,7 +510,8 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
     nextUpcoming,
     standings,
     favorites,
-    seattleGames,
+    city: homeCity,
+    cityGames,
   };
 
   return json(body, {
