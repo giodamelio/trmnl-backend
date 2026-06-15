@@ -33,6 +33,12 @@ httpyac apis/trmnl-backend/worldcup.http --env prod --all     # our API vs deplo
 cd plugin && trmnlp serve     # live preview at http://localhost:4567
 cd plugin && trmnlp build     # render src/*.liquid -> plugin/_build/*.html (HTML only, no browser)
 cd plugin && trmnlp push      # upload to the private plugin (needs id: in settings.yml + trmnlp login)
+
+# PNG export (for automated visual tests). trmnlp has no build --png; the PNG is
+# served by `serve` at /render/<view>.png, rendered via headless Firefox. With
+# serve running (and wrangler dev for live data):
+curl 'http://localhost:4567/render/full.png' -o full.png                 # 800x480, 1-bit (OG default)
+curl 'http://localhost:4567/render/full.png?width=1024&height=758&color_depth=4' -o full.png  # e.g. larger/greyer
 ```
 
 There is no test suite. Verification is done by running `wrangler dev` and hitting the endpoint
@@ -105,8 +111,12 @@ fetched once per window and filtered per-request, so adding viewers/configs cost
   block did not apply in this httpyac version — don't rely on it.
 - `flake.nix` uses flake.parts; systems come from `nixpkgs.lib.systems.flakeExposed`.
 - **`trmnlp` is built from a bundix lockset** in `nix/trmnlp/` (not in nixpkgs); after a version bump
-  regenerate with `cd nix/trmnlp && nix run nixpkgs#bundix -- --lock`. `build --png` would also need a
-  browser + geckodriver, which aren't wired into the derivation.
+  regenerate with `cd nix/trmnlp && nix run nixpkgs#bundix -- --lock`.
+- **PNG export needs Firefox + geckodriver**, both in the devshell. trmnlp renders via Selenium, whose
+  bundled `selenium-manager` can't run on Nix (no FHS loader); the devshell sets `SE_GECKODRIVER` to the
+  Nix geckodriver, which makes selenium-webdriver skip selenium-manager (`service.rb`: `env_path` wins
+  over `find_driver_path`). geckodriver then finds Firefox on PATH. PNG is served by `serve` at
+  `/render/<view>.png` — there is no `build --png` subcommand.
 - **Plugin = the TRMNL frontend** in `plugin/` (`src/*.liquid` + `src/settings.yml`, managed by
   `trmnlp`). The Worker's JSON maps to top-level Liquid vars directly (`{{ current.home.name }}`,
   `{% for m in matches %}`) — the `merge_variables` wrapper is webhook-only, not polling. Liquid
