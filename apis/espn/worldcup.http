@@ -8,7 +8,9 @@
 # espn.com scoreboards). No published terms, no SLA, no documented rate limit.
 # Treat it as best-effort and cache aggressively (see src/lib/cache.ts).
 
-@host = https://site.api.espn.com/apis/site/v2/sports/soccer
+@site = https://site.api.espn.com/apis/site/v2/sports/soccer
+@web = https://site.api.espn.com/apis/v2/sports/soccer
+@core = https://sports.core.api.espn.com/v2/sports/soccer/leagues
 @league = fifa.world
 
 # Compute "today" in UTC as YYYYMMDD (ESPN's ?dates= format, no dashes).
@@ -20,27 +22,87 @@
   exports.today = `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`;
 }}
 
-###
-# @name today
-# Scoreboard for a single UTC day. Primary feed for the "games today" page.
-# Returns { leagues:[...], events:[...], provider }.
-GET {{host}}/{{league}}/scoreboard?dates={{today}}
-
-###
-# @name scoreboardNoDate
-# Scoreboard with no date param -> ESPN's default window (roughly "now"). Useful
-# to confirm the league slug and see which matches ESPN considers current/live.
-GET {{host}}/{{league}}/scoreboard
+# ============================================================================
+# What the Worker actually fetches (src/features/worldcup.ts)
+# ============================================================================
 
 ###
 # @name tournament
-# Whole-tournament window. dateTo is inclusive; range form is YYYYMMDD-YYYYMMDD.
-# NOTE: as of 2026-06-14 this returns 100 of 104 matches — the semi-finals,
-# third-place playoff, and final are not yet published (see NOTES.md gap).
-GET {{host}}/{{league}}/scoreboard?dates=20260611-20260719
+# PRIMARY FEED. Whole-tournament window; `dates` is an INCLUSIVE range, YYYYMMDD
+# (no dashes). The Worker fetches this once (cached) and filters per-request by
+# the viewer's local date. Returns { leagues:[...], events:[...], provider }.
+#
+# COVERAGE: returns 100 of 104 matches — all 72 group + 16 R32 + 8 R16 + 4 QF.
+# The scoreboard view TRUNCATES to "active" rounds, so the 2 semis, 3rd-place,
+# and final are absent here. They are NOT missing data — fetch them per-event
+# via `summary` below (or the core API). See NOTES.md "Bracket / late nodes".
+GET {{site}}/{{league}}/scoreboard?dates=20260611-20260719
 
 ###
-# @name leagueMeta
-# League/season metadata + the `calendar` block (stage date ranges: Group,
-# Round of 32, Rd of 16, Quarterfinals, ...). Same payload as `leagues[0]` above.
-GET {{host}}/{{league}}/scoreboard?dates={{today}}
+# @name standings
+# Group tables (apis/v2 host, NOT apis/site/v2). `children[]` = one block per
+# group A–L; each has `standings.entries[]` with stats{ rank, points, wins,
+# losses, ties/draws, pointsFor/Against (GF/GA), pointDifferential }.
+# Best-effort enrichment — the Worker tolerates a failure here.
+GET {{web}}/{{league}}/standings
+
+# ============================================================================
+# Bracket / late nodes — the full 32-match knockout tree, all clean JSON
+# ============================================================================
+# Every knockout match's two competitor labels NAME their feeder matches
+# ("Quarterfinal 1 Winner", "Round of 32 1 Winner", "Group A 2nd Place"), so the
+# whole bracket tree reconstructs from plain-text labels — no scraping, no
+# id-order guessing. The 4 late nodes the scoreboard omits have stable ids:
+#   760514 Semifinal 1   (QF1 W vs QF2 W)   Jul 14
+#   760515 Semifinal 2   (QF3 W vs QF4 W)   Jul 15
+#   760516 3rd-Place     (SF1 L vs SF2 L)   Jul 18
+#   760517 Final         (SF1 W vs SF2 W)   Jul 19
+
+###
+# @name summaryFinal
+# Per-event summary (site API, clean JSON). Has header.competitions[0] with
+# date, status.type, competitors[] (placeholder labels until teams resolve),
+# gameInfo.venue, and season.name (the stage, e.g. "…, Final"). This is how the
+# Worker can fill the late nodes the scoreboard truncates.
+GET {{site}}/{{league}}/summary?event=760517
+
+###
+# @name summarySemi1
+GET {{site}}/{{league}}/summary?event=760514
+
+###
+# @name coreEvent
+# Core API event (sports.core.api.espn.com). $ref/HATEOAS graph — heavier (one
+# request per event/competition), but authoritative: competition object carries
+# `matchNumber` (the official FIFA match no.) and a `bracketAvailable` flag.
+# Useful to cross-check the bracket wiring; too many requests to use live.
+GET {{core}}/{{league}}/events/760517?lang=en
+
+###
+# @name coreSeasonTypes
+# The 7 tournament stages as first-class objects (proves SF/3rd/Final exist even
+# though the scoreboard omits them): 1 Group Stage, 2 Round of 32, 3 Round of 16,
+# 4 Quarterfinals, 5 Semifinals, 6 3rd-Place Match, 7 Final.
+GET {{core}}/{{league}}/seasons/2026/types?lang=en
+
+###
+# @name coreFinalEvents
+# Events under a given stage (here type 7 = Final) -> resolves the late-node ids.
+GET {{core}}/{{league}}/seasons/2026/types/7/events?lang=en
+
+# ============================================================================
+# Exploration / sanity checks
+# ============================================================================
+
+###
+# @name today
+# Scoreboard for a single UTC day. NOTE: the `dates` single-day filter buckets
+# by US Eastern, not UTC, so a 02:00Z kickoff files under the previous day here.
+# The Worker avoids this by fetching the whole window and bucketing itself.
+GET {{site}}/{{league}}/scoreboard?dates={{today}}
+
+###
+# @name scoreboardNoDate
+# Scoreboard with no date param -> ESPN's default "current" window. Handy to see
+# which matches ESPN considers live right now.
+GET {{site}}/{{league}}/scoreboard
