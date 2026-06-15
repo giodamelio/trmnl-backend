@@ -250,6 +250,25 @@ function dbVenueFor(home: EspnTeam, away: EspnTeam): Venue | null {
   return id ? venuesById.get(id) ?? null : null;
 }
 
+// ESPN venue id -> our DB venue id. Knockout matches can't resolve via the team-
+// pair join (placeholder teams), so map ESPN's stable inline venue id back to the
+// static DB venue — giving knockouts the FIFA-branded name, the clean city label
+// (which the `city` filter matches on), lat/lng, etc. A stadium-NAME join would
+// miss two (ESPN uses "Estadio Banorte" and "GEHA Field at Arrowhead Stadium"),
+// so we key on the id. Captured from the live fifa.world feed.
+const ESPN_VENUE_TO_DB_ID: Record<string, string> = {
+  "3871": "arlington", "4370": "vancouver", "10143": "toronto", "5009": "guadalajara",
+  "1672": "mexico-city", "6351": "monterrey", "10897": "kansas-city", "10660": "foxborough",
+  "4643": "miami", "5960": "santa-clara", "1421": "philadelphia", "4485": "seattle",
+  "7485": "atlanta", "4727": "east-rutherford", "6262": "houston", "9115": "inglewood",
+};
+
+// DB venue for an ESPN inline venue id, else null.
+function dbVenueByEspnId(v: EspnVenue | undefined): Venue | null {
+  const dbId = v?.id ? ESPN_VENUE_TO_DB_ID[v.id] : undefined;
+  return dbId ? venuesById.get(dbId) ?? null : null;
+}
+
 // ESPN's inline venue — the fallback for knockouts the database can't resolve.
 // ESPN has no FIFA-branded name, so reuse the stadium name for fifaName.
 function espnVenueOf(v: EspnVenue | undefined): Venue | null {
@@ -295,7 +314,9 @@ function side(c: EspnCompetitor, played: boolean): Side {
   return {
     name: c.team.displayName,
     tla: c.team.abbreviation ?? null,
-    crest: flagUrl(c.team.displayName) ?? c.team.logo ?? null,
+    // Knockout placeholders carry logo:"" — coerce empty to null so the template's
+    // `{% if crest %}` (Liquid treats "" as truthy) doesn't render an empty <img>.
+    crest: flagUrl(c.team.displayName) ?? (c.team.logo || null),
     // ESPN reports "0" before kickoff, so only trust a score once play has begun.
     score: played && c.score != null ? Number(c.score) : null,
   };
@@ -321,7 +342,7 @@ function normalize(e: EspnEvent, tz: string): Match {
     localDate: localDate(kickoff, tz),
     home: side(home, played),
     away: side(away, played),
-    venue: dbVenueFor(home.team, away.team) ?? espnVenueOf(c.venue),
+    venue: dbVenueFor(home.team, away.team) ?? dbVenueByEspnId(c.venue) ?? espnVenueOf(c.venue),
   };
 }
 
