@@ -33,19 +33,21 @@
                 {% if m.group %} · {{ m.group | replace: "GROUP_", "Group " }}{% endif %}
               </span>
 
-              {% comment %} Teams + score — big flag on top, tiny left-aligned name above the code.
-                 Modest gap + the card's horizontal padding keep the row inside the
-                 clipping .columns box so the outer-aligned names never get cut off. {% endcomment %}
-              <div class="flex flex--center items--center" style="gap: 16px; max-width: 100%;">
-                {% comment %} Home {% endcomment %}
-                <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px;">
+              {% comment %} Teams + score — big flag on top, tiny name above the code.
+                 The two side groups take equal flex:1 and pin to the outer edges
+                 (home left, away right), so the flag + name/code line up flush with
+                 the card's outer edge; the fixed-width score stays at the centre.
+                 The card's horizontal padding keeps it inside the clipping .columns box. {% endcomment %}
+              <div class="flex items--center" style="width: 100%;">
+                {% comment %} Home — flag + name/code, pinned to the outside (left) {% endcomment %}
+                <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px;">
                   {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 120px; width: 172px; object-fit: cover;" />{% endif %}
                   <span class="label" style="font-size: 12px; white-space: nowrap;">{{ m.home.name }}</span>
                   <span class="value" style="font-size: 38px; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
                 </div>
 
                 {% comment %} Score / vs — never wrap; don't let the flags squeeze it {% endcomment %}
-                <span class="value" style="font-size: 46px; font-weight: 700; white-space: nowrap; flex: 0 0 auto;">
+                <span class="value" style="font-size: 46px; font-weight: 700; white-space: nowrap; flex: 0 0 auto; padding: 0 16px;">
                   {% if m.isLive or m.isFinished %}
                     {{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}
                   {% else %}
@@ -53,8 +55,8 @@
                   {% endif %}
                 </span>
 
-                {% comment %} Away — name/code aligned to the outside (right) {% endcomment %}
-                <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 3px;">
+                {% comment %} Away — flag + name/code, pinned to the outside (right) {% endcomment %}
+                <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 3px;">
                   {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 120px; width: 172px; object-fit: cover;" />{% endif %}
                   <span class="label" style="font-size: 12px; white-space: nowrap;">{{ m.away.name }}</span>
                   <span class="value" style="font-size: 38px; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
@@ -70,26 +72,24 @@
             </div>
           {% else %}
             {% comment %}
-              Other game — 5 equal flex sections, evenly spaced:
-                [home flag] [home name/code] [centre score/status] [away name/code] [away flag]
-              Equal sections keep the centre at the exact row centre, so scores line
-              up down the list. Flags sit on the outside of their section; the name/code
-              aligns to the outside of its side too — left for home, right for away.
+              Other game — flag+name grouped per side and pinned to the outer
+              edge (same pattern as the Favorites / In-city rows), with a fixed
+              centre score/status. The two equal flex:1 side groups keep the
+              centre at the exact row centre, so scores line up down the list;
+              grouping the flag with the name puts the flag's outer edge flush
+              with the name/code's outer edge — left for home, right for away.
             {% endcomment %}
             <div style="flex: 1 1 0; display: flex; align-items: center; padding: 6px 8px;">
-              {% comment %} 1 — home flag, outside (left) {% endcomment %}
-              <div style="flex: 1 1 0; display: flex; justify-content: flex-start;">
+              {% comment %} home — flag then name/code, pinned to the outside (left) {% endcomment %}
+              <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; white-space: nowrap;">
                 {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 56px; width: 80px; object-fit: cover;" />{% endif %}
-              </div>
-              {% comment %} 2 — home name/code, aligned to the outside (left) {% endcomment %}
-              <div style="flex: 1 1 0; display: flex; justify-content: flex-start;">
                 <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px;">
-                  <span class="label" style="font-size: 14px; white-space: nowrap;">{{ m.home.name }}</span>
+                  <span class="label" style="font-size: 14px;">{{ m.home.name }}</span>
                   <span class="value" style="font-size: 30px; font-weight: 700;">{{ m.home.tla }}</span>
                 </div>
               </div>
-              {% comment %} 3 — centre: status above score, or status alone when no score {% endcomment %}
-              <div style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; line-height: 1; gap: 3px;">
+              {% comment %} centre: status above score, or status alone when no score {% endcomment %}
+              <div style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; line-height: 1; gap: 3px; padding: 0 10px;">
                 {% if m.isLive or m.isFinished %}
                   <span class="label label--small" style="font-size: 11px;">
                     {% if m.isLive %}LIVE{% if m.minute %} {{ m.minute }}'{% endif %}{% else %}FT{% endif %}
@@ -99,15 +99,12 @@
                   <span class="value" style="font-size: 19px; font-weight: 700; white-space: nowrap;">{{ m.kickoffLocal }}</span>
                 {% endif %}
               </div>
-              {% comment %} 4 — away name/code, aligned to the outside (right) {% endcomment %}
-              <div style="flex: 1 1 0; display: flex; justify-content: flex-end;">
+              {% comment %} away — name/code then flag, pinned to the outside (right) {% endcomment %}
+              <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 10px; white-space: nowrap;">
                 <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 2px;">
-                  <span class="label" style="font-size: 14px; white-space: nowrap;">{{ m.away.name }}</span>
+                  <span class="label" style="font-size: 14px;">{{ m.away.name }}</span>
                   <span class="value" style="font-size: 30px; font-weight: 700;">{{ m.away.tla }}</span>
                 </div>
-              </div>
-              {% comment %} 5 — away flag, outside (right) {% endcomment %}
-              <div style="flex: 1 1 0; display: flex; justify-content: flex-end;">
                 {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 56px; width: 80px; object-fit: cover;" />{% endif %}
               </div>
             </div>
