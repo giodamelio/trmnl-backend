@@ -37,7 +37,7 @@
   </span>
   <div class="flex items--center" style="width: 100%;">
     <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px;">
-      {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: cover;" />{% endif %}
+      {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
       <span class="label" style="font-size: {{ nameSize }}px; white-space: nowrap;">{{ m.home.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
     </div>
@@ -45,7 +45,7 @@
       {% if m.isLive or m.isFinished %}{{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}{% else %}vs{% endif %}
     </span>
     <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 3px;">
-      {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: cover;" />{% endif %}
+      {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
       <span class="label" style="font-size: {{ nameSize }}px; white-space: nowrap;">{{ m.away.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
     </div>
@@ -68,7 +68,7 @@
 {%- assign timeSize = timeSize | default: 19 -%}
 <div style="flex: 1 1 0; display: flex; align-items: center; padding: 6px 8px;">
   <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; white-space: nowrap;">
-    {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: cover;" />{% endif %}
+    {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
     <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px;">
       <span class="label" style="font-size: {{ nameSize }}px;">{{ m.home.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700;">{{ m.home.tla }}</span>
@@ -87,7 +87,7 @@
       <span class="label" style="font-size: {{ nameSize }}px;">{{ m.away.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700;">{{ m.away.tla }}</span>
     </div>
-    {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: cover;" />{% endif %}
+    {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
   </div>
 </div>
 {% endtemplate %}
@@ -127,13 +127,13 @@
             {{ m.kickoffLocal }}{% if m.venue %} · {{ m.venue.city }}{% endif %}
           </span>
           <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
-            <span style="display: flex; align-items: center;">{% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 1.5em; width: 2.2em; object-fit: cover;" />{% endif %}</span>
+            <span style="display: flex; align-items: center;">{% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 1.5em; width: 2.2em; object-fit: contain;" />{% endif %}</span>
             <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
             <span class="label" style="font-size: 1em;">{{ m.home.name }}</span>
           </div>
           <span class="label" style="font-size: 0.8em; align-self: flex-start; padding-left: 0.6em; line-height: 1; margin: -1px 0;">vs</span>
           <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
-            <span style="display: flex; align-items: center;">{% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 1.5em; width: 2.2em; object-fit: cover;" />{% endif %}</span>
+            <span style="display: flex; align-items: center;">{% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 1.5em; width: 2.2em; object-fit: contain;" />{% endif %}</span>
             <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
             <span class="label" style="font-size: 1em;">{{ m.away.name }}</span>
           </div>
@@ -160,7 +160,7 @@
           {% for r in g.rows %}
             <div style="display: grid; grid-template-columns: 1em 1.6em 1fr 1.7em 1.4em; align-items: center; column-gap: 4px; white-space: nowrap; line-height: 1;">
               <span class="label" style="text-align: center;">{{ r.rank }}</span>
-              <span style="display: flex; align-items: center;">{% if r.crest %}<img class="image" src="{{ r.crest }}" style="height: 1em; width: 1.5em; object-fit: cover;" />{% endif %}</span>
+              <span style="display: flex; align-items: center;">{% if r.crest %}<img class="image" src="{{ r.crest }}" style="height: 1em; width: 1.5em; object-fit: contain;" />{% endif %}</span>
               <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1;">{{ r.tla }}</span>
               <span style="font-size: 1.3em; line-height: 1; text-align: right;">{% if r.gd > 0 %}+{% endif %}{{ r.gd }}</span>
               <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1; text-align: right;">{{ r.points }}</span>
@@ -185,13 +185,13 @@
         {% if f.hasGame %}
           <div style="display: flex; align-items: center;">
             <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 0.4em; white-space: nowrap;">
-              {% if f.fav.crest %}<img class="image" src="{{ f.fav.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+              {% if f.fav.crest %}<img class="image" src="{{ f.fav.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
               <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ f.fav.name }}</span>
             </div>
             <span class="label" style="flex: 0 0 auto; font-size: 0.95em; padding: 0 0.5em; white-space: nowrap;">{% if f.isLive %}{{ f.fav.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ f.opp.score | default: 0 }}{% else %}vs{% endif %}</span>
             <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 0.4em; white-space: nowrap;">
               <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ f.opp.name }}</span>
-              {% if f.opp.crest %}<img class="image" src="{{ f.opp.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+              {% if f.opp.crest %}<img class="image" src="{{ f.opp.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
             </div>
           </div>
           <div style="display: flex; align-items: baseline; font-size: 10px;">
@@ -219,13 +219,13 @@
       <div style="font-size: 12px; display: flex; flex-direction: column; gap: 1px; line-height: 1.05;">
         <div style="display: flex; align-items: center;">
           <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 0.4em; white-space: nowrap;">
-            {% if sg.home.crest %}<img class="image" src="{{ sg.home.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+            {% if sg.home.crest %}<img class="image" src="{{ sg.home.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
             <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ sg.home.name }}</span>
           </div>
           <span class="label" style="flex: 0 0 auto; font-size: 0.95em; padding: 0 0.5em; white-space: nowrap;">{% if sg.isLive %}{{ sg.home.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ sg.away.score | default: 0 }}{% else %}vs{% endif %}</span>
           <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 0.4em; white-space: nowrap;">
             <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ sg.away.name }}</span>
-            {% if sg.away.crest %}<img class="image" src="{{ sg.away.crest }}" style="height: 1.5em; width: 2.1em; object-fit: cover;" />{% endif %}
+            {% if sg.away.crest %}<img class="image" src="{{ sg.away.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
           </div>
         </div>
         <div style="display: flex; align-items: baseline; font-size: 10px;">
