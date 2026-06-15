@@ -208,6 +208,35 @@ const TEAM_ALIASES: Record<string, string> = {
 const dbName = (name: string): string => TEAM_ALIASES[name] ?? name;
 const pairKey = (a: string, b: string): string => [dbName(a), dbName(b)].sort().join(" | ");
 
+// Flags. ESPN's country logos (countries/500/<code>.png) are a flag centered on
+// a 500x500 transparent canvas — a constant 20px (4%) left/right inset plus
+// aspect-ratio letterboxing top/bottom — which renders as white margins on
+// e-ink and breaks row alignment. flagcdn serves crisp BORDERLESS SVGs by ISO
+// 3166-1 alpha-2 slug (home nations use gb-* subdivision slugs), so with the
+// template's object-fit:cover the flag fills its box edge-to-edge, no margins.
+// Keyed by database name (post-dbName normalization); ESPN's logo stays as the
+// fallback for anything unmapped (e.g. knockout placeholders, which have none).
+const FLAG_CODE: Record<string, string> = {
+  Algeria: "dz", Argentina: "ar", Australia: "au", Austria: "at", Belgium: "be",
+  "Bosnia & Herzegovina": "ba", Brazil: "br", Canada: "ca", "Cape Verde": "cv",
+  Colombia: "co", Croatia: "hr", "Curaçao": "cw", "Czech Republic": "cz",
+  "DR Congo": "cd", Ecuador: "ec", Egypt: "eg", England: "gb-eng", France: "fr",
+  Germany: "de", Ghana: "gh", Haiti: "ht", Iran: "ir", Iraq: "iq",
+  "Ivory Coast": "ci", Japan: "jp", Jordan: "jo", Mexico: "mx", Morocco: "ma",
+  Netherlands: "nl", "New Zealand": "nz", Norway: "no", Panama: "pa",
+  Paraguay: "py", Portugal: "pt", Qatar: "qa", "Saudi Arabia": "sa",
+  Scotland: "gb-sct", Senegal: "sn", "South Africa": "za", "South Korea": "kr",
+  Spain: "es", Sweden: "se", Switzerland: "ch", Tunisia: "tn", Turkey: "tr",
+  USA: "us", Uruguay: "uy", Uzbekistan: "uz",
+};
+
+// Borderless flag SVG for a team, or null when the nation isn't mapped (caller
+// falls back to ESPN's padded logo).
+function flagUrl(name: string): string | null {
+  const code = FLAG_CODE[dbName(name)];
+  return code ? `https://flagcdn.com/${code}.svg` : null;
+}
+
 const venueByPair = new Map<string, string>();
 for (const m of db.matches) {
   if (m.venueId && !m.home.placeholder && !m.away.placeholder) {
@@ -266,7 +295,7 @@ function side(c: EspnCompetitor, played: boolean): Side {
   return {
     name: c.team.displayName,
     tla: c.team.abbreviation ?? null,
-    crest: c.team.logo ?? null,
+    crest: flagUrl(c.team.displayName) ?? c.team.logo ?? null,
     // ESPN reports "0" before kickoff, so only trust a score once play has begun.
     score: played && c.score != null ? Number(c.score) : null,
   };
@@ -350,7 +379,7 @@ function normalizeStandings(data: EspnStandingsResponse): GroupStanding[] {
         .map((e) => ({
           name: e.team.displayName,
           tla: e.team.abbreviation ?? null,
-          crest: e.team.logos?.[0]?.href ?? null,
+          crest: flagUrl(e.team.displayName) ?? e.team.logos?.[0]?.href ?? null,
           rank: stat(e.stats, "rank"),
           played: stat(e.stats, "gamesPlayed"),
           win: stat(e.stats, "wins"),

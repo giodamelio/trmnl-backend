@@ -73,9 +73,18 @@ Top level: `{ leagues: [...], events: [...], provider }`.
 | `group` | `match.group` ("Group A") | parse `altGameNote` ("…, Group A") |
 | `home/away.name` | `team.name` | `competitor.team.displayName` |
 | `home/away.tla` | `team.tla` | `competitor.team.abbreviation` |
-| `home/away.crest` | `team.crest` | `competitor.team.logo` |
+| `home/away.crest` | `team.crest` | `competitor.team.logo` (see flags note) |
 | `home/away.score` | `score.fullTime.{home,away}` (int\|null) | `competitor.score` (string; "0" pre-match) |
 | `venue` | (none → static DB join) | `competitions[0].venue` inline (+ static DB for lat/lng/cap/tz) |
+
+**Flags note:** `competitor.team.logo` is a flag centered on a 500×500 transparent
+canvas — a constant 20px (4%) left/right inset plus aspect-ratio letterboxing
+top/bottom — which shows as white margins on e-ink and breaks row alignment.
+ESPN has no unpadded variant (only the `500` size; `100`/`50` are 404; the
+`combiner` endpoint only rescales the square). So `worldcup.ts` serves borderless
+**flagcdn** SVGs instead (`https://flagcdn.com/<iso2>.svg`, home nations via
+`gb-eng`/`gb-sct`), keyed by team name, and falls back to ESPN's logo only for
+unmapped teams (knockout placeholders, which have no logo anyway).
 
 ## Status vocabulary
 Observed so far: `STATUS_SCHEDULED` (pre), `STATUS_FIRST_HALF` (in), `STATUS_FULL_TIME`
