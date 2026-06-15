@@ -21,3 +21,6 @@ plugin/_build/
 
 # nix
 /result
+
+# local scratch notes
+todo.md
