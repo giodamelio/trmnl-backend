@@ -17,7 +17,8 @@ Endpoint pattern works for any competition by slug: `.../soccer/{slug}/scoreboar
 - **Stability / ToS:** unofficial, no SLA, undocumented — the schema or host can
   change without notice (precedent: ESPN's Fantasy API host moved in Apr 2024 and
   broke integrations overnight). Fine for a hobby plugin; legally grey for anything
-  commercial. Wrap in defensive error handling; keep football-data wired as fallback.
+  commercial. Wrap in defensive error handling; if it proves unreliable, football-data.org
+  (`fifa.world`-equivalent competition `WC`) is the obvious fallback to wire back in.
 
 ## Endpoints we use (see worldcup.http)
 | name | path | purpose |
@@ -90,7 +91,7 @@ The tournament window returns **100 of 104 matches**: 72 group-stage, 16 round-o
 are not yet in the feed** (latest event is 2026-07-12; the final is 2026-07-19).
 These almost certainly appear as ESPN populates the bracket, but until then the
 "next match in the tournament" fallback can't see them. Re-check closer to the
-knockouts; if still missing, this is the one case to keep football-data as a backstop.
+knockouts; if still missing, this is the strongest case for wiring in a backstop upstream.
 
 ## Knockout placeholders
 Before the bracket resolves, knockout `competitors` carry placeholder teams:

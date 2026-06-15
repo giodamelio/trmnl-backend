@@ -1,3 +1,6 @@
 # Copy to .dev.vars for local `wrangler dev`. (.dev.vars is gitignored.)
-# In production set it as a secret: wrangler secret put FOOTBALL_DATA_TOKEN
-FOOTBALL_DATA_TOKEN=your_token_here
+# The worldcup feed needs no secrets (ESPN is unauthenticated), so this is empty.
+# Future authenticated feeds add their token here, and in production set it with:
+#   wrangler secret put EXAMPLE_FEED_TOKEN
+#
+# EXAMPLE_FEED_TOKEN=your_token_here

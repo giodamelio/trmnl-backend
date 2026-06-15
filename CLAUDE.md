@@ -9,8 +9,7 @@ fetches data from an upstream API, does timezone-aware logic server-side, and re
 template-ready JSON that a TRMNL private plugin renders. The first (and currently only) endpoint
 is `/v1/worldcup`, backed by [ESPN's undocumented `site.api.espn.com`](apis/espn/NOTES.md) feed
 (league slug `fifa.world`). We switched off football-data.org because its free tier delays scores
-by design; ESPN exposes a live in-play clock for free and needs no API key. The old football-data
-exploration is kept under `apis/football-data/` for reference only.
+by design; ESPN exposes a live in-play clock for free and needs no API key.
 
 ## Commands
 
@@ -89,7 +88,7 @@ are still placeholders in the database.
   `.dev.vars`/`npm run secrets` are currently unused. The plumbing remains for future feeds: a
   token would live in `.env` (gitignored, read by httpyac and `direnv`) and `.dev.vars` for
   `wrangler dev`; `npm run secrets` syncs *everything* in `.env` up as production secrets — so keep
-  non-secret config out of `.env`. The leftover `FOOTBALL_DATA_TOKEN` in those files is now inert.
+  non-secret config out of `.env`. See `.env.example`/`.dev.vars.example` for the (empty) shape.
 - **httpyac environments** (`http-client.env.json`) only carry `host` (`dev` vs `prod`); per-request
   params like `tz`/`offset` are `@`-variables inside the `.http` file. The IntelliJ `$shared`
   block did not apply in this httpyac version — don't rely on it.
@@ -112,7 +111,6 @@ are still placeholders in the database.
 - `src/data/` — static `worldcup-2026.json` (venues + fixtures) joined for venue enrichment.
 - `apis/espn/` — the **live** upstream's exploration: `NOTES.md` (no-auth, field shapes, the
   football-data→ESPN field map, the 100/104 coverage gap), `worldcup.http`, `samples/*.json`.
-- `apis/football-data/` — legacy/reference exploration of the previous upstream (no longer used).
 - `plugin/` — the TRMNL plugin (frontend): `src/*.liquid`, `src/settings.yml`, `.trmnlp.yml`.
 - `nix/trmnlp/` — bundix lockset that builds the `trmnlp` CLI.
 - `apis/trmnl-backend/` — `.http` requests against our own deployed/local API.
