@@ -11,6 +11,11 @@
 # preview receives exactly what a real America/Los_Angeles device would.
 # `time_zone` also sets trmnl.user.* for any in-template use.
 #
+# This override also carries hardcoded favorite teams + host city so the
+# `favorites`/`cityGames` sections render in preview. These are LOCAL ONLY — the
+# published settings.yml still defaults every user to None. Change them freely;
+# url_encode any value with spaces or `&` (e.g. city=New%20York%20%2F%20New%20Jersey).
+#
 # Points at the local `wrangler dev` (localhost:8787) so in-progress Worker
 # changes show in preview without deploying. Swap back to the workers.dev URL
 # to preview against production.
@@ -24,4 +29,4 @@ time_zone: America/Los_Angeles
 variables:
   trmnl:
     plugin_settings:
-      polling_url: http://localhost:8787/v1/worldcup?tz=America/Los_Angeles&offset=-25200
+      polling_url: http://localhost:8787/v1/worldcup?tz=America/Los_Angeles&offset=-25200&team1=Netherlands&team2=USA&city=Seattle
