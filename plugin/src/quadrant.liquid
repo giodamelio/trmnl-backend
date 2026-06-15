@@ -1,0 +1,13 @@
+{% comment %} World Cup — quadrant view (smallest). Just the current/next game, in a
+  compact version of the featured card (smaller flags + type) filling the cell. {% endcomment %}
+<div class="layout">
+  {% if meta.todayCount > 0 %}
+    <div class="columns" style="align-self: stretch;">
+      <div class="column" style="height: 100%;">
+        {% render 'today_featured', m: current, basis: '1 1 0', flagH: 84, flagW: 120, codeSize: 30, scoreSize: 32 %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% render 'title_bar', meta: meta %}

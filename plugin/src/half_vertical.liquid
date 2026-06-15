@@ -1,0 +1,9 @@
+{% comment %} World Cup — half-vertical view (tall, narrow). Reuses the full view's
+  left column as-is: the full-height column of today's games. The column is about
+  the same width as the full view's left column, so the featured card needs no
+  resizing. {% endcomment %}
+<div class="layout">
+  {% if meta.todayCount > 0 %}{% render 'today_column', matches: matches, current: current %}{% endif %}
+</div>
+
+{% render 'title_bar', meta: meta %}
