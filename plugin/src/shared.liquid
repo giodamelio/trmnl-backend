@@ -252,6 +252,10 @@
 {% endif %}
 {% endtemplate %}
 
+{% comment %} The knockout bracket is no longer a CSS partial — it's a server-rendered
+  SVG (own route, src/features/worldcup.ts → bracketSvg) embedded by full.liquid via
+  an <iframe> (an <img>-embedded SVG can't load its hotlinked flags). {% endcomment %}
+
 {% comment %} ─────────────────────────── title_bar ─────────────────────────── {% endcomment %}
 {% template title_bar %}
 <div class="title_bar">

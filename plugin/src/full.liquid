@@ -1,6 +1,9 @@
 {% comment %} World Cup — full view. Composes the partials defined in shared.liquid:
   today's games down the left, the stacked right-hand sections, then the title bar.
-  Each section partial guards its own emptiness, so absent data renders nothing. {% endcomment %}
+  Each section partial guards its own emptiness, so absent data renders nothing.
+  In the knockout phase the standings slot is replaced by the server-rendered
+  bracket SVG, embedded via an <iframe> (an <img>-embedded SVG can't load its
+  hotlinked flags). The SVG's viewBox scales it to fill the iframe's width. {% endcomment %}
 <div class="layout">
 
   {% if meta.todayCount > 0 %}{% render 'today_column', matches: matches, current: current %}{% endif %}
@@ -9,7 +12,14 @@
   <div class="columns">
     <div class="column" style="justify-content: flex-start; gap: 11px;">
       {% render 'tomorrow_section', tomorrow: tomorrow, meta: meta %}
-      {% render 'standings_section', standings: standings %}
+      {% if meta.phase == 'knockout' %}
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          {% render 'section_header', title: 'Knockout' %}
+          <iframe src="{{ meta.bracketSvgUrl }}" style="width: 100%; aspect-ratio: 700 / 450; border: 0;" scrolling="no"></iframe>
+        </div>
+      {% else %}
+        {% render 'standings_section', standings: standings %}
+      {% endif %}
       {% render 'favorites_section', favorites: favorites %}
       {% render 'city_section', cityGames: cityGames, city: city %}
     </div>
