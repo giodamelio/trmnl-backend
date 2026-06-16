@@ -495,6 +495,272 @@ function configValue(raw: string | null): string | null {
   return v && v.toLowerCase() !== "none" ? v : null;
 }
 
+// ============================================================================
+// Bracket. FIFA fixes the knockout wiring, dates and venues long before the
+// teams are known, so the *skeleton* — 32 nodes with their slots, feeders, dates
+// and venues — is compiled from the static database (src/data/worldcup-2026.json)
+// once at module load. ESPN only OVERLAYS the live bits per request: which teams
+// resolved, scores, status, clock. This keeps "which match is match N" logic out
+// of ESPN — we use FIFA's own match numbers and the database's W##/L## wiring,
+// not a fragile ESPN-id-order assumption.
+// ============================================================================
+
+type Feeder =
+  | { type: "group"; group: string; outcome: "winner" | "runnerUp" }
+  | { type: "group"; outcome: "thirdPlace"; groups: string[] }
+  | { type: "match"; matchNum: number; outcome: "winner" | "loser" };
+
+interface BracketSide {
+  name: string; // resolved nation, or a placeholder label ("Group A Winner", "Winner M89")
+  tla: string | null;
+  crest: string | null;
+  score: number | null;
+  resolved: boolean; // true once a real nation has filled the slot
+  feeder: Feeder; // where this slot is fed from (for drawing connectors)
+}
+interface BracketNode {
+  num: number; // FIFA match number — the stable bracket id
+  round: string; // R32 | R16 | QF | SF | TP | F
+  slot: number; // 1-based vertical position within the round
+  date: string; // venue-local match date (YYYY-MM-DD), from the database
+  venue: Venue | null;
+  home: BracketSide;
+  away: BracketSide;
+  // Live overlay — null/false until ESPN has the match:
+  status: string | null;
+  isLive: boolean;
+  isFinished: boolean;
+  minute: number | null;
+  kickoffUtc: string | null;
+  kickoffLocal: string | null;
+  // Where the winner / loser advance to (match numbers); null = nowhere (the final
+  // has no winner target; only the semis have a loser target — the 3rd-place match).
+  feedsInto: { winner: number | null; loser: number | null };
+}
+
+const DB_ROUND_KEY: Record<string, string> = {
+  "Round of 32": "R32",
+  "Round of 16": "R16",
+  "Quarter-final": "QF",
+  "Semi-final": "SF",
+  "Match for third place": "TP",
+  Final: "F",
+};
+
+const BRACKET_ROUNDS = [
+  { key: "R32", name: "Round of 32", count: 16 },
+  { key: "R16", name: "Round of 16", count: 8 },
+  { key: "QF", name: "Quarterfinals", count: 4 },
+  { key: "SF", name: "Semifinals", count: 2 },
+  { key: "TP", name: "Third Place", count: 1 },
+  { key: "F", name: "Final", count: 1 },
+];
+
+const KNOCKOUT_STAGES = new Set([
+  "LAST_32",
+  "LAST_16",
+  "QUARTER_FINALS",
+  "SEMI_FINALS",
+  "THIRD_PLACE",
+  "FINAL",
+]);
+
+// Parse a database placeholder slot ("1A", "2B", "3A/B/C/D/F", "W89", "L101").
+function parseFeeder(label: string): Feeder {
+  let m = label.match(/^([12])([A-L])$/);
+  if (m) {
+    return { type: "group", group: `Group ${m[2]}`, outcome: m[1] === "1" ? "winner" : "runnerUp" };
+  }
+  m = label.match(/^3([A-L/]+)$/);
+  if (m) {
+    return { type: "group", outcome: "thirdPlace", groups: m[1].split("/").map((g) => `Group ${g}`) };
+  }
+  m = label.match(/^([WL])(\d+)$/);
+  if (m) return { type: "match", matchNum: Number(m[2]), outcome: m[1] === "W" ? "winner" : "loser" };
+  // WC data shouldn't reach here; degrade to a harmless match-feeder.
+  return { type: "match", matchNum: 0, outcome: "winner" };
+}
+
+// Human-readable placeholder name for an unresolved slot.
+function feederLabel(f: Feeder): string {
+  if (f.type === "group") {
+    if (f.outcome === "thirdPlace") return `3rd ${f.groups.map((g) => g.slice(6)).join("/")}`;
+    return `${f.group} ${f.outcome === "winner" ? "Winner" : "Runner-up"}`;
+  }
+  return `${f.outcome === "winner" ? "Winner" : "Loser"} M${f.matchNum}`;
+}
+
+function skeletonSide(label: string): BracketSide {
+  const feeder = parseFeeder(label);
+  return { name: feederLabel(feeder), tla: null, crest: null, score: null, resolved: false, feeder };
+}
+
+interface DbBracketMatch {
+  num: number;
+  round: string;
+  date: string;
+  venueId: string | null;
+  home: { name: string };
+  away: { name: string };
+}
+
+// The static skeleton, built once: all 32 knockout nodes, sorted by FIFA match
+// number, with slot, venue, feeders and the inverted feedsInto links.
+const BRACKET_SKELETON: BracketNode[] = (() => {
+  const matches = (wcDatabase as unknown as { matches: DbBracketMatch[] }).matches;
+  const ko = matches.filter((m) => DB_ROUND_KEY[m.round] != null).sort((a, b) => a.num - b.num);
+  const slotCounter: Record<string, number> = {};
+  const nodes: BracketNode[] = ko.map((m) => {
+    const round = DB_ROUND_KEY[m.round];
+    slotCounter[round] = (slotCounter[round] ?? 0) + 1;
+    return {
+      num: m.num,
+      round,
+      slot: slotCounter[round],
+      date: m.date,
+      venue: m.venueId ? venuesById.get(m.venueId) ?? null : null,
+      home: skeletonSide(m.home.name),
+      away: skeletonSide(m.away.name),
+      status: null,
+      isLive: false,
+      isFinished: false,
+      minute: null,
+      kickoffUtc: null,
+      kickoffLocal: null,
+      feedsInto: { winner: null, loser: null },
+    };
+  });
+  // Invert each match-feeder into the source node's feedsInto.{winner|loser}.
+  const byNum = new Map(nodes.map((n) => [n.num, n]));
+  for (const n of nodes) {
+    for (const s of [n.home, n.away]) {
+      if (s.feeder.type === "match") {
+        const src = byNum.get(s.feeder.matchNum);
+        if (src) src.feedsInto[s.feeder.outcome] = n.num;
+      }
+    }
+  }
+  return nodes;
+})();
+
+// Overlay index: (dbVenueId | venue-local date) -> FIFA match number. The pair is
+// unique across the tournament (one match per stadium per day).
+const SKELETON_NUM_BY_VENUE_DATE = new Map<string, number>(
+  BRACKET_SKELETON.filter((n) => n.venue?.id).map((n) => [`${n.venue!.id}|${n.date}`, n.num]),
+);
+
+// The four nodes ESPN's scoreboard truncates (semis / 3rd / final). Stable event
+// ids, fetched per-event only in the knockout phase; mapped straight to their
+// FIFA match number so they overlay without a venue/date join.
+const LATE_NODES: { id: number; num: number; slug: string }[] = [
+  { id: 760514, num: 101, slug: "semifinals" },
+  { id: 760515, num: 102, slug: "semifinals" },
+  { id: 760516, num: 103, slug: "third-place" },
+  { id: 760517, num: 104, slug: "final" },
+];
+const LATE_ID_TO_NUM = new Map(LATE_NODES.map((n) => [n.id, n.num]));
+
+// ---- ESPN per-event summary shape (only the fields we use) ----
+// The summary's competition block carries no venue (it lives under gameInfo), so
+// we read both and prefer whichever has it.
+interface EspnSummary {
+  header?: {
+    competitions?: {
+      date?: string;
+      status?: EspnStatus;
+      competitors?: EspnCompetitor[];
+    }[];
+  };
+  gameInfo?: { venue?: EspnVenue };
+}
+
+// Adapt a summary response into an EspnEvent so it flows through normalize().
+function summaryToEvent(id: number, slug: string, s: EspnSummary): EspnEvent | null {
+  const c = s.header?.competitions?.[0];
+  if (!c?.date || !c.status || !c.competitors) return null;
+  return {
+    id: String(id),
+    date: c.date,
+    season: { slug },
+    competitions: [{ status: c.status, venue: s.gameInfo?.venue, competitors: c.competitors }],
+  };
+}
+
+// Fetch + normalize the four late nodes (each cached independently). Failures drop.
+async function fetchLateNodes(tz: string): Promise<Match[]> {
+  const events = await Promise.all(
+    LATE_NODES.map((n) =>
+      cachedFetchJson<EspnSummary>(`${ESPN_BASE}/${LEAGUE}/summary?event=${n.id}`)
+        .then((s) => summaryToEvent(n.id, n.slug, s))
+        .catch(() => null),
+    ),
+  );
+  return events.filter((e): e is EspnEvent => e != null).map((e) => normalize(e, tz));
+}
+
+// Which FIFA match number a normalized knockout Match overlays onto.
+function matchNum(m: Match): number | null {
+  const late = LATE_ID_TO_NUM.get(m.id);
+  if (late != null) return late;
+  if (m.venue?.id && m.venue.timezone) {
+    const d = localDate(new Date(m.kickoffUtc), m.venue.timezone);
+    return SKELETON_NUM_BY_VENUE_DATE.get(`${m.venue.id}|${d}`) ?? null;
+  }
+  return null;
+}
+
+// A slot resolves once its live name is a real nation (placeholders aren't mapped).
+function overlaySide(skel: BracketSide, live: Side): BracketSide {
+  if (FLAG_CODE[dbName(live.name)] == null) return skel; // still a placeholder
+  return {
+    name: live.name,
+    tla: live.tla,
+    crest: live.crest,
+    score: live.score,
+    resolved: true,
+    feeder: skel.feeder,
+  };
+}
+
+// Overlay live knockout matches onto the static skeleton; returns all 32 nodes.
+function buildBracket(all: Match[]): BracketNode[] {
+  const live = new Map<number, Match>();
+  for (const m of all) {
+    if (!KNOCKOUT_STAGES.has(m.stage)) continue;
+    const num = matchNum(m);
+    if (num != null) live.set(num, m);
+  }
+  return BRACKET_SKELETON.map((node) => {
+    const m = live.get(node.num);
+    if (!m) return node;
+    return {
+      ...node,
+      status: m.status,
+      isLive: m.isLive,
+      isFinished: m.isFinished,
+      minute: m.minute,
+      kickoffUtc: m.kickoffUtc,
+      kickoffLocal: m.kickoffLocal,
+      venue: node.venue ?? m.venue,
+      home: overlaySide(node.home, m.home),
+      away: overlaySide(node.away, m.away),
+    };
+  });
+}
+
+// Auto-derive the phase from the feed (no manual flag, no extra call): knockout
+// once every group match is finished, or once we've reached the first knockout
+// kickoff — the OR survives a postponed group game that never reaches "finished".
+function derivePhase(all: Match[], now: Date): "group" | "knockout" {
+  const group = all.filter((m) => m.stage === "GROUP_STAGE");
+  const allGroupsDone = group.length > 0 && group.every((m) => m.isFinished);
+  const knockoutKickoffs = all
+    .filter((m) => KNOCKOUT_STAGES.has(m.stage))
+    .map((m) => new Date(m.kickoffUtc).getTime());
+  const firstKnockout = knockoutKickoffs.length ? Math.min(...knockoutKickoffs) : Infinity;
+  return allGroupsDone || now.getTime() >= firstKnockout ? "knockout" : "group";
+}
+
 export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
   const tz = resolveTimeZone(url.searchParams.get("tz"));
   // Scoreboard is required; standings are a best-effort enrichment — a standings
@@ -513,6 +779,16 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
   const all = data.events
     .map((e) => normalize(e, tz))
     .sort((a, b) => a.kickoffUtc.localeCompare(b.kickoffUtc));
+
+  // Auto-derived (gates the per-event late-node fetch below). ESPN's scoreboard
+  // truncates the semis/3rd/final, so once we're in the knockout phase we pull
+  // them per-event and merge — so they feed today/current/nextUpcoming and the
+  // bracket alike.
+  const phase = derivePhase(all, now);
+  if (phase === "knockout") {
+    all.push(...(await fetchLateNodes(tz)));
+    all.sort((a, b) => a.kickoffUtc.localeCompare(b.kickoffUtc));
+  }
 
   const today = all.filter((m) => m.localDate === todayStr);
 
@@ -550,6 +826,7 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
       localDate: todayStr,
       generatedAt: now.toISOString(),
       competition: data.leagues?.[0]?.name ?? "FIFA World Cup",
+      phase,
       todayCount: today.length,
       tomorrowCount: tomorrow.length,
       hasLive: today.some((m) => m.isLive),
@@ -562,6 +839,7 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
     favorites,
     city: homeCity,
     cityGames,
+    bracket: { rounds: BRACKET_ROUNDS, matches: buildBracket(all) },
   };
 
   return json(body, {

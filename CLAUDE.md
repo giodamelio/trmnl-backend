@@ -78,11 +78,22 @@ own upstream client, query-param parsing, and secrets. Generic, feed-agnostic he
 `features/<name>.ts` exporting a handler + one route line; it opts into `lib/` only as needed (a
 non-time-based feed need not touch `timezone.ts`). Adding a feed's secret means extending the
 `Env` interface in `src/env.ts` (currently empty — the worldcup feed is unauthenticated). The
-worldcup module's response shape is `meta` / `current` / `matches` / `tomorrow` / `nextUpcoming` /
-`standings` / `favorites` / `city` + `cityGames`.
+worldcup module's response shape is `meta` (incl. an auto-derived `phase: group|knockout`) /
+`current` / `matches` / `tomorrow` / `nextUpcoming` / `standings` / `favorites` / `city` +
+`cityGames` / `bracket`.
 Venues come from the static `src/data/worldcup-2026.json` (joined on the team pair, giving
 fifaName/lat/lng/capacity), falling back to ESPN's inline venue for knockout matches whose teams
 are still placeholders in the database.
+
+**The bracket is a static skeleton + a live overlay.** FIFA fixes the knockout wiring, dates and
+venues before teams are known, so `bracket` (all 32 nodes, their `slot`, `feeder`/`feedsInto`
+links, date and venue) is compiled once from `worldcup-2026.json` — using FIFA's own match numbers
+and `W##`/`L##` wiring, not a fragile ESPN-id-order guess. ESPN only overlays the live bits
+(resolved teams, scores, status, clock), joined by `(venueId, venue-local-date)`. ESPN's scoreboard
+truncates the semis/3rd/final, so those four nodes are fetched per-event via `summary?event=ID`,
+but only once `phase` is `knockout` (derived from the feed: all group games finished, or the first
+knockout kickoff reached). The bracket is always present; in the group phase the late nodes show as
+skeleton placeholders.
 
 **Viewer config is per-device, passed via the polling URL — no server state.** The `favorites`
 and `cityGames` sections are driven by TRMNL `custom_fields` (`plugin/src/settings.yml`): two
