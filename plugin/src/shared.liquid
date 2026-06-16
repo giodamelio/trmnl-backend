@@ -6,6 +6,7 @@
   a partial sees only the variables passed to it, so every input is explicit.
 
   Partials:
+    flag            — one bordered flag, hugging the image at any size
     today_featured  — large current/next game card (size-parameterised)
     today_row       — compact single-line match row (size-parameterised)
     today_column    — the full-height interleaved column of today's games
@@ -13,6 +14,18 @@
     tomorrow_section / standings_section / favorites_section / city_section
     title_bar       — the bottom bar (logo · competition · date)
 {% endcomment %}
+
+{% comment %} ─────────────────────────── flag ───────────────────────────
+  One flag image with a 1px frame (flagcdn SVGs are borderless). The border is on
+  the <img> so it hugs the flag itself — no letterbox gap — while the wrapping
+  <span> holds the fixed h×w box that keeps rows and grids aligned. When src is
+  empty (knockout placeholders — a TBD team) it falls back to a generic "?" flag
+  so the slot still shows a flag. h/w are CSS lengths ("120px", "1.5em"). Use this
+  for EVERY flag so there's one place to change. {% endcomment %}
+{% template flag %}
+{%- assign flagSrc = src | default: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MCA2MCI+PHJlY3Qgd2lkdGg9IjkwIiBoZWlnaHQ9IjYwIiBmaWxsPSJ3aGl0ZSIvPjx0ZXh0IHg9IjQ1IiB5PSI0NyIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjUwIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+PzwvdGV4dD48L3N2Zz4=' -%}
+<span style="display: inline-flex; align-items: center; justify-content: center; height: {{ h }}; width: {{ w }};"><img class="image" src="{{ flagSrc }}" style="max-height: 100%; max-width: 100%; border: 1px solid; box-sizing: border-box;" /></span>
+{% endtemplate %}
 
 {% comment %} ─────────────────────────── today_featured ───────────────────────────
   Current / next game — big flags on top, tiny name above the code, score in the
@@ -22,8 +35,8 @@
   flex value in its parent column (0 0 50% inside the interleaved column; 1 1 0
   when it is the whole column). {% endcomment %}
 {% template today_featured %}
-{%- assign flagH = flagH | default: 120 -%}
-{%- assign flagW = flagW | default: 172 -%}
+{%- assign flagH = flagH | default: 120 | append: 'px' -%}
+{%- assign flagW = flagW | default: 172 | append: 'px' -%}
 {%- assign nameSize = nameSize | default: 12 -%}
 {%- assign codeSize = codeSize | default: 38 -%}
 {%- assign scoreSize = scoreSize | default: 46 -%}
@@ -37,7 +50,7 @@
   </span>
   <div class="flex items--center" style="width: 100%;">
     <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px;">
-      {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
+      {% render 'flag', src: m.home.crest, h: flagH, w: flagW %}
       <span class="label" style="font-size: {{ nameSize }}px; white-space: nowrap;">{{ m.home.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
     </div>
@@ -45,7 +58,7 @@
       {% if m.isLive or m.isFinished %}{{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}{% else %}vs{% endif %}
     </span>
     <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 3px;">
-      {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
+      {% render 'flag', src: m.away.crest, h: flagH, w: flagW %}
       <span class="label" style="font-size: {{ nameSize }}px; white-space: nowrap;">{{ m.away.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
     </div>
@@ -60,15 +73,15 @@
   the row centre so scores line up down a list. Root keeps flex:1 1 0 so rows
   share leftover column height. {% endcomment %}
 {% template today_row %}
-{%- assign flagH = flagH | default: 56 -%}
-{%- assign flagW = flagW | default: 80 -%}
+{%- assign flagH = flagH | default: 56 | append: 'px' -%}
+{%- assign flagW = flagW | default: 80 | append: 'px' -%}
 {%- assign nameSize = nameSize | default: 14 -%}
 {%- assign codeSize = codeSize | default: 30 -%}
 {%- assign scoreSize = scoreSize | default: 26 -%}
 {%- assign timeSize = timeSize | default: 19 -%}
 <div style="flex: 1 1 0; display: flex; align-items: center; padding: 6px 8px;">
   <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; white-space: nowrap;">
-    {% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
+    {% render 'flag', src: m.home.crest, h: flagH, w: flagW %}
     <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px;">
       <span class="label" style="font-size: {{ nameSize }}px;">{{ m.home.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700;">{{ m.home.tla }}</span>
@@ -87,7 +100,7 @@
       <span class="label" style="font-size: {{ nameSize }}px;">{{ m.away.name }}</span>
       <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700;">{{ m.away.tla }}</span>
     </div>
-    {% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: {{ flagH }}px; width: {{ flagW }}px; object-fit: contain;" />{% endif %}
+    {% render 'flag', src: m.away.crest, h: flagH, w: flagW %}
   </div>
 </div>
 {% endtemplate %}
@@ -127,13 +140,13 @@
             {{ m.kickoffLocal }}{% if m.venue %} · {{ m.venue.city }}{% endif %}
           </span>
           <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
-            <span style="display: flex; align-items: center;">{% if m.home.crest %}<img class="image" src="{{ m.home.crest }}" style="height: 1.5em; width: 2.2em; object-fit: contain;" />{% endif %}</span>
+            <span style="display: flex; align-items: center;">{% render 'flag', src: m.home.crest, h: '1.5em', w: '2.2em' %}</span>
             <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
             <span class="label" style="font-size: 1em;">{{ m.home.name }}</span>
           </div>
           <span class="label" style="font-size: 0.8em; align-self: flex-start; padding-left: 0.6em; line-height: 1; margin: -1px 0;">vs</span>
           <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
-            <span style="display: flex; align-items: center;">{% if m.away.crest %}<img class="image" src="{{ m.away.crest }}" style="height: 1.5em; width: 2.2em; object-fit: contain;" />{% endif %}</span>
+            <span style="display: flex; align-items: center;">{% render 'flag', src: m.away.crest, h: '1.5em', w: '2.2em' %}</span>
             <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
             <span class="label" style="font-size: 1em;">{{ m.away.name }}</span>
           </div>
@@ -160,7 +173,7 @@
           {% for r in g.rows %}
             <div style="display: grid; grid-template-columns: 1em 1.6em 1fr 1.7em 1.4em; align-items: center; column-gap: 4px; white-space: nowrap; line-height: 1;">
               <span class="label" style="text-align: center;">{{ r.rank }}</span>
-              <span style="display: flex; align-items: center;">{% if r.crest %}<img class="image" src="{{ r.crest }}" style="height: 1em; width: 1.5em; object-fit: contain;" />{% endif %}</span>
+              <span style="display: flex; align-items: center;">{% render 'flag', src: r.crest, h: '1em', w: '1.5em' %}</span>
               <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1;">{{ r.tla }}</span>
               <span style="font-size: 1.3em; line-height: 1; text-align: right;">{% if r.gd > 0 %}+{% endif %}{{ r.gd }}</span>
               <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1; text-align: right;">{{ r.points }}</span>
@@ -185,13 +198,13 @@
         {% if f.hasGame %}
           <div style="display: flex; align-items: center;">
             <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 0.4em; white-space: nowrap;">
-              {% if f.fav.crest %}<img class="image" src="{{ f.fav.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
+              {% render 'flag', src: f.fav.crest, h: '1.5em', w: '2.1em' %}
               <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ f.fav.name }}</span>
             </div>
             <span class="label" style="flex: 0 0 auto; font-size: 0.95em; padding: 0 0.5em; white-space: nowrap;">{% if f.isLive %}{{ f.fav.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ f.opp.score | default: 0 }}{% else %}vs{% endif %}</span>
             <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 0.4em; white-space: nowrap;">
               <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ f.opp.name }}</span>
-              {% if f.opp.crest %}<img class="image" src="{{ f.opp.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
+              {% render 'flag', src: f.opp.crest, h: '1.5em', w: '2.1em' %}
             </div>
           </div>
           <div style="display: flex; align-items: baseline; font-size: 10px;">
@@ -219,13 +232,13 @@
       <div style="font-size: 12px; display: flex; flex-direction: column; gap: 1px; line-height: 1.05;">
         <div style="display: flex; align-items: center;">
           <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 0.4em; white-space: nowrap;">
-            {% if sg.home.crest %}<img class="image" src="{{ sg.home.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
+            {% render 'flag', src: sg.home.crest, h: '1.5em', w: '2.1em' %}
             <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ sg.home.name }}</span>
           </div>
           <span class="label" style="flex: 0 0 auto; font-size: 0.95em; padding: 0 0.5em; white-space: nowrap;">{% if sg.isLive %}{{ sg.home.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ sg.away.score | default: 0 }}{% else %}vs{% endif %}</span>
           <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 0.4em; white-space: nowrap;">
             <span class="value" style="font-size: 1.4em; font-weight: 700; line-height: 1;">{{ sg.away.name }}</span>
-            {% if sg.away.crest %}<img class="image" src="{{ sg.away.crest }}" style="height: 1.5em; width: 2.1em; object-fit: contain;" />{% endif %}
+            {% render 'flag', src: sg.away.crest, h: '1.5em', w: '2.1em' %}
           </div>
         </div>
         <div style="display: flex; align-items: baseline; font-size: 10px;">
