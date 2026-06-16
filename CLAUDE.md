@@ -34,11 +34,21 @@ cd plugin && trmnlp serve     # live preview at http://localhost:4567
 cd plugin && trmnlp build     # render src/*.liquid -> plugin/_build/*.html (HTML only, no browser)
 cd plugin && trmnlp push      # upload to the private plugin (needs id: in settings.yml + trmnlp login)
 
-# PNG export (for automated visual tests). trmnlp has no build --png; the PNG is
-# served by `serve` at /render/<view>.png, rendered via headless Firefox. With
-# serve running (and wrangler dev for live data):
-curl 'http://localhost:4567/render/full.png' -o full.png                 # 800x480, 1-bit (OG default)
-curl 'http://localhost:4567/render/full.png?width=1024&height=758&color_depth=4' -o full.png  # e.g. larger/greyer
+# Viewing the rendered plugin — two ways, both need `trmnlp serve` running (and
+# `wrangler dev` for live data). PREFER the `/browser-harness` skill over the
+# `/chrome` command: `/chrome` drives the user's *personal* Chrome (and trips over
+# the M144 "Allow remote debugging" lockdown here) — only reach for it if asked.
+#
+#  1. Interactive preview (device + grey-depth dropdowns): point the `/browser-harness`
+#     skill — which drives its own browser, not the user's — at http://localhost:4567/full.
+#     The dropdowns are JS-rendered, so they're not in the static HTML.
+#  2. Headless PNG (no browser): `serve` renders via Firefox at /render/<view>.png.
+#     To match a device, mirror what the /full dropdowns POST (web/public/index.js):
+#     width = model.width / scale_factor, color_depth = ceil(log2(grays)), + screen_classes.
+#     Device/palette specs: https://trmnl.com/api/models  and  /api/palettes.
+curl 'http://localhost:4567/render/full.png' -o og.png   # OG 800x480, 1-bit (the /render default)
+# TRMNL X (1872x1404, scale_factor 1.8 -> render 1040x780), 16 greys (4-bit):
+curl 'http://localhost:4567/render/full.png?screen_classes=screen%20screen--4bit%20screen--v2%20screen--lg%20screen--1x&width=1040&height=780&color_depth=4' -o x.png
 ```
 
 There is no test suite. Verification is done by running `wrangler dev` and hitting the endpoint
