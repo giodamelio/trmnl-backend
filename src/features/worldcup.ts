@@ -322,7 +322,7 @@ function side(c: EspnCompetitor, played: boolean): Side {
   };
 }
 
-function normalize(e: EspnEvent, tz: string): Match {
+export function normalize(e: EspnEvent, tz: string): Match {
   const c = e.competitions[0];
   const state = c.status.type.state;
   const played = state !== "pre";
@@ -391,7 +391,7 @@ function stat(stats: EspnStandingStat[], name: string): number {
   return Number.isNaN(n) ? 0 : n;
 }
 
-function normalizeStandings(data: EspnStandingsResponse): GroupStanding[] {
+export function normalizeStandings(data: EspnStandingsResponse): GroupStanding[] {
   return (data.children ?? [])
     .filter((g) => /^Group [A-L]$/.test(g.name))
     .map((g) => ({
@@ -769,7 +769,7 @@ function overlaySide(skel: BracketSide, live: Side): BracketSide {
 }
 
 // Overlay live knockout matches onto the static skeleton; returns all 32 nodes.
-function buildBracket(all: Match[]): BracketNode[] {
+export function buildBracket(all: Match[]): BracketNode[] {
   const live = new Map<number, Match>();
   for (const m of all) {
     if (!KNOCKOUT_STAGES.has(m.stage)) continue;
@@ -797,7 +797,7 @@ function buildBracket(all: Match[]): BracketNode[] {
 // Auto-derive the phase from the feed (no manual flag, no extra call): knockout
 // once every group match is finished, or once we've reached the first knockout
 // kickoff — the OR survives a postponed group game that never reaches "finished".
-function derivePhase(all: Match[], now: Date): "group" | "knockout" {
+export function derivePhase(all: Match[], now: Date): "group" | "knockout" {
   const group = all.filter((m) => m.stage === "GROUP_STAGE");
   const allGroupsDone = group.length > 0 && group.every((m) => m.isFinished);
   const knockoutKickoffs = all
@@ -1223,7 +1223,7 @@ const DEMO_SIDE_ROUNDS = ["R32", "R16", "QF", "SF"]; // outer→inner
 // teams flow forward to the next round (set, unplayed) but that next round has no
 // scores yet, so everything past it stays a skeleton placeholder — a realistic
 // "this round's matchups are set" state. "F" = the whole tournament is done.
-function demoBracket(scoredThrough: string): BracketNode[] {
+export function demoBracket(scoredThrough: string): BracketNode[] {
   const nodes = BRACKET_SKELETON.map((n) => ({ ...n, home: { ...n.home }, away: { ...n.away } }));
   const byNum = new Map(nodes.map((n) => [n.num, n]));
   const scoredMax = scoredThrough === "F" ? 99 : DEMO_SIDE_ROUNDS.indexOf(scoredThrough);
