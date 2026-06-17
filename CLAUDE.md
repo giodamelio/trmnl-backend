@@ -24,6 +24,11 @@ npm run secrets      # wrangler secret bulk .env  — push all .env vars up as W
                      #   (no secrets needed yet — the worldcup feed uses ESPN unauthenticated)
 npm run typecheck    # tsc --noEmit  (wrangler/esbuild does NOT typecheck on its own)
 
+npm test             # vitest run — Layer 1 (worldcup logic + workerd routing) & 2 (HTML snapshots)
+npm run test:watch   # vitest in watch mode
+npm run test:visual  # playwright — Layer 3, pixel snapshots of the rendered views
+npm run test:visual:update   # re-baseline the visual snapshots after an intended UI change
+
 # Exercise the upstream API or our own API (httpyac, .http files):
 httpyac apis/espn/worldcup.http --name today                 # ESPN feed (no auth needed)
 httpyac apis/trmnl-backend/worldcup.http --env dev  --all     # our API vs local wrangler dev
@@ -51,9 +56,51 @@ curl 'http://localhost:4567/render/full.png' -o og.png   # OG 800x480, 1-bit (th
 curl 'http://localhost:4567/render/full.png?screen_classes=screen%20screen--4bit%20screen--v2%20screen--lg%20screen--1x&width=1040&height=780&color_depth=4' -o x.png
 ```
 
-There is no test suite. Verification is done by running `wrangler dev` and hitting the endpoint
-(see `apis/trmnl-backend/worldcup.http`, which includes UTC/Tokyo/Auckland cases to check the
-timezone filter).
+## Tests
+
+Three layers, all under `test/`, all runnable from the devshell with no manual setup:
+
+- **Layer 1 — worker logic** (`test/unit/`, Node via Vitest). The painful, invisible,
+  timezone-sensitive transforms (`normalize`/`derivePhase`/`demoBracket`, exported from
+  `worldcup.ts`) tested as pure functions against ESPN fixture slices in `apis/espn/samples/`.
+  This is the data-faking the suite is really about. Plus `test/worker/` runs the Worker's
+  router *inside workerd* (the production runtime, via `@cloudflare/vitest-pool-workers`) for
+  hermetic, no-upstream routing tests. (The v4 pool dropped per-test outbound `fetchMock`, so
+  data-path coverage lives in the pure-function tests, not end-to-end SELF calls.)
+- **Layer 2 — HTML snapshots** (`test/render/`, Node via Vitest). A LiquidJS harness renders the
+  real `plugin/src/*.liquid` *outside trmnlp* — `engine.ts` reimplements trmnl-liquid's custom
+  `{% template %}` block tag + in-memory partial fs, so the templates render unmodified against
+  any data object. Snapshots the rendered markup; catches template/data-wiring regressions fast.
+- **Layer 3 — visual snapshots** (`test/visual/`, Playwright). `harness.ts` `renderDocument()`
+  wraps the view in trmnlp's exact `render_html.erb` shell (same `trmnl.com/css|js/latest` +
+  Inter font), and Playwright pixel-snapshots it in headless chromium. Renders **only the TRMNL X
+  device** (1040×780, 4-bit — the device we support; `test/render/devices.ts` `DEVICE`), and each
+  view at its real mashup slot via `viewBox()`: full 1040×780, half_h 1040×390, half_v 520×780,
+  quadrant 520×390. Needs network (framework CSS/JS + flagcdn flags load live, like trmnlp);
+  `framework_version` is `latest`, so a TRMNL CSS change can legitimately move baselines —
+  re-baseline with `test:visual:update`.
+
+Fixtures live in `test/render/fixtures/` and are **captured from a live `wrangler dev`** by
+`generate.mjs` (re-run it after a response-shape change), not hand-written. The set covers
+group days with 2/3/4/5/6 games (the 5-game day only exists in a tz where a UTC matchday splits),
+knockout phase (bracket branch), favorites + Seattle host-city (`favorites-city`), and hard-to-
+render flags (`hard-flags`). Add a scenario by saving another `<name>.json` — both Layer 2 and
+Layer 3 fan it out across all four views automatically.
+
+The knockout **bracket SVG** is tested separately (`test/visual/bracket.spec.ts`) at each zoom
+level — R32→R16→QF→SF, the bracket auto-shrinks inward as rounds resolve — from the SVG fixtures
+in `fixtures/bracket/` (also captured by `generate.mjs`). It's rendered **inline** (not via `<img>`,
+which would block the hotlinked flags) at the X right-column width.
+
+**Nix gotchas baked into the devshell** (`flake.nix`): the npm `workerd` binary is patchelf'd to
+the Nix glibc on shell entry (its `/lib64` loader is absent on Nix, else the Vitest pool can't
+spawn it); Playwright is pinned to the same version as `pkgs.playwright-driver` (chromium rev
+1217) and pointed at the Nix browser via `PLAYWRIGHT_BROWSERS_PATH` (never its own download); and
+`FONTCONFIG_FILE` is set — without it headless chromium renders **zero-width glyphs** (blank text,
+images fine) and every visual snapshot looks empty.
+
+`apis/trmnl-backend/worldcup.http` (UTC/Tokyo/Auckland cases) still works for ad-hoc checks
+against a live `wrangler dev`.
 
 ## Architecture
 
