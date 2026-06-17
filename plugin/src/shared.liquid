@@ -21,100 +21,116 @@
   <span> holds the fixed h×w box that keeps rows and grids aligned. When src is
   empty (knockout placeholders — a TBD team) it falls back to a generic "?" flag
   so the slot still shows a flag. h/w are CSS lengths ("120px", "1.5em"). Use this
-  for EVERY flag so there's one place to change. {% endcomment %}
+  for EVERY flag so there's one place to change.
+
+  NOTE: at LARGE sizes some flagcdn SVGs (those without a viewBox, e.g. sa.svg) balloon
+  past their box in trmnlp's headless-Firefox PNG render — a geckodriver bug; they render
+  correctly in real browsers (verify flag-heavy layout in Chrome, not the PNG preview).
+  This `flag` partial is used at small sizes (tomorrow/standings/etc.) where it's fine;
+  the larger today cards use flag_fit. {% endcomment %}
 {% template flag %}
 {%- assign flagSrc = src | default: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MCA2MCI+PHJlY3Qgd2lkdGg9IjkwIiBoZWlnaHQ9IjYwIiBmaWxsPSJ3aGl0ZSIvPjx0ZXh0IHg9IjQ1IiB5PSI0NyIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjUwIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+PzwvdGV4dD48L3N2Zz4=' -%}
 <span style="display: inline-flex; align-items: center; justify-content: center; height: {{ h }}; width: {{ w }};"><img class="image" src="{{ flagSrc }}" style="max-height: 100%; max-width: 100%; border: 1px solid; box-sizing: border-box;" /></span>
 {% endtemplate %}
 
+{% comment %} ─────────────────────────── flag_fit ───────────────────────────
+  Scales to fit its parent cell preserving aspect, with the border HUGGING the flag
+  (no letterbox box): max-width/height:100% + width/height:auto sizes the <img> to the
+  flag, the border is on that <img>, and the parent's flex alignment (justify/align)
+  places it. The parent must bound it (a flex cell with a basis width + stretched
+  height). NB this balloons viewBox-less SVGs in headless Firefox (trmnlp preview) but
+  renders correctly in real browsers — see memory; verify in Chrome. Used by the today
+  cards. {% endcomment %}
+{% template flag_fit %}
+{%- assign flagSrc = src | default: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MCA2MCI+PHJlY3Qgd2lkdGg9IjkwIiBoZWlnaHQ9IjYwIiBmaWxsPSJ3aGl0ZSIvPjx0ZXh0IHg9IjQ1IiB5PSI0NyIgZm9udC1mYW1pbHk9IkhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjUwIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+PzwvdGV4dD48L3N2Zz4=' -%}
+<img class="image" src="{{ flagSrc }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; border: 1px solid; box-sizing: border-box; display: block;" />
+{% endtemplate %}
+
 {% comment %} ─────────────────────────── today_featured ───────────────────────────
-  Current / next game — big flags on top, tiny name above the code, score in the
-  centre. The two side groups take equal flex:1 and pin to the outer edges so the
-  flag + name/code line up flush with the card's outer edge. Sizes default to the
-  full/half-vertical scale; callers override for quadrant. `basis` is the card's
-  flex value in its parent column (0 0 50% inside the interleaved column; 1 1 0
-  when it is the whole column). {% endcomment %}
+  Current / next game — the distinct card: a centred status line on top (LIVE·min /
+  FINISHED / Starts·time, + group), a matchup row in the middle, and the venue
+  (stadium · city, country) centred on the bottom. Unlike today_row's flag-beside-text,
+  each side here stacks a BIG flag on top of name+code (the flag in a flex:1 box that
+  takes the height left over above the text — that's what makes the featured visually
+  pop vs the rows), with the score/vs centred between. The card is align-items:center
+  (so the status/venue lines centre) with the matchup row align-self:stretch (full
+  width). `basis` is the card's flex in the column — grow-based (e.g. '2 1 0' ≈ 2× a
+  row), never a percentage. Only font-size (`base`) and padding/gaps are fixed. {% endcomment %}
 {% template today_featured %}
-{%- assign flagH = flagH | default: 120 | append: 'px' -%}
-{%- assign flagW = flagW | default: 172 | append: 'px' -%}
-{%- assign nameSize = nameSize | default: 12 -%}
-{%- assign codeSize = codeSize | default: 38 -%}
-{%- assign scoreSize = scoreSize | default: 46 -%}
+{%- assign base = base | default: '13px' -%}
 {%- assign basis = basis | default: '0 0 50%' -%}
-<div style="flex: {{ basis }}; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; padding: 6px 12px;">
-  <span class="label label--small">
-    {% if m.isLive %}LIVE{% if m.minute %} · {{ m.minute }}'{% endif %}
-    {% elsif m.isFinished %}FINISHED
-    {% else %}Starts {{ m.kickoffLocal }}{% endif %}
-    {% if m.group %} · {{ m.group | replace: "GROUP_", "Group " }}{% endif %}
-  </span>
-  <div class="flex items--center" style="width: 100%;">
-    <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 3px;">
-      {% render 'flag', src: m.home.crest, h: flagH, w: flagW %}
-      <span class="label" style="font-size: {{ nameSize }}px; white-space: nowrap;">{{ m.home.name }}</span>
-      <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
+<div style="flex: {{ basis }}; min-height: 0; font-size: {{ base }}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25em; padding: 5px 8px;">
+  <span class="label label--small" style="font-size: 0.85em; text-align: center; flex: 0 0 auto; white-space: nowrap;">{% if m.isLive %}LIVE{% if m.minute %} · {{ m.minute }}'{% endif %}{% elsif m.isFinished %}FINISHED{% else %}Starts {{ m.kickoffLocal }}{% endif %}{% if m.group %} · {{ m.group | replace: "GROUP_", "Group " }}{% endif %}</span>
+  <div style="flex: 1 1 0; min-height: 0; align-self: stretch; display: flex; align-items: stretch;">
+    <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.2em; line-height: 1;">
+      <div style="flex: 1 1 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: flex-start;">{% render 'flag_fit', src: m.home.crest %}</div>
+      <span class="label" style="font-size: 1em; white-space: nowrap;">{{ m.home.name }}</span>
+      <span class="value" style="font-size: 2.4em; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
     </div>
-    <span class="value" style="font-size: {{ scoreSize }}px; font-weight: 700; white-space: nowrap; flex: 0 0 auto; padding: 0 16px;">
-      {% if m.isLive or m.isFinished %}{{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}{% else %}vs{% endif %}
-    </span>
-    <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 3px;">
-      {% render 'flag', src: m.away.crest, h: flagH, w: flagW %}
-      <span class="label" style="font-size: {{ nameSize }}px; white-space: nowrap;">{{ m.away.name }}</span>
-      <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
+    <span class="value" style="font-size: 2.6em; font-weight: 700; white-space: nowrap; flex: 0 0 auto; align-self: center; padding: 0 0.4em;">{% if m.isLive or m.isFinished %}{{ m.home.score | default: 0 }}<span style="margin: 0 0.12em;">&ndash;</span>{{ m.away.score | default: 0 }}{% else %}vs{% endif %}</span>
+    <div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 0.2em; line-height: 1;">
+      <div style="flex: 1 1 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: flex-end;">{% render 'flag_fit', src: m.away.crest %}</div>
+      <span class="label" style="font-size: 1em; white-space: nowrap;">{{ m.away.name }}</span>
+      <span class="value" style="font-size: 2.4em; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
     </div>
   </div>
-  {% if m.venue %}<span class="label label--small">{{ m.venue.fifaName }} · {{ m.venue.city }}, {{ m.venue.country }}</span>{% endif %}
+  {% if m.venue %}<span class="label label--small" style="font-size: 0.85em; text-align: center; flex: 0 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.venue.fifaName }} · {{ m.venue.city }}, {{ m.venue.country }}</span>{% endif %}
 </div>
 {% endtemplate %}
 
 {% comment %} ─────────────────────────── today_row ───────────────────────────
-  Other game — flag+name grouped per side and pinned to the outer edge, with a
-  fixed centre score/status. The two equal flex:1 side groups keep the centre at
-  the row centre so scores line up down a list. Root keeps flex:1 1 0 so rows
-  share leftover column height. {% endcomment %}
+  Other game — one flex row of five cells: flag · name+code · score/time · name+code ·
+  flag. Each cell has a flex-basis so the flags are capped at a sensible max width
+  (no runaway-wide flags) while still filling the row's height up to that cap; the
+  two name+code cells grow to share the leftover width and keep the score centred.
+  Root flex:1 1 0 lets stacked rows split the column height. Only font-size (`base`)
+  and padding/gaps are fixed. {% endcomment %}
 {% template today_row %}
-{%- assign flagH = flagH | default: 56 | append: 'px' -%}
-{%- assign flagW = flagW | default: 80 | append: 'px' -%}
-{%- assign nameSize = nameSize | default: 14 -%}
-{%- assign codeSize = codeSize | default: 30 -%}
-{%- assign scoreSize = scoreSize | default: 26 -%}
-{%- assign timeSize = timeSize | default: 19 -%}
-<div style="flex: 1 1 0; display: flex; align-items: center; padding: 6px 8px;">
-  <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; white-space: nowrap;">
-    {% render 'flag', src: m.home.crest, h: flagH, w: flagW %}
-    <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px;">
-      <span class="label" style="font-size: {{ nameSize }}px;">{{ m.home.name }}</span>
-      <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700;">{{ m.home.tla }}</span>
-    </div>
+{%- assign base = base | default: '14px' -%}
+<div style="flex: 1 1 0; min-height: 0; font-size: {{ base }}; display: flex; align-items: stretch; padding: 5px 7px;">
+  <div style="flex: 0 1 28%; min-width: 0; display: flex; align-items: center; justify-content: flex-start;">{% render 'flag_fit', src: m.home.crest %}</div>
+  <div style="flex: 1 1 20%; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1; gap: 0.12em; padding-left: 0.45em; overflow: hidden;">
+    <span class="label" style="font-size: 0.95em; white-space: nowrap;">{{ m.home.name }}</span>
+    <span class="value" style="font-size: 1.9em; font-weight: 700; white-space: nowrap;">{{ m.home.tla }}</span>
   </div>
-  <div style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; line-height: 1; gap: 3px; padding: 0 10px;">
+  <div style="flex: 0 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; gap: 0.15em; padding: 0 0.4em;">
     {% if m.isLive or m.isFinished %}
-      <span class="label label--small" style="font-size: 11px;">{% if m.isLive %}LIVE{% if m.minute %} {{ m.minute }}'{% endif %}{% else %}FT{% endif %}</span>
-      <span class="value" style="font-size: {{ scoreSize }}px; font-weight: 700;">{{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}</span>
+      <span class="label label--small" style="font-size: 0.75em;">{% if m.isLive %}LIVE{% if m.minute %} {{ m.minute }}'{% endif %}{% else %}FT{% endif %}</span>
+      <span class="value" style="font-size: 1.75em; font-weight: 700; white-space: nowrap;">{{ m.home.score | default: 0 }}<span style="margin: 0 0.14em;">&ndash;</span>{{ m.away.score | default: 0 }}</span>
     {% else %}
-      <span class="value" style="font-size: {{ timeSize }}px; font-weight: 700; white-space: nowrap;">{{ m.kickoffLocal }}</span>
+      <span class="value" style="font-size: 1.25em; font-weight: 700; white-space: nowrap;">{{ m.kickoffLocal }}</span>
     {% endif %}
   </div>
-  <div style="flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 10px; white-space: nowrap;">
-    <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 1; gap: 2px;">
-      <span class="label" style="font-size: {{ nameSize }}px;">{{ m.away.name }}</span>
-      <span class="value" style="font-size: {{ codeSize }}px; font-weight: 700;">{{ m.away.tla }}</span>
-    </div>
-    {% render 'flag', src: m.away.crest, h: flagH, w: flagW %}
+  <div style="flex: 1 1 20%; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; line-height: 1; gap: 0.12em; padding-right: 0.45em; overflow: hidden;">
+    <span class="label" style="font-size: 0.95em; white-space: nowrap;">{{ m.away.name }}</span>
+    <span class="value" style="font-size: 1.9em; font-weight: 700; white-space: nowrap;">{{ m.away.tla }}</span>
   </div>
+  <div style="flex: 0 1 28%; min-width: 0; display: flex; align-items: center; justify-content: flex-end;">{% render 'flag_fit', src: m.away.crest %}</div>
 </div>
 {% endtemplate %}
 
 {% comment %} ─────────────────────────── today_column ───────────────────────────
   Full-height column of today's games in kickoff order: the current/next game is
   the large featured card in its chronological slot, every other game a compact
-  row, hairline rules between. Used by the full and half-vertical views. {% endcomment %}
+  row, hairline rules between. Used by the full and half-vertical views.
+
+  Pure flexbox shares the column height: every card uses a grow-based flex (basis 0,
+  NOT a percentage basis — a percentage flex-basis collapses to the flag's huge
+  intrinsic height when the column height is only "used, not definite"). The featured
+  grows 2× a row, so it's roughly a third and scales with the day's game count. Inside
+  each card the flags fill the height the flex layout hands them (see flag_fit) — so a
+  busy 6-game day and a quiet 2-game day both fill the column with no per-count tuning.
+  Only the font-size (`base`) and padding/gaps are fixed. {% endcomment %}
 {% template today_column %}
 <div class="columns" style="align-self: stretch;">
   <div class="column" style="height: 100%; justify-content: flex-start; gap: 0;">
     {% for m in matches %}
       {% unless forloop.first %}<hr style="border: 0; border-top: 1px solid; margin: 0; width: 100%;" />{% endunless %}
-      {% if m.id == current.id %}{% render 'today_featured', m: m %}{% else %}{% render 'today_row', m: m %}{% endif %}
+      {% if m.id == current.id %}
+        {% render 'today_featured', m: m, basis: '2 1 0', base: '14px' %}
+      {% else %}
+        {% render 'today_row', m: m, base: '14px' %}
+      {% endif %}
     {% endfor %}
   </div>
 </div>
@@ -128,27 +144,38 @@
 </div>
 {% endtemplate %}
 
-{% comment %} ─────────────────────────── tomorrow_section ─────────────────────────── {% endcomment %}
+{% comment %} ─────────────────────────── tomorrow_section ───────────────────────────
+  Tomorrow's slate as a grid: 2-up for ≤4 games (2×2), 3-up for 5–6 (a 3+2 / 3+3 grid)
+  so a busy group-stage day still fits. The 3-up cells are narrower, so the flag/code
+  columns, the inter-column gap and the grid gaps all shrink a touch. Capped at 6 (the
+  section's vertical budget — it shares the right column with standings/favorites/city);
+  the full slate is always in the /v1/worldcup JSON. Each cell: kickoff · city, then the
+  two teams (flag · code · name) with a small "vs" between. {% endcomment %}
 {% template tomorrow_section %}
+{%- assign n = tomorrow | size -%}
+{%- if n > 4 -%}
+  {%- assign cols = 3 -%}{%- assign cell = '10px' -%}{%- assign gap = '7px 10px' -%}{%- assign tmpl = '1.9em 2.7em 1fr' -%}{%- assign icg = '0.2em' -%}{%- assign fw = '1.9em' -%}{%- assign fh = '1.3em' -%}{%- assign codeFs = '1.35em' -%}
+{%- else -%}
+  {%- assign cols = 2 -%}{%- assign cell = '11px' -%}{%- assign gap = '10px 16px' -%}{%- assign tmpl = '2.5em 3em 1fr' -%}{%- assign icg = '0.3em' -%}{%- assign fw = '2.2em' -%}{%- assign fh = '1.5em' -%}{%- assign codeFs = '1.5em' -%}
+{%- endif -%}
 <div style="display: flex; flex-direction: column; gap: 3px;">
   {% render 'section_header', title: 'Tomorrow' %}
   {% if meta.tomorrowCount > 0 %}
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 11px 16px;">
-      {% for m in tomorrow limit: 4 %}
-        <div style="font-size: 11px; display: flex; flex-direction: column; gap: 0; line-height: 1.1;">
+    <div style="display: grid; grid-template-columns: repeat({{ cols }}, 1fr); gap: {{ gap }};">
+      {% for m in tomorrow limit: 6 %}
+        <div style="font-size: {{ cell }}; min-width: 0; display: flex; flex-direction: column; gap: 0.12em; line-height: 1.1; overflow: hidden;">
           <span class="label" style="font-size: 1em; white-space: nowrap;">
             {{ m.kickoffLocal }}{% if m.venue %} · {{ m.venue.city }}{% endif %}
           </span>
-          <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
-            <span style="display: flex; align-items: center;">{% render 'flag', src: m.home.crest, h: '1.5em', w: '2.2em' %}</span>
-            <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
-            <span class="label" style="font-size: 1em;">{{ m.home.name }}</span>
+          <div style="display: grid; grid-template-columns: {{ tmpl }}; align-items: center; column-gap: {{ icg }}; white-space: nowrap; line-height: 1;">
+            <span style="display: flex; align-items: center;">{% render 'flag', src: m.home.crest, h: fh, w: fw %}</span>
+            <span class="value" style="font-size: {{ codeFs }}; font-weight: 700; line-height: 1;">{{ m.home.tla }}</span>
+            <span class="label" style="font-size: 1em; min-width: 0; padding-left: 0.5em; overflow: hidden; text-overflow: ellipsis;">{{ m.home.name }}</span>
           </div>
-          <span class="label" style="font-size: 0.8em; align-self: flex-start; padding-left: 0.6em; line-height: 1; margin: -1px 0;">vs</span>
-          <div style="display: grid; grid-template-columns: 2.8em 3.2em 1fr; align-items: center; column-gap: 0.4em; white-space: nowrap; line-height: 1;">
-            <span style="display: flex; align-items: center;">{% render 'flag', src: m.away.crest, h: '1.5em', w: '2.2em' %}</span>
-            <span class="value" style="font-size: 1.5em; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
-            <span class="label" style="font-size: 1em;">{{ m.away.name }}</span>
+          <div style="display: grid; grid-template-columns: {{ tmpl }}; align-items: center; column-gap: {{ icg }}; white-space: nowrap; line-height: 1;">
+            <span style="display: flex; align-items: center;">{% render 'flag', src: m.away.crest, h: fh, w: fw %}</span>
+            <span class="value" style="font-size: {{ codeFs }}; font-weight: 700; line-height: 1;">{{ m.away.tla }}</span>
+            <span class="label" style="font-size: 1em; min-width: 0; padding-left: 0.5em; overflow: hidden; text-overflow: ellipsis;">{{ m.away.name }}</span>
           </div>
         </div>
       {% endfor %}

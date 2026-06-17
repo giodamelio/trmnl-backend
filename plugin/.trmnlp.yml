@@ -29,4 +29,4 @@ time_zone: America/Los_Angeles
 variables:
   trmnl:
     plugin_settings:
-      polling_url: http://localhost:8787/v1/worldcup?tz=America/Los_Angeles&offset=-25200&team1=Netherlands&team2=USA&city=Seattle&phase=knockout
+      polling_url: http://localhost:8787/v1/worldcup?tz=America/Los_Angeles&offset=-25200&team1=Netherlands&team2=USA&city=Seattle&phase=group
