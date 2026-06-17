@@ -961,8 +961,7 @@ function bracketSvg(nodes: BracketNode[], startOverride?: string): string {
   const FLAG_W = Math.min(0.72 * boxW, (0.86 * pitch) / 1.404);
   const FLAG_H = 0.65 * FLAG_W;
   const FONT = 0.2 * boxW;
-  const SCORE_W = 0.09 * boxW; // inner space reserved for a score
-  const CODE_W = boxW - FLAG_W - 0.05 * boxW - SCORE_W; // fixed code slot (long codes shrink to fit)
+  const TEXT_W = boxW - FLAG_W - 0.09 * boxW; // slot after the flag for the "CODE SCORE" label (shrinks to fit)
   const ROW_DY = 0.58 * FLAG_H; // a small gap between the two flags — the rung & "t" sit in it
   const HALF = ROW_DY + FLAG_H / 2; // half node height / outgoing-tick reach
   const ITICK = Math.max(4, 0.09 * boxW); // incoming "t" tick reach
@@ -1010,27 +1009,26 @@ function bracketSvg(nodes: BracketNode[], startOverride?: string): string {
   const f1 = (x: number): string => x.toFixed(1);
 
   // ---- drawing helpers (capture the dimensions above) ----
-  // One team row: hotlinked flag (or "?" placeholder) with a hairline frame, an
-  // uppercase code held to CODE_W (long codes shrink rather than squish), opt. score.
+  // One team row: hotlinked flag (or "?" placeholder) with a hairline frame, then a
+  // single "CODE SCORE" label (the score is part of the run, so it can never collide
+  // with the code) held to TEXT_W — long labels shrink rather than squish.
   const side = (
-    s: BracketSide, flagX: number, codeX: number, codeAnchor: "start" | "end",
-    scoreX: number, scoreAnchor: "start" | "end", cy: number,
+    s: BracketSide, flagX: number, labelX: number, anchor: "start" | "end", cy: number,
   ): string => {
     const fy = cy - FLAG_H / 2;
     let out = s.crest
       ? `<image href="${esc(s.crest)}" x="${f1(flagX)}" y="${f1(fy)}" width="${f1(FLAG_W)}" height="${f1(FLAG_H)}" preserveAspectRatio="none"/>`
       : `<text x="${f1(flagX + FLAG_W / 2)}" y="${f1(cy + FLAG_H * 0.32)}" text-anchor="middle" font-size="${f1(FLAG_H * 0.8)}" font-weight="700">?</text>`;
     out += `<rect x="${f1(flagX)}" y="${f1(fy)}" width="${f1(FLAG_W)}" height="${f1(FLAG_H)}" fill="none" stroke="black" stroke-width="0.5"/>`;
-    const code = s.code.toUpperCase();
+    const label = s.code.toUpperCase() + (s.score != null ? ` ${s.score}` : "");
     let attr = "";
     let cdy = FONT * 0.35;
-    if (code.length * FONT * 0.55 > CODE_W) {
-      const fs = Math.max(0.5 * FONT, CODE_W / (code.length * 0.55));
-      attr = ` font-size="${f1(fs)}" textLength="${f1(CODE_W)}" lengthAdjust="spacingAndGlyphs"`;
+    if (label.length * FONT * 0.55 > TEXT_W) {
+      const fs = Math.max(0.5 * FONT, TEXT_W / (label.length * 0.55));
+      attr = ` font-size="${f1(fs)}" textLength="${f1(TEXT_W)}" lengthAdjust="spacingAndGlyphs"`;
       cdy = fs * 0.35;
     }
-    out += `<text x="${f1(codeX)}" y="${f1(cy + cdy)}" text-anchor="${codeAnchor}" font-weight="700"${attr}>${esc(code)}</text>`;
-    if (s.score != null) out += `<text x="${f1(scoreX)}" y="${f1(cy + FONT * 0.35)}" text-anchor="${scoreAnchor}" font-weight="700">${s.score}</text>`;
+    out += `<text x="${f1(labelX)}" y="${f1(cy + cdy)}" text-anchor="${anchor}" font-weight="700"${attr}>${esc(label)}</text>`;
     return out;
   };
   const inTick = (x: number, y: number, dash = "", reach = ITICK): string =>
@@ -1044,12 +1042,12 @@ function bracketSvg(nodes: BracketNode[], startOverride?: string): string {
     const ox = outerX(n);
     let out: string;
     if (n.half === "left") {
-      out = side(n.home, ox, ox + FLAG_W + gap, "start", ox + boxW - 2, "end", y - ROW_DY)
-        + side(n.away, ox, ox + FLAG_W + gap, "start", ox + boxW - 2, "end", y + ROW_DY);
+      out = side(n.home, ox, ox + FLAG_W + gap, "start", y - ROW_DY)
+        + side(n.away, ox, ox + FLAG_W + gap, "start", y + ROW_DY);
     } else {
       const flagX = ox - FLAG_W;
-      out = side(n.home, flagX, flagX - gap, "end", ox - boxW + 2, "start", y - ROW_DY)
-        + side(n.away, flagX, flagX - gap, "end", ox - boxW + 2, "start", y + ROW_DY);
+      out = side(n.home, flagX, flagX - gap, "end", y - ROW_DY)
+        + side(n.away, flagX, flagX - gap, "end", y + ROW_DY);
     }
     const cap = CAPTION[n.round];
     // Caption is centred on the flag (not the wider content box), so it reads as a label
@@ -1187,14 +1185,104 @@ ${els.join("\n")}
 </svg>`;
 }
 
+// ============================================================================
+// Synthetic bracket data, exposed via `?demo=full|partial` on the bracket SVG
+// route. Renders a fully-played or a realistic mid-tournament bracket on demand,
+// so the layout can be exercised with real-looking data year-round without
+// waiting for the live feed to resolve. The plugin never sends `demo`.
+// ============================================================================
+const DEMO_NATIONS = [
+  "Brazil", "Argentina", "France", "Spain", "England", "Portugal", "Netherlands", "Germany",
+  "Croatia", "Morocco", "Japan", "South Korea", "USA", "Mexico", "Uruguay", "Belgium",
+  "Switzerland", "Senegal", "Australia", "Canada", "Ecuador", "Norway", "Sweden", "Austria",
+  "Colombia", "Egypt", "Ghana", "Iran", "Qatar", "Scotland", "Tunisia", "Panama",
+]; // 32, all present in FLAG_CODE so flags render
+const DEMO_TLA: Record<string, string> = {
+  Brazil: "BRA", Argentina: "ARG", France: "FRA", Spain: "ESP", England: "ENG",
+  Portugal: "POR", Netherlands: "NED", Germany: "GER", Croatia: "CRO", Morocco: "MAR",
+  Japan: "JPN", "South Korea": "KOR", USA: "USA", Mexico: "MEX", Uruguay: "URU",
+  Belgium: "BEL", Switzerland: "SUI", Senegal: "SEN", Australia: "AUS", Canada: "CAN",
+  Ecuador: "ECU", Norway: "NOR", Sweden: "SWE", Austria: "AUT", Colombia: "COL",
+  Egypt: "EGY", Ghana: "GHA", Iran: "IRN", Qatar: "QAT", Scotland: "SCO",
+  Tunisia: "TUN", Panama: "PAN",
+};
+// Deterministic, always-decisive scoreline for a match (no draws ⇒ a clear winner).
+function demoScore(num: number): [number, number] {
+  const h = (num * 13) % 4;
+  const a = (num * 7) % 4;
+  return h === a ? [(h + 1) % 4, a] : [h, a];
+}
+const DEMO_SIDE_ROUNDS = ["R32", "R16", "QF", "SF"]; // outer→inner
+
+// Build a synthetic bracket. `scoredThrough` is the last round actually played:
+// teams flow forward to the next round (set, unplayed) but that next round has no
+// scores yet, so everything past it stays a skeleton placeholder — a realistic
+// "this round's matchups are set" state. "F" = the whole tournament is done.
+function demoBracket(scoredThrough: string): BracketNode[] {
+  const nodes = BRACKET_SKELETON.map((n) => ({ ...n, home: { ...n.home }, away: { ...n.away } }));
+  const byNum = new Map(nodes.map((n) => [n.num, n]));
+  const scoredMax = scoredThrough === "F" ? 99 : DEMO_SIDE_ROUNDS.indexOf(scoredThrough);
+
+  const setSide = (side: BracketSide, name: string, score: number | null): void => {
+    side.name = name;
+    side.tla = DEMO_TLA[name] ?? name.slice(0, 3).toUpperCase();
+    side.code = side.tla;
+    side.crest = flagUrl(name);
+    side.score = score;
+    side.resolved = true;
+  };
+  const decided = (n: BracketNode): boolean =>
+    n.home.resolved && n.away.resolved && n.home.score != null && n.away.score != null;
+  const advancing = (n: BracketNode, outcome: "winner" | "loser"): string | null => {
+    if (!decided(n)) return null;
+    const homeWins = n.home.score! >= n.away.score!;
+    return (outcome === "winner") === homeWins ? n.home.name : n.away.name;
+  };
+  const teamFor = (f: Feeder): string | null =>
+    f.type === "match" ? advancing(byNum.get(f.matchNum) ?? ({} as BracketNode), f.outcome) : null;
+
+  // R32: seed from the pool (each nation exactly once); score it if R32 is played.
+  nodes.filter((n) => n.round === "R32").sort((a, b) => a.num - b.num).forEach((n, i) => {
+    const [h, a] = demoScore(n.num);
+    setSide(n.home, DEMO_NATIONS[2 * i], scoredMax >= 0 ? h : null);
+    setSide(n.away, DEMO_NATIONS[2 * i + 1], scoredMax >= 0 ? a : null);
+  });
+  // R16→SF then F+TP: resolve each side from its feeder's child winner/loser. A child
+  // that isn't decided leaves this slot as a skeleton placeholder.
+  const fill = (round: string, roundIdx: number): void => {
+    for (const n of nodes.filter((x) => x.round === round)) {
+      const hn = teamFor(n.home.feeder);
+      const an = teamFor(n.away.feeder);
+      if (hn == null || an == null) continue;
+      const [h, a] = demoScore(n.num);
+      const scored = roundIdx <= scoredMax;
+      setSide(n.home, hn, scored ? h : null);
+      setSide(n.away, an, scored ? a : null);
+    }
+  };
+  fill("R16", 1);
+  fill("QF", 2);
+  fill("SF", 3);
+  fill("F", scoredThrough === "F" ? 0 : 99); // F/TP scored only when the whole thing is done
+  fill("TP", scoredThrough === "F" ? 0 : 99);
+  return nodes;
+}
+
 // Knockout bracket as a standalone SVG, embedded by the plugin via <iframe>. The
 // bracket is tz-independent, so this route needs no `tz`; it overlays only the
 // scoreboard (the four late nodes — semis/3rd/final — stay skeleton placeholders
-// until ~mid-July, and buildBracket returns all 32 regardless).
+// until ~mid-July, and buildBracket returns all 32 regardless). `?demo=full|partial`
+// substitutes synthetic data (see demoBracket) for realistic test rendering.
 export async function handleWorldCupBracketSvg(url: URL, _env: Env): Promise<Response> {
-  const data = await cachedFetchJson<EspnScoreboard>(`${ESPN_BASE}/${LEAGUE}/scoreboard?dates=${WC_WINDOW}`);
-  const all = data.events.map((e) => normalize(e, "UTC"));
-  const svg = bracketSvg(buildBracket(all), url.searchParams.get("round") ?? undefined);
+  const demo = url.searchParams.get("demo");
+  let nodes: BracketNode[];
+  if (demo === "full" || demo === "partial") {
+    nodes = demoBracket(demo === "full" ? "F" : "QF");
+  } else {
+    const data = await cachedFetchJson<EspnScoreboard>(`${ESPN_BASE}/${LEAGUE}/scoreboard?dates=${WC_WINDOW}`);
+    nodes = buildBracket(data.events.map((e) => normalize(e, "UTC")));
+  }
+  const svg = bracketSvg(nodes, url.searchParams.get("round") ?? undefined);
   return new Response(svg, {
     headers: {
       "Content-Type": "image/svg+xml; charset=utf-8",
@@ -1209,19 +1297,29 @@ export async function handleWorldCupBracketSvg(url: URL, _env: Env): Promise<Res
 // 505 ≈ the TRMNL X right-column slot). Not linked from anywhere; for local testing.
 export function handleWorldCupBracketTest(url: URL): Response {
   const w = Number(url.searchParams.get("w")) || 505;
-  const views: { label: string; q: string }[] = [
-    { label: "auto (server-picked by resolution)", q: "" },
-    { label: "R32 — full", q: "?round=R32" },
-    { label: "R16", q: "?round=R16" },
-    { label: "QF", q: "?round=QF" },
-    { label: "SF", q: "?round=SF" },
+  const rounds = ["R32", "R16", "QF", "SF"];
+  // Each dataset shown across every forced view, plus the auto pick. `demo` selects
+  // the synthetic data (see demoBracket); "" is the real (live) feed.
+  const datasets: { title: string; note: string; demo: string }[] = [
+    { title: "Fully played", note: "every round decided with scores", demo: "full" },
+    { title: "Mid-tournament", note: "R32/R16/QF played; semifinal matchups set but unplayed; final still TBD", demo: "partial" },
+    { title: "Live feed", note: "the real ESPN feed — all placeholders until the tournament starts", demo: "" },
   ];
-  const sections = views
+  const dq = (demo: string, round = ""): string => {
+    const p = [demo && `demo=${demo}`, round && `round=${round}`].filter(Boolean).join("&");
+    return p ? `?${p}` : "";
+  };
+  const frame = (demo: string, label: string, round = ""): string =>
+    `<section><h3>${label}</h3><iframe src="/v1/worldcup/bracket.svg${dq(demo, round)}" width="${w}" style="aspect-ratio:700/480;border:1px solid #999;display:block" scrolling="no"></iframe></section>`;
+  const groups = datasets
     .map(
-      (v) =>
-        `<section><h2>${v.label}</h2><iframe src="/v1/worldcup/bracket.svg${v.q}" width="${w}" style="aspect-ratio:700/480;border:1px solid #999;display:block" scrolling="no"></iframe></section>`,
+      (d) =>
+        `<h2>${d.title} <small>— ${d.note}</small></h2><div class="row">` +
+        frame(d.demo, "auto") +
+        rounds.map((r) => frame(d.demo, r, r)).join("") +
+        `</div>`,
     )
     .join("\n");
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>WC bracket — all views</title><style>body{font-family:system-ui,sans-serif;margin:20px;color:#222}h1{font-size:18px}h2{font-size:13px;color:#555;margin:20px 0 4px}p{color:#666;font-size:13px}code{background:#eee;padding:1px 4px;border-radius:3px}</style></head><body><h1>World Cup knockout bracket — every view (${w}px wide)</h1><p>Production auto-selects by resolution (a tier shows once <em>all</em> its teams are decided); these force each via <code>?round=</code>. Override width with <code>?w=</code>.</p>${sections}</body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>WC bracket — test views</title><style>body{font-family:system-ui,sans-serif;margin:20px;color:#222}h1{font-size:18px}h2{font-size:15px;margin:28px 0 8px}h2 small{font-weight:400;color:#777;font-size:12px}h3{font-size:12px;color:#555;margin:0 0 4px}p{color:#666;font-size:13px}code{background:#eee;padding:1px 4px;border-radius:3px}.row{display:flex;flex-wrap:wrap;gap:16px}</style></head><body><h1>World Cup knockout bracket — test views (${w}px wide)</h1><p>Each dataset is shown as the server's <code>auto</code> pick and forced to each round via <code>?round=</code>. The <em>full</em> and <em>partial</em> datasets come from <code>?demo=full|partial</code> on the bracket SVG route; override width with <code>?w=</code>.</p>${groups}</body></html>`;
   return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
