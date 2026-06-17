@@ -7,7 +7,11 @@
 // src/lib/. Per-feed query parsing and secrets stay inside each feed.
 
 import type { Env } from "./env";
-import { handleWorldCup, handleWorldCupBracketSvg } from "./features/worldcup";
+import {
+  handleWorldCup,
+  handleWorldCupBracketSvg,
+  handleWorldCupBracketTest,
+} from "./features/worldcup";
 import { errorResponse, json } from "./lib/response";
 
 export default {
@@ -19,6 +23,8 @@ export default {
           return await handleWorldCup(url, env);
         case "/v1/worldcup/bracket.svg":
           return await handleWorldCupBracketSvg(url, env);
+        case "/v1/worldcup/bracket-test":
+          return handleWorldCupBracketTest(url);
         case "/":
         case "/health":
           return json({ ok: true, endpoints: ["/v1/worldcup?tz=America/Los_Angeles"] });

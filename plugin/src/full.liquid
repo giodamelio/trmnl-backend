@@ -15,7 +15,7 @@
       {% if meta.phase == 'knockout' %}
         <div style="display: flex; flex-direction: column; gap: 3px;">
           {% render 'section_header', title: 'Knockout' %}
-          <iframe src="{{ meta.bracketSvgUrl }}" style="width: 100%; aspect-ratio: 700 / 450; border: 0;" scrolling="no"></iframe>
+          <iframe src="{{ meta.bracketSvgUrl }}" style="width: 100%; aspect-ratio: 700 / 480; border: 0;" scrolling="no"></iframe>
         </div>
       {% else %}
         {% render 'standings_section', standings: standings %}

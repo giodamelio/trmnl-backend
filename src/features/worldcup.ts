@@ -877,8 +877,9 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
       competition: data.leagues?.[0]?.name ?? "FIFA World Cup",
       phase,
       // The bracket is rendered as a standalone SVG (own route) the plugin embeds
-      // via <iframe>; absolute so it resolves in both local dev and prod.
-      bracketSvgUrl: `${url.origin}/v1/worldcup/bracket.svg${phaseParam ? `?phase=${phaseParam}` : ""}`,
+      // via <iframe>; absolute so it resolves in both local dev and prod. A `round`
+      // override is forwarded for preview (prod leaves it off → the SVG auto-picks).
+      bracketSvgUrl: `${url.origin}/v1/worldcup/bracket.svg${url.searchParams.get("round") ? `?round=${url.searchParams.get("round")}` : ""}`,
       todayCount: today.length,
       tomorrowCount: tomorrow.length,
       hasLive: today.some((m) => m.isLive),
@@ -905,279 +906,284 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
 // document, so flags resolve). The bracket is tz-independent (codes/teams/scores
 // don't depend on the viewer), so this route takes no `tz` and is globally cached.
 //
-// Layout: round → x column, bracketRow → y. Each match is its two team rows (flag +
-// uppercase code + score) with a short vertical line on its outgoing edge; elbow
-// connectors join each pair to the next round. The two halves mirror; the center
-// column stacks (top→bottom) 3RD PLACE, SF-left, FINAL, SF-right, with the FINAL
-// vertically centered and the semis ∓gap above/below it.
+// Layout: a two-sided knockout tree feeding a center FINAL. Each match is its two
+// team rows (flag + uppercase code + score); pairs join the next round inward via
+// elbow connectors. The two semifinals are ALWAYS the innermost SIDE columns — one
+// on each side, flanking the FINAL — never stacked together in the center; the center
+// column only ever holds FINAL (centred) and 3RD PLACE (above it). The view
+// auto-shrinks as the tournament resolves: once every team in a round is decided, the
+// outermost column is dropped and everything is drawn proportionally larger
+// (R32→R16→QF→SF per side, then R16→…, QF→…, finally just SF→). `?round=` overrides
+// the auto-pick for preview. The SVG scales by iframe-width / SVG_W, so node
+// dimensions scale with the column count to fill the slot at every view.
 // ============================================================================
 
-// The viewBox the SVG scales from. Width drives the on-screen text size (the SVG
-// scales uniformly by iframe-width / SVG_W), so it's kept tight and the font large
-// to stay legible on e-ink; height is kept short so the bracket fills its slot
-// without sparse vertical gaps. The iframe's aspect-ratio matches SVG_W / SVG_H.
 const SVG_W = 700;
-const SVG_H = 450;
-const FONT = 14;
-
-// A node is laid out from its OUTER (flag) edge inward; the inner (outgoing) edge is
-// one content-box later. Connectors attach to the CONTENT — the outgoing tick hugs
-// the inner content edge, the incoming line stops INSET short of the flag — so no
-// line touches a flag and none springs from empty space.
-const FLAG_W = 26;
-const FLAG_H = 17;
-const CODE_W = 28; // fixed code slot (≈3 caps at FONT); long placeholder codes crunch to it
-const SCORE_RESERVE = 8; // inner space held for a 1-digit score after the code
-const W_OUT = FLAG_W + 4 + CODE_W + SCORE_RESERVE; // 66 — outer(flag) edge → inner(outgoing) edge
-const INSET = 5; // gap the incoming line leaves before the flag
-
-// Outer (flag) x of each left-half column; the right half mirrors about SVG_W/2. The
-// 103px column step makes every connector gap identical (32px: R32→R16, R16→QF,
-// QF→center) AND lands the center node's box centred on SVG_W/2.
-const SIDE_OUTER_L: Record<string, number> = { R32: 8, R16: 111, QF: 214 };
-const SIDE_COUNT: Record<string, number> = { R32: 8, R16: 4, QF: 2 };
-
-// Center column: each node's content box is centred on CENTER_X (so the spine runs
-// through its middle); FINAL is centred vertically, the semis sit ∓CENTER_GAP from
-// it, 3RD PLACE one more gap above. CENTER_GAP is kept modest so each semi stays
-// near the midpoint of its two QF feeders — a wide gap makes the join look squished.
-const CENTER_X = SVG_W / 2; // 350
-const CENTER_GAP = 64;
-const CENTER_LABEL_X = CENTER_X - W_OUT / 2; // 317 — center node outer(flag/left) edge
-const CENTER_EDGE_X = CENTER_X + W_OUT / 2; // 383 — inner(right) edge
-const FINAL_Y = SVG_H / 2;
-const SF_L_Y = FINAL_Y - CENTER_GAP;
-const SF_R_Y = FINAL_Y + CENTER_GAP;
-const TP_Y = SF_L_Y - CENTER_GAP;
-
-const ROW_DY = 11; // a team row's vertical offset from its node centre
-const NODE_HALF = 18; // half a node's drawn height (for connector gaps)
+const SVG_H = 480;
+const ROUND_SEQ = ["R32", "R16", "QF", "SF"]; // side-tree rounds, outer→inner
+const PER_SIDE: Record<string, number> = { R32: 8, R16: 4, QF: 2, SF: 1 };
 
 const esc = (s: string): string =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-// Centre y of a side node (perfect-binary-tree spacing: a parent auto-centres
-// between its two children, so connectors line up).
-function sideY(round: string, bracketRow: number): number {
-  return (bracketRow + 0.5) * (SVG_H / SIDE_COUNT[round]);
+// Pick the outermost round still worth showing: a round drops once all of the NEXT
+// round's teams are decided (all R16 resolved ⇒ R32 done ⇒ start from R16, etc.).
+function pickStartRound(nodes: BracketNode[]): string {
+  const allResolved = (round: string): boolean => {
+    const rs = nodes.filter((n) => n.round === round);
+    return rs.length > 0 && rs.every((n) => n.home.resolved && n.away.resolved);
+  };
+  if (allResolved("SF")) return "SF";
+  if (allResolved("QF")) return "QF";
+  if (allResolved("R16")) return "R16";
+  return "R32";
 }
 
-// A side node's key x-positions, all derived from its outer (flag) edge.
-const outerX = (n: BracketNode): number =>
-  n.half === "left" ? SIDE_OUTER_L[n.round] : SVG_W - SIDE_OUTER_L[n.round];
-// Inner (outgoing) edge — where this node's outgoing tick + elbow spring from.
-const innerX = (n: BracketNode): number =>
-  n.half === "left" ? outerX(n) + W_OUT : outerX(n) - W_OUT;
-// Where an incoming connector stops: INSET short of the flag, so it never touches it.
-const incomingX = (n: BracketNode): number =>
-  n.half === "left" ? outerX(n) - INSET : outerX(n) + INSET;
-
-// The outgoing edge tick — as tall as the full two-flag row, so the elbow springs
-// from a bar that spans the whole match.
-function edgeTick(x: number, y: number): string {
-  const t = ROW_DY + FLAG_H / 2;
-  return `<line x1="${x}" y1="${y - t}" x2="${x}" y2="${y + t}" stroke="black"/>`;
-}
-
-// One team row: borderless hotlinked flag (with a hairline frame), uppercase code,
-// optional score. `codeAnchor`/`scoreAnchor` flip for the mirrored right side.
-function svgSide(
-  s: BracketSide,
-  flagX: number,
-  codeX: number,
-  codeAnchor: "start" | "end",
-  scoreX: number,
-  scoreAnchor: "start" | "end",
-  cy: number,
-): string {
-  const ty = cy + FONT * 0.35; // baseline for a glyph centred on cy
-  const fy = cy - FLAG_H / 2;
-  // Always draw a flag box so rows stay aligned: the hotlinked flag when the team
-  // is resolved, else a "?" placeholder (knockout slots are TBD until the bracket
-  // fills). Flags will become the focal point once teams resolve.
-  let out = "";
-  if (s.crest) {
-    out += `<image href="${esc(s.crest)}" x="${flagX}" y="${fy}" width="${FLAG_W}" height="${FLAG_H}" preserveAspectRatio="none"/>`;
-  } else {
-    out += `<text x="${flagX + FLAG_W / 2}" y="${cy + 3.2}" text-anchor="middle" font-size="9" font-weight="700">?</text>`;
-  }
-  out += `<rect x="${flagX}" y="${fy}" width="${FLAG_W}" height="${FLAG_H}" fill="none" stroke="black" stroke-width="0.5"/>`;
-  // Keep every code within the fixed CODE_W slot so columns stay aligned no matter
-  // which slots have resolved. Codes that don't fit at FONT are rendered at a smaller
-  // font (so they read at near-natural spacing rather than squished); textLength is
-  // kept only as a final clamp.
-  const code = s.code.toUpperCase();
-  let codeAttr = "";
-  let codeY = ty;
-  if (code.length * FONT * 0.55 > CODE_W) {
-    const fs = Math.max(7, CODE_W / (code.length * 0.55));
-    codeAttr = ` font-size="${fs.toFixed(1)}" textLength="${CODE_W}" lengthAdjust="spacingAndGlyphs"`;
-    codeY = cy + fs * 0.35;
-  }
-  out += `<text x="${codeX}" y="${codeY}" text-anchor="${codeAnchor}" font-weight="700"${codeAttr}>${esc(code)}</text>`;
-  if (s.score != null) {
-    out += `<text x="${scoreX}" y="${ty}" text-anchor="${scoreAnchor}" font-weight="700">${s.score}</text>`;
-  }
-  return out;
-}
-
-// A side (left/right) node: two stacked team rows + the short vertical line on its
-// outgoing (inner) edge that the elbow connector springs from.
-function svgSideNode(n: BracketNode): string {
-  const y = sideY(n.round, n.bracketRow);
-  const ox = outerX(n);
-  let out = "";
-  if (n.half === "left") {
-    const codeX = ox + FLAG_W + 4;
-    const scoreX = ox + W_OUT - 2;
-    out += svgSide(n.home, ox, codeX, "start", scoreX, "end", y - ROW_DY);
-    out += svgSide(n.away, ox, codeX, "start", scoreX, "end", y + ROW_DY);
-  } else {
-    const flagX = ox - FLAG_W;
-    const scoreX = ox - W_OUT + 2;
-    out += svgSide(n.home, flagX, flagX - 4, "end", scoreX, "start", y - ROW_DY);
-    out += svgSide(n.away, flagX, flagX - 4, "end", scoreX, "start", y + ROW_DY);
-  }
-  out += edgeTick(innerX(n), y);
-  return out;
-}
-
-// A short vertical "t" tick at a node's incoming connector junction (mirrors the
-// children's outgoing ticks so both ends of a connector read the same).
-const INNER_TICK = 6;
-function incomingTick(x: number, y: number): string {
-  return `<line x1="${x}" y1="${y - INNER_TICK}" x2="${x}" y2="${y + INNER_TICK}" stroke="black"/>`;
-}
-
-// A center node (SF/F/TP): two stacked rows + a caption above. No outgoing edge
-// line — the center connectors (spine + loser drops) are drawn explicitly. SEMI/
-// FINAL captions are nudged left of the spine (capX/capAnchor) so the vertical spine
-// doesn't run through them; 3RD PLACE stays centred (no line above it).
-function svgCenterNode(
-  n: BracketNode,
-  y: number,
-  caption: string,
-  capX: number = CENTER_X,
-  capAnchor: "middle" | "end" = "middle",
-): string {
-  const codeX = CENTER_LABEL_X + FLAG_W + 4;
-  const scoreX = CENTER_EDGE_X - 2;
-  let out = `<text x="${capX}" y="${y - NODE_HALF - 9}" text-anchor="${capAnchor}" font-size="9" font-weight="700">${caption}</text>`;
-  out += svgSide(n.home, CENTER_LABEL_X, codeX, "start", scoreX, "end", y - ROW_DY);
-  out += svgSide(n.away, CENTER_LABEL_X, codeX, "start", scoreX, "end", y + ROW_DY);
-  return out;
-}
-
-// Elbow joining a child pair (c0 top, c1 bottom; both at x=childEdgeX, their inner
-// edges) to a parent's incoming point (parentLabelX, parentY): horizontal stubs from
-// each child to a vertical bar at the midpoint, then a horizontal into the parent,
-// capped with a small incoming tick. Direction-agnostic (left or right).
-function svgElbow(
-  childEdgeX: number,
-  c0y: number,
-  c1y: number,
-  parentLabelX: number,
-  parentY: number,
-  barX = (childEdgeX + parentLabelX) / 2,
-): string {
-  return (
-    `<line x1="${childEdgeX}" y1="${c0y}" x2="${barX}" y2="${c0y}" stroke="black"/>` +
-    `<line x1="${childEdgeX}" y1="${c1y}" x2="${barX}" y2="${c1y}" stroke="black"/>` +
-    `<line x1="${barX}" y1="${c0y}" x2="${barX}" y2="${c1y}" stroke="black"/>` +
-    `<line x1="${barX}" y1="${parentY}" x2="${parentLabelX}" y2="${parentY}" stroke="black"/>` +
-    incomingTick(parentLabelX, parentY)
-  );
-}
-
-// The two match-feeder children of a node, sorted top-to-bottom by their drawn y.
-function feederChildren(n: BracketNode, byNum: Map<number, BracketNode>): BracketNode[] {
-  return [n.home.feeder, n.away.feeder]
-    .filter((f): f is Extract<Feeder, { type: "match" }> => f.type === "match")
-    .map((f) => byNum.get(f.matchNum))
-    .filter((c): c is BracketNode => c != null)
-    .sort((a, b) => sideY(a.round, a.bracketRow) - sideY(b.round, b.bracketRow));
-}
-
-// Render the full bracket SVG from the 32 nodes.
-function bracketSvg(nodes: BracketNode[]): string {
+// Render the bracket from `start` outward: a two-sided tree (start … SF on each side)
+// feeding a center FINAL, with 3RD PLACE above. Fewer rounds ⇒ fewer columns ⇒ every
+// node is drawn proportionally larger. All dimensions are derived from the column
+// count, so the helpers are nested to capture them.
+function bracketSvg(nodes: BracketNode[], startOverride?: string): string {
   const byNum = new Map(nodes.map((n) => [n.num, n]));
-  const sf = (half: string): BracketNode | undefined =>
-    nodes.find((n) => n.round === "SF" && n.half === half);
-  const sfL = sf("left");
-  const sfR = sf("right");
-  const final = nodes.find((n) => n.round === "F");
-  const tp = nodes.find((n) => n.round === "TP");
+  const start = startOverride && ROUND_SEQ.includes(startOverride) ? startOverride : pickStartRound(nodes);
+  const sideRounds = ROUND_SEQ.slice(ROUND_SEQ.indexOf(start)); // [start..SF], outer→inner
+  const L = sideRounds.length;
+
+  // Proportional dimensions: 2L+1 boxes (L per side + center) with gaps fill the
+  // width, so a view with fewer rounds gets proportionally larger nodes and text.
+  const M = 8;
+  const boxW = (SVG_W - 2 * M) / (2.5 * L + 1); // node content-box width (tighter columns ⇒ bigger flags)
+  const G = 0.25 * boxW; // connector gap between columns (compact, since the rung is short)
+  // Flags as large as the view allows: capped horizontally by the box, and vertically by
+  // the outermost round's row pitch (so e.g. R32's 8 rows/side still fit). A match is
+  // ~1.4× the flag width tall (two flags + the small inter-flag gap).
+  const pitch = SVG_H / PER_SIDE[start];
+  const FLAG_W = Math.min(0.72 * boxW, (0.86 * pitch) / 1.404);
+  const FLAG_H = 0.65 * FLAG_W;
+  const FONT = 0.2 * boxW;
+  const SCORE_W = 0.09 * boxW; // inner space reserved for a score
+  const CODE_W = boxW - FLAG_W - 0.05 * boxW - SCORE_W; // fixed code slot (long codes shrink to fit)
+  const ROW_DY = 0.58 * FLAG_H; // a small gap between the two flags — the rung & "t" sit in it
+  const HALF = ROW_DY + FLAG_H / 2; // half node height / outgoing-tick reach
+  const ITICK = Math.max(4, 0.09 * boxW); // incoming "t" tick reach
+  const INSET = 0.07 * boxW; // gap an incoming line leaves before the flag
+  const CAP_FONT = Math.max(7, 0.62 * FONT);
+  const CAP_DY = HALF + 0.4 * FONT; // caption baseline above a node
+  // Importance sizing — in the QF/SF views the final is the focal point, so matches are
+  // scaled by importance (FINAL largest, then semis, quarters, 3rd-place smallest); other
+  // views stay uniform. A node is scaled about its outer/vertical anchor, so the bracket
+  // geometry (column x, row y) is unchanged — only the drawn match shrinks.
+  const byImportance = start === "QF" || start === "SF";
+  const IMPORTANCE: Record<string, number> = { F: 1, SF: 0.85, QF: 0.72, TP: 0.6 };
+  const scaleOf = (round: string): number => (byImportance ? IMPORTANCE[round] ?? 1 : 1);
+  const CAPTION: Record<string, string> = { SF: "SEMI", QF: "QUARTER" };
+
+  // Horizontal: outer (flag) x of each left-half side column; the right half mirrors.
+  const outerL: Record<string, number> = {};
+  sideRounds.forEach((r, i) => (outerL[r] = M + i * (boxW + G)));
+  const CX = SVG_W / 2;
+  const finalY = SVG_H / 2;
+  // The 3rd-place game sits above the final, the SAME size as it in the wider views
+  // (R32/R16/QF) and shrunk only in the tightest SF view. tpY is placed so a node-scaled
+  // gap (tpGap) always separates the 3rd-place box from the final (the overall fit-scale
+  // below pulls everything back in when this lifts the box off the top).
+  const tpScale: number = start === "SF" ? 0.5 : 1;
+  const codeReach = HALF + 0.93 * FONT; // a center node's flag + its outer code, from its centre
+  const tpGap = 0.9 * FONT + 0.04 * SVG_H; // clear space between the 3rd-place and final boxes
+  const tpY = finalY - codeReach - tpGap - tpScale * codeReach;
+
+  const outerX = (n: BracketNode): number =>
+    n.half === "left" ? outerL[n.round] : SVG_W - outerL[n.round];
+  const innerX = (n: BracketNode): number =>
+    n.half === "left" ? outerX(n) + boxW : outerX(n) - boxW;
+  const yOf = (n: BracketNode): number => (n.bracketRow + 0.5) * (SVG_H / PER_SIDE[n.round]);
+  // A match's inner edge — where its outgoing connector leaves. The node is scaled about
+  // its outer edge for importance, so the inner edge moves with the scale.
+  const innerEdge = (n: BracketNode): number => {
+    const s = scaleOf(n.round);
+    return n.half === "left" ? outerX(n) + boxW * s : outerX(n) - boxW * s;
+  };
+  // Parent's incoming point: just outside its flag's outer edge (outerX is the scale
+  // anchor, so the flag's outer edge stays put).
+  const inX = (n: BracketNode): number =>
+    n.half === "left" ? outerX(n) - INSET : outerX(n) + INSET;
+  const f1 = (x: number): string => x.toFixed(1);
+
+  // ---- drawing helpers (capture the dimensions above) ----
+  // One team row: hotlinked flag (or "?" placeholder) with a hairline frame, an
+  // uppercase code held to CODE_W (long codes shrink rather than squish), opt. score.
+  const side = (
+    s: BracketSide, flagX: number, codeX: number, codeAnchor: "start" | "end",
+    scoreX: number, scoreAnchor: "start" | "end", cy: number,
+  ): string => {
+    const fy = cy - FLAG_H / 2;
+    let out = s.crest
+      ? `<image href="${esc(s.crest)}" x="${f1(flagX)}" y="${f1(fy)}" width="${f1(FLAG_W)}" height="${f1(FLAG_H)}" preserveAspectRatio="none"/>`
+      : `<text x="${f1(flagX + FLAG_W / 2)}" y="${f1(cy + FLAG_H * 0.32)}" text-anchor="middle" font-size="${f1(FLAG_H * 0.8)}" font-weight="700">?</text>`;
+    out += `<rect x="${f1(flagX)}" y="${f1(fy)}" width="${f1(FLAG_W)}" height="${f1(FLAG_H)}" fill="none" stroke="black" stroke-width="0.5"/>`;
+    const code = s.code.toUpperCase();
+    let attr = "";
+    let cdy = FONT * 0.35;
+    if (code.length * FONT * 0.55 > CODE_W) {
+      const fs = Math.max(0.5 * FONT, CODE_W / (code.length * 0.55));
+      attr = ` font-size="${f1(fs)}" textLength="${f1(CODE_W)}" lengthAdjust="spacingAndGlyphs"`;
+      cdy = fs * 0.35;
+    }
+    out += `<text x="${f1(codeX)}" y="${f1(cy + cdy)}" text-anchor="${codeAnchor}" font-weight="700"${attr}>${esc(code)}</text>`;
+    if (s.score != null) out += `<text x="${f1(scoreX)}" y="${f1(cy + FONT * 0.35)}" text-anchor="${scoreAnchor}" font-weight="700">${s.score}</text>`;
+    return out;
+  };
+  const inTick = (x: number, y: number, dash = "", reach = ITICK): string =>
+    `<line x1="${f1(x)}" y1="${f1(y - reach)}" x2="${f1(x)}" y2="${f1(y + reach)}" stroke="black"${dash}/>`;
+  // A side (left/right) node: two large touching flags laid out from the outer edge,
+  // plus its caption. The connectors are drawn separately (joins between matches), so
+  // the node itself carries no connector line — keeping the bracket sparse.
+  const node = (n: BracketNode): string => {
+    const y = yOf(n);
+    const gap = 0.05 * boxW;
+    const ox = outerX(n);
+    let out: string;
+    if (n.half === "left") {
+      out = side(n.home, ox, ox + FLAG_W + gap, "start", ox + boxW - 2, "end", y - ROW_DY)
+        + side(n.away, ox, ox + FLAG_W + gap, "start", ox + boxW - 2, "end", y + ROW_DY);
+    } else {
+      const flagX = ox - FLAG_W;
+      out = side(n.home, flagX, flagX - gap, "end", ox - boxW + 2, "start", y - ROW_DY)
+        + side(n.away, flagX, flagX - gap, "end", ox - boxW + 2, "start", y + ROW_DY);
+    }
+    const cap = CAPTION[n.round];
+    // Caption is centred on the flag (not the wider content box), so it reads as a label
+    // sitting directly above the flag rather than drifting toward the code.
+    const fcx = n.half === "left" ? ox + FLAG_W / 2 : ox - FLAG_W / 2;
+    if (cap) out += `<text x="${f1(fcx)}" y="${f1(y - CAP_DY)}" text-anchor="middle" font-size="${f1(CAP_FONT)}" font-weight="700">${cap}</text>`;
+    // Scale the whole match by importance, about its outer/vertical anchor (no-op at 1).
+    const s = scaleOf(n.round);
+    return s === 1 ? out : `<g transform="translate(${f1(ox)} ${f1(y)}) scale(${f1(s)}) translate(${f1(-ox)} ${f1(-y)})">${out}</g>`;
+  };
+  // A center node (FINAL/3RD): its two flags stacked and centred on CX, with each team's
+  // code (+ score) above the home flag and below the away flag. Codes go outside rather
+  // than beside the flags so the incoming lines from both semis meet the flag edges
+  // symmetrically — a side-laid-out code would pull the right-hand line off toward the
+  // text and look unbalanced. The caption sits just outside the codes.
+  const centerNode = (n: BracketNode, y: number, caption: string, below = false): string => {
+    const flagX = CX - FLAG_W / 2;
+    const codeGap = 0.18 * FONT;
+    const flag = (s: BracketSide, cy: number): string => {
+      const fy = cy - FLAG_H / 2;
+      const img = s.crest
+        ? `<image href="${esc(s.crest)}" x="${f1(flagX)}" y="${f1(fy)}" width="${f1(FLAG_W)}" height="${f1(FLAG_H)}" preserveAspectRatio="none"/>`
+        : `<text x="${f1(CX)}" y="${f1(cy + FLAG_H * 0.32)}" text-anchor="middle" font-size="${f1(FLAG_H * 0.8)}" font-weight="700">?</text>`;
+      return img + `<rect x="${f1(flagX)}" y="${f1(fy)}" width="${f1(FLAG_W)}" height="${f1(FLAG_H)}" fill="none" stroke="black" stroke-width="0.5"/>`;
+    };
+    const code = (s: BracketSide, baseY: number): string => {
+      const label = s.code.toUpperCase() + (s.score != null ? ` ${s.score}` : "");
+      return `<text x="${CX}" y="${f1(baseY)}" text-anchor="middle" font-weight="700">${esc(label)}</text>`;
+    };
+    const homeCodeY = y - ROW_DY - FLAG_H / 2 - codeGap; // baseline above the home flag
+    const awayCodeY = y + ROW_DY + FLAG_H / 2 + codeGap + FONT * 0.75; // below the away flag
+    const capY = below ? awayCodeY + CAP_FONT + 2 : homeCodeY - FONT * 0.75 - 2;
+    return `<text x="${CX}" y="${f1(capY)}" text-anchor="middle" font-size="${f1(CAP_FONT)}" font-weight="700">${caption}</text>`
+      + code(n.home, homeCodeY) + flag(n.home, y - ROW_DY)
+      + flag(n.away, y + ROW_DY) + code(n.away, awayCodeY);
+  };
+  // A match's outgoing connector: a clean horizontal stub from its inner edge inward to
+  // the joining bar, at the match's vertical centre.
+  const stubOut = (n: BracketNode, barX: number): string =>
+    `<line x1="${f1(innerEdge(n))}" y1="${f1(yOf(n))}" x2="${f1(barX)}" y2="${f1(yOf(n))}" stroke="black"/>`;
+  const kidsOf = (n: BracketNode): BracketNode[] =>
+    [n.home.feeder, n.away.feeder]
+      .filter((ff): ff is Extract<Feeder, { type: "match" }> => ff.type === "match")
+      .map((ff) => byNum.get(ff.matchNum))
+      .filter((c): c is BracketNode => c != null)
+      .sort((a, b) => yOf(a) - yOf(b));
+  const isSide = (n: BracketNode): boolean =>
+    sideRounds.includes(n.round) && (n.half === "left" || n.half === "right");
 
   const conns: string[] = [];
   const dashed: string[] = [];
-
-  // Side elbows: each R16/QF (left & right) joins its two children's inner edges to
-  // its own incoming point (one INSET short of its flag).
-  for (const n of nodes) {
-    if ((n.round !== "R16" && n.round !== "QF") || (n.half !== "left" && n.half !== "right")) continue;
-    const kids = feederChildren(n, byNum);
-    if (kids.length !== 2) continue;
-    conns.push(
-      svgElbow(
-        innerX(kids[0]),
-        sideY(kids[0].round, kids[0].bracketRow),
-        sideY(kids[1].round, kids[1].bracketRow),
-        incomingX(n),
-        sideY(n.round, n.bracketRow),
-      ),
-    );
-  }
-
-  // QF → SF (into the center column), and the dashed 3RD PLACE branch coming off the
-  // NEAREST point of each QF→SF vertical bar — its top, which is the part closest to
-  // the 3rd-place node above — extended up and into TP's near side.
-  const qfToSf = (sfNode: BracketNode | undefined, parentInc: number, sfY: number): void => {
-    if (!sfNode) return;
-    const kids = feederChildren(sfNode, byNum);
-    if (kids.length !== 2) return;
-    const topY = sideY(kids[0].round, kids[0].bracketRow);
-    const botY = sideY(kids[1].round, kids[1].bracketRow);
-    const childEdge = innerX(kids[0]);
-    const barX = (childEdge + parentInc) / 2;
-    conns.push(svgElbow(childEdge, topY, botY, parentInc, sfY, barX));
-    const tpEdge = barX < CENTER_X ? CENTER_LABEL_X - INSET : CENTER_EDGE_X + INSET;
-    dashed.push(
-      `<polyline points="${barX},${topY} ${barX},${TP_Y} ${tpEdge},${TP_Y}" fill="none" stroke="black" stroke-dasharray="3 2"/>` +
-        // little "t" tick where it meets the 3rd-place node, matching the solid joins
-        `<line x1="${tpEdge}" y1="${TP_Y - INNER_TICK}" x2="${tpEdge}" y2="${TP_Y + INNER_TICK}" stroke="black" stroke-dasharray="3 2"/>`,
-    );
-  };
-  qfToSf(sfL, CENTER_LABEL_X - INSET, SF_L_Y);
-  qfToSf(sfR, CENTER_EDGE_X + INSET, SF_R_Y);
-
-  // SF → FINAL: the vertical spine, drawn in the gaps above and below the final.
-  conns.push(`<line x1="${CENTER_X}" y1="${SF_L_Y + NODE_HALF}" x2="${CENTER_X}" y2="${FINAL_Y - NODE_HALF}" stroke="black"/>`);
-  conns.push(`<line x1="${CENTER_X}" y1="${FINAL_Y + NODE_HALF}" x2="${CENTER_X}" y2="${SF_R_Y - NODE_HALF}" stroke="black"/>`);
-
-  // Nodes. Side columns are R32/R16/QF; SF/F/TP are the center column (drawn below).
   const els: string[] = [];
-  for (const n of nodes) {
-    if (SIDE_COUNT[n.round] && (n.half === "left" || n.half === "right")) els.push(svgSideNode(n));
-  }
-  // SEMI/FINAL captions sit just left of the spine (end-anchored) so it can't run
-  // through them; 3RD PLACE is centred (nothing crosses above it).
-  if (sfL) els.push(svgCenterNode(sfL, SF_L_Y, "SEMI", CENTER_X - 6, "end"));
-  if (sfR) els.push(svgCenterNode(sfR, SF_R_Y, "SEMI", CENTER_X - 6, "end"));
-  if (final) els.push(svgCenterNode(final, FINAL_Y, "FINAL", CENTER_X - 6, "end"));
-  if (tp) els.push(svgCenterNode(tp, TP_Y, "3RD PLACE"));
 
-  // QF captions (one per QF node, centred on the box, with room above the flag).
+  // Side nodes (each draws its own caption, scaled with the node).
   for (const n of nodes) {
-    if (n.round !== "QF") continue;
-    const cx = (outerX(n) + innerX(n)) / 2;
-    els.push(`<text x="${cx}" y="${sideY(n.round, n.bracketRow) - NODE_HALF - 9}" text-anchor="middle" font-size="9" font-weight="700">QUARTER</text>`);
+    if (isSide(n)) els.push(node(n));
   }
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SVG_W} ${SVG_H}" font-family="Helvetica,Arial,sans-serif" font-size="${FONT}" fill="black">
+  // Tree elbows: every shown round except the outermost joins its two children (the next
+  // round out) to itself, at the scaled connection points. Outermost round = leaves.
+  for (const n of nodes) {
+    if (!isSide(n) || n.round === start) continue;
+    const kids = kidsOf(n);
+    if (kids.length !== 2) continue;
+    // Two match-outputs join a vertical bar (pulled back just past the columns); the T to
+    // the parent sits between the pairs (at the parent's centre).
+    const dir = n.half === "left" ? 1 : -1;
+    const barX = innerEdge(kids[0]) + dir * 0.06 * boxW;
+    conns.push(
+      stubOut(kids[0], barX) + stubOut(kids[1], barX)
+        + `<line x1="${f1(barX)}" y1="${f1(yOf(kids[0]))}" x2="${f1(barX)}" y2="${f1(yOf(kids[1]))}" stroke="black"/>`
+        + `<line x1="${f1(barX)}" y1="${f1(yOf(n))}" x2="${f1(inX(n))}" y2="${f1(yOf(n))}" stroke="black"/>`
+        + inTick(inX(n), yOf(n), "", ITICK * scaleOf(n.round)),
+    );
+  }
+
+  // SF → FINAL (one per side, horizontal into the center), and the dashed 3RD PLACE
+  // branch off each semi up into the 3rd-place box.
+  const final = nodes.find((n) => n.round === "F");
+  const tp = nodes.find((n) => n.round === "TP");
+  const tpHalfW = (FLAG_W * tpScale) / 2; // half flag-width of the (centred) 3rd box
+  for (const half of ["left", "right"] as const) {
+    const sfN = nodes.find((n) => n.round === "SF" && n.half === half);
+    if (!sfN) continue;
+    const finalEdge = half === "left" ? CX - FLAG_W / 2 - INSET : CX + FLAG_W / 2 + INSET;
+    // The semi's output runs from its inner edge straight into the final.
+    conns.push(stubOut(sfN, finalEdge) + inTick(finalEdge, finalY));
+    // 3rd-place loser: branch up from the semi's stub into the TP box.
+    const mx = (innerEdge(sfN) + finalEdge) / 2;
+    const tpEdge = half === "left" ? CX - tpHalfW - INSET * tpScale : CX + tpHalfW + INSET * tpScale;
+    dashed.push(
+      `<polyline points="${f1(mx)},${f1(finalY)} ${f1(mx)},${f1(tpY)} ${f1(tpEdge)},${f1(tpY)}" fill="none" stroke="black" stroke-dasharray="3 2"/>`
+        + inTick(tpEdge, tpY, ` stroke-dasharray="3 2"`, ITICK * tpScale),
+    );
+  }
+
+  // Center nodes. The 3rd-place game is scaled down about its centre so it reads as
+  // secondary to the final.
+  if (final) els.push(centerNode(final, finalY, "FINAL", true));
+  if (tp) {
+    const tpNode = centerNode(tp, tpY, "3RD PLACE");
+    els.push(
+      tpScale === 1
+        ? tpNode
+        : `<g transform="translate(${f1(CX)} ${f1(tpY)}) scale(${f1(tpScale)}) translate(${f1(-CX)} ${f1(-tpY)})">${tpNode}</g>`,
+    );
+  }
+
+  // Vertically centre the drawn content. Big views (R32) already fill the height;
+  // small ones (QF/SF) have huge nodes clustered mid-height with 3RD PLACE poking off
+  // the top — translating the whole group to centre its bounding box fixes both.
+  const capReach = CAP_DY + CAP_FONT; // a caption's reach above a node centre
+  const centerReach = HALF + 1.5 * FONT + CAP_FONT + 4; // a center node's flag+code+caption reach from its centre
+  const oc = PER_SIDE[start];
+  const sStart = scaleOf(start); // the outermost round is scaled too
+  const startHasCap = start === "SF" || start === "QF";
+  const contentTop = Math.min(
+    0.5 * (SVG_H / oc) - (startHasCap ? capReach : HALF) * sStart, // topmost outer node (scaled)
+    tpY - centerReach * tpScale, // 3RD PLACE code + caption (scaled about tpY)
+  );
+  const contentBottom = Math.max((oc - 0.5) * (SVG_H / oc) + HALF * sStart, finalY + centerReach);
+  const cy0 = (contentTop + contentBottom) / 2; // content's vertical centre
+  // The most-zoomed views (SF, sometimes QF) stack 3rd-place + final + their codes and
+  // captions taller than the canvas; centring alone would then clip top and bottom, so
+  // shrink the whole drawing uniformly to fit (no-op for the wider views).
+  const fit = Math.min(1, (SVG_H - 4) / (contentBottom - contentTop));
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SVG_W} ${SVG_H}" font-family="Helvetica,Arial,sans-serif" font-size="${f1(FONT)}" fill="black">
 <rect width="${SVG_W}" height="${SVG_H}" fill="white"/>
+<g transform="translate(${f1(CX)} ${f1(SVG_H / 2)}) scale(${fit.toFixed(3)}) translate(${f1(-CX)} ${f1(-cy0)})">
 <g>${conns.join("")}</g>
 <g>${dashed.join("")}</g>
 ${els.join("\n")}
+</g>
 </svg>`;
 }
 
@@ -1185,14 +1191,37 @@ ${els.join("\n")}
 // bracket is tz-independent, so this route needs no `tz`; it overlays only the
 // scoreboard (the four late nodes — semis/3rd/final — stay skeleton placeholders
 // until ~mid-July, and buildBracket returns all 32 regardless).
-export async function handleWorldCupBracketSvg(_url: URL, _env: Env): Promise<Response> {
+export async function handleWorldCupBracketSvg(url: URL, _env: Env): Promise<Response> {
   const data = await cachedFetchJson<EspnScoreboard>(`${ESPN_BASE}/${LEAGUE}/scoreboard?dates=${WC_WINDOW}`);
   const all = data.events.map((e) => normalize(e, "UTC"));
-  const svg = bracketSvg(buildBracket(all));
+  const svg = bracketSvg(buildBracket(all), url.searchParams.get("round") ?? undefined);
   return new Response(svg, {
     headers: {
       "Content-Type": "image/svg+xml; charset=utf-8",
       "Cache-Control": `public, max-age=${RESPONSE_MAX_AGE}`,
     },
   });
+}
+
+// Dev preview page: embeds the bracket SVG in an <iframe> for every view (the auto
+// pick plus each forced `?round=`), so all five layouts can be eyeballed at once
+// without waiting for the tournament to resolve. `?w=` sets the iframe width (default
+// 505 ≈ the TRMNL X right-column slot). Not linked from anywhere; for local testing.
+export function handleWorldCupBracketTest(url: URL): Response {
+  const w = Number(url.searchParams.get("w")) || 505;
+  const views: { label: string; q: string }[] = [
+    { label: "auto (server-picked by resolution)", q: "" },
+    { label: "R32 — full", q: "?round=R32" },
+    { label: "R16", q: "?round=R16" },
+    { label: "QF", q: "?round=QF" },
+    { label: "SF", q: "?round=SF" },
+  ];
+  const sections = views
+    .map(
+      (v) =>
+        `<section><h2>${v.label}</h2><iframe src="/v1/worldcup/bracket.svg${v.q}" width="${w}" style="aspect-ratio:700/480;border:1px solid #999;display:block" scrolling="no"></iframe></section>`,
+    )
+    .join("\n");
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>WC bracket — all views</title><style>body{font-family:system-ui,sans-serif;margin:20px;color:#222}h1{font-size:18px}h2{font-size:13px;color:#555;margin:20px 0 4px}p{color:#666;font-size:13px}code{background:#eee;padding:1px 4px;border-radius:3px}</style></head><body><h1>World Cup knockout bracket — every view (${w}px wide)</h1><p>Production auto-selects by resolution (a tier shows once <em>all</em> its teams are decided); these force each via <code>?round=</code>. Override width with <code>?w=</code>.</p>${sections}</body></html>`;
+  return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
