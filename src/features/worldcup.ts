@@ -820,7 +820,10 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
   const standings = standingsData ? normalizeStandings(standingsData) : [];
 
   const now = new Date();
-  const todayStr = localDate(now, tz);
+  // `?today=YYYY-MM-DD` overrides the local day for preview/testing (e.g. to see a
+  // busy 6-game group-stage day); read-only, harmless on prod. Falls back to real today.
+  const todayOverride = url.searchParams.get("today");
+  const todayStr = todayOverride ?? localDate(now, tz);
 
   const all = data.events
     .map((e) => normalize(e, tz))
@@ -843,7 +846,9 @@ export async function handleWorldCup(url: URL, _env: Env): Promise<Response> {
 
   // The viewer's local tomorrow (one calendar day on from local today), for the
   // right-hand "Tomorrow" overview.
-  const tomorrowStr = localDate(new Date(now.getTime() + 86_400_000), tz);
+  const tomorrowStr = todayOverride
+    ? new Date(new Date(`${todayOverride}T00:00:00Z`).getTime() + 86_400_000).toISOString().slice(0, 10)
+    : localDate(new Date(now.getTime() + 86_400_000), tz);
   const tomorrow = all.filter((m) => m.localDate === tomorrowStr);
 
   const current = pickCurrent(today, now);
