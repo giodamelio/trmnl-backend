@@ -202,7 +202,7 @@
               <span class="label" style="text-align: center;">{{ r.rank }}</span>
               <span style="display: flex; align-items: center;">{% render 'flag', src: r.crest, h: '1em', w: '1.5em' %}</span>
               <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1;">{{ r.tla }}</span>
-              <span style="font-size: 1.3em; line-height: 1; text-align: right;">{% if r.gd > 0 %}+{% endif %}{{ r.gd }}</span>
+              <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1; text-align: right;">{% if r.gd > 0 %}+{% endif %}{{ r.gd }}</span>
               <span class="value" style="font-size: 1.3em; font-weight: 700; line-height: 1; text-align: right;">{{ r.points }}</span>
             </div>
           {% endfor %}
