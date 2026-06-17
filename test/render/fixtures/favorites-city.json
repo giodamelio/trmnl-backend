@@ -1,0 +1,1200 @@
+{
+ "meta": {
+  "timezone": "America/Los_Angeles",
+  "localDate": "2026-06-13",
+  "generatedAt": "2026-06-17T18:41:06.211Z",
+  "competition": "FIFA World Cup",
+  "phase": "group",
+  "bracketSvgUrl": "http://localhost:8787/v1/worldcup/bracket.svg",
+  "todayCount": 4,
+  "tomorrowCount": 4,
+  "hasLive": false
+ },
+ "current": {
+  "id": 760421,
+  "status": "STATUS_FULL_TIME",
+  "isLive": false,
+  "isFinished": true,
+  "minute": null,
+  "stage": "GROUP_STAGE",
+  "group": "Group D",
+  "kickoffUtc": "2026-06-14T04:00:00.000Z",
+  "kickoffLocal": "9:00 PM",
+  "localDate": "2026-06-13",
+  "home": {
+   "name": "Australia",
+   "tla": "AUS",
+   "crest": "https://flagcdn.com/au.svg",
+   "score": 2
+  },
+  "away": {
+   "name": "Türkiye",
+   "tla": "TUR",
+   "crest": "https://flagcdn.com/tr.svg",
+   "score": 0
+  },
+  "venue": {
+   "id": "vancouver",
+   "stadium": "BC Place",
+   "fifaName": "Vancouver Stadium",
+   "city": "Vancouver",
+   "country": "Canada",
+   "capacity": 54500,
+   "lat": 49.2768,
+   "lng": -123.1119,
+   "timezone": "America/Vancouver"
+  }
+ },
+ "matches": [
+  {
+   "id": 760420,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group B",
+   "kickoffUtc": "2026-06-13T19:00:00.000Z",
+   "kickoffLocal": "12:00 PM",
+   "localDate": "2026-06-13",
+   "home": {
+    "name": "Qatar",
+    "tla": "QAT",
+    "crest": "https://flagcdn.com/qa.svg",
+    "score": 1
+   },
+   "away": {
+    "name": "Switzerland",
+    "tla": "SUI",
+    "crest": "https://flagcdn.com/ch.svg",
+    "score": 1
+   },
+   "venue": {
+    "id": "santa-clara",
+    "stadium": "Levi's Stadium",
+    "fifaName": "San Francisco Bay Area Stadium",
+    "city": "San Francisco Bay Area",
+    "country": "USA",
+    "capacity": 68500,
+    "lat": 37.403,
+    "lng": -121.97,
+    "timezone": "America/Los_Angeles"
+   }
+  },
+  {
+   "id": 760419,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group C",
+   "kickoffUtc": "2026-06-13T22:00:00.000Z",
+   "kickoffLocal": "3:00 PM",
+   "localDate": "2026-06-13",
+   "home": {
+    "name": "Brazil",
+    "tla": "BRA",
+    "crest": "https://flagcdn.com/br.svg",
+    "score": 1
+   },
+   "away": {
+    "name": "Morocco",
+    "tla": "MAR",
+    "crest": "https://flagcdn.com/ma.svg",
+    "score": 1
+   },
+   "venue": {
+    "id": "east-rutherford",
+    "stadium": "MetLife Stadium",
+    "fifaName": "New York New Jersey Stadium",
+    "city": "New York / New Jersey",
+    "country": "USA",
+    "capacity": 82500,
+    "lat": 40.8135,
+    "lng": -74.0745,
+    "timezone": "America/New_York"
+   }
+  },
+  {
+   "id": 760418,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group C",
+   "kickoffUtc": "2026-06-14T01:00:00.000Z",
+   "kickoffLocal": "6:00 PM",
+   "localDate": "2026-06-13",
+   "home": {
+    "name": "Haiti",
+    "tla": "HAI",
+    "crest": "https://flagcdn.com/ht.svg",
+    "score": 0
+   },
+   "away": {
+    "name": "Scotland",
+    "tla": "SCO",
+    "crest": "https://flagcdn.com/gb-sct.svg",
+    "score": 1
+   },
+   "venue": {
+    "id": "foxborough",
+    "stadium": "Gillette Stadium",
+    "fifaName": "Boston Stadium",
+    "city": "Boston",
+    "country": "USA",
+    "capacity": 65878,
+    "lat": 42.0909,
+    "lng": -71.2643,
+    "timezone": "America/New_York"
+   }
+  },
+  {
+   "id": 760421,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group D",
+   "kickoffUtc": "2026-06-14T04:00:00.000Z",
+   "kickoffLocal": "9:00 PM",
+   "localDate": "2026-06-13",
+   "home": {
+    "name": "Australia",
+    "tla": "AUS",
+    "crest": "https://flagcdn.com/au.svg",
+    "score": 2
+   },
+   "away": {
+    "name": "Türkiye",
+    "tla": "TUR",
+    "crest": "https://flagcdn.com/tr.svg",
+    "score": 0
+   },
+   "venue": {
+    "id": "vancouver",
+    "stadium": "BC Place",
+    "fifaName": "Vancouver Stadium",
+    "city": "Vancouver",
+    "country": "Canada",
+    "capacity": 54500,
+    "lat": 49.2768,
+    "lng": -123.1119,
+    "timezone": "America/Vancouver"
+   }
+  }
+ ],
+ "tomorrow": [
+  {
+   "id": 760422,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group E",
+   "kickoffUtc": "2026-06-14T17:00:00.000Z",
+   "kickoffLocal": "10:00 AM",
+   "localDate": "2026-06-14",
+   "home": {
+    "name": "Germany",
+    "tla": "GER",
+    "crest": "https://flagcdn.com/de.svg",
+    "score": 7
+   },
+   "away": {
+    "name": "Curaçao",
+    "tla": "CUW",
+    "crest": "https://flagcdn.com/cw.svg",
+    "score": 1
+   },
+   "venue": {
+    "id": "houston",
+    "stadium": "NRG Stadium",
+    "fifaName": "Houston Stadium",
+    "city": "Houston",
+    "country": "USA",
+    "capacity": 72220,
+    "lat": 29.6847,
+    "lng": -95.4107,
+    "timezone": "America/Chicago"
+   }
+  },
+  {
+   "id": 760425,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group F",
+   "kickoffUtc": "2026-06-14T20:00:00.000Z",
+   "kickoffLocal": "1:00 PM",
+   "localDate": "2026-06-14",
+   "home": {
+    "name": "Netherlands",
+    "tla": "NED",
+    "crest": "https://flagcdn.com/nl.svg",
+    "score": 2
+   },
+   "away": {
+    "name": "Japan",
+    "tla": "JPN",
+    "crest": "https://flagcdn.com/jp.svg",
+    "score": 2
+   },
+   "venue": {
+    "id": "arlington",
+    "stadium": "AT&T Stadium",
+    "fifaName": "Dallas Stadium",
+    "city": "Dallas",
+    "country": "USA",
+    "capacity": 80000,
+    "lat": 32.7473,
+    "lng": -97.0945,
+    "timezone": "America/Chicago"
+   }
+  },
+  {
+   "id": 760423,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group E",
+   "kickoffUtc": "2026-06-14T23:00:00.000Z",
+   "kickoffLocal": "4:00 PM",
+   "localDate": "2026-06-14",
+   "home": {
+    "name": "Ivory Coast",
+    "tla": "CIV",
+    "crest": "https://flagcdn.com/ci.svg",
+    "score": 1
+   },
+   "away": {
+    "name": "Ecuador",
+    "tla": "ECU",
+    "crest": "https://flagcdn.com/ec.svg",
+    "score": 0
+   },
+   "venue": {
+    "id": "philadelphia",
+    "stadium": "Lincoln Financial Field",
+    "fifaName": "Philadelphia Stadium",
+    "city": "Philadelphia",
+    "country": "USA",
+    "capacity": 69328,
+    "lat": 39.9008,
+    "lng": -75.1675,
+    "timezone": "America/New_York"
+   }
+  },
+  {
+   "id": 760424,
+   "status": "STATUS_FULL_TIME",
+   "isLive": false,
+   "isFinished": true,
+   "minute": null,
+   "stage": "GROUP_STAGE",
+   "group": "Group F",
+   "kickoffUtc": "2026-06-15T02:00:00.000Z",
+   "kickoffLocal": "7:00 PM",
+   "localDate": "2026-06-14",
+   "home": {
+    "name": "Sweden",
+    "tla": "SWE",
+    "crest": "https://flagcdn.com/se.svg",
+    "score": 5
+   },
+   "away": {
+    "name": "Tunisia",
+    "tla": "TUN",
+    "crest": "https://flagcdn.com/tn.svg",
+    "score": 1
+   },
+   "venue": {
+    "id": "monterrey",
+    "stadium": "Estadio BBVA",
+    "fifaName": "Estadio Monterrey",
+    "city": "Monterrey",
+    "country": "Mexico",
+    "capacity": 53500,
+    "lat": 25.6692,
+    "lng": -100.244,
+    "timezone": "America/Monterrey"
+   }
+  }
+ ],
+ "nextUpcoming": null,
+ "standings": [
+  {
+   "group": "Group A",
+   "rows": [
+    {
+     "name": "Mexico",
+     "tla": "MEX",
+     "crest": "https://flagcdn.com/mx.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 2,
+     "ga": 0,
+     "gd": 2,
+     "points": 3
+    },
+    {
+     "name": "South Korea",
+     "tla": "KOR",
+     "crest": "https://flagcdn.com/kr.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 2,
+     "ga": 1,
+     "gd": 1,
+     "points": 3
+    },
+    {
+     "name": "Czechia",
+     "tla": "CZE",
+     "crest": "https://flagcdn.com/cz.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 2,
+     "gd": -1,
+     "points": 0
+    },
+    {
+     "name": "South Africa",
+     "tla": "RSA",
+     "crest": "https://flagcdn.com/za.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 0,
+     "ga": 2,
+     "gd": -2,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group B",
+   "rows": [
+    {
+     "name": "Switzerland",
+     "tla": "SUI",
+     "crest": "https://flagcdn.com/ch.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Canada",
+     "tla": "CAN",
+     "crest": "https://flagcdn.com/ca.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Qatar",
+     "tla": "QAT",
+     "crest": "https://flagcdn.com/qa.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Bosnia-Herzegovina",
+     "tla": "BIH",
+     "crest": "https://flagcdn.com/ba.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    }
+   ]
+  },
+  {
+   "group": "Group C",
+   "rows": [
+    {
+     "name": "Scotland",
+     "tla": "SCO",
+     "crest": "https://flagcdn.com/gb-sct.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 1,
+     "ga": 0,
+     "gd": 1,
+     "points": 3
+    },
+    {
+     "name": "Morocco",
+     "tla": "MAR",
+     "crest": "https://flagcdn.com/ma.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Brazil",
+     "tla": "BRA",
+     "crest": "https://flagcdn.com/br.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Haiti",
+     "tla": "HAI",
+     "crest": "https://flagcdn.com/ht.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 0,
+     "ga": 1,
+     "gd": -1,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group D",
+   "rows": [
+    {
+     "name": "United States",
+     "tla": "USA",
+     "crest": "https://flagcdn.com/us.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 4,
+     "ga": 1,
+     "gd": 3,
+     "points": 3
+    },
+    {
+     "name": "Australia",
+     "tla": "AUS",
+     "crest": "https://flagcdn.com/au.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 2,
+     "ga": 0,
+     "gd": 2,
+     "points": 3
+    },
+    {
+     "name": "Türkiye",
+     "tla": "TUR",
+     "crest": "https://flagcdn.com/tr.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 0,
+     "ga": 2,
+     "gd": -2,
+     "points": 0
+    },
+    {
+     "name": "Paraguay",
+     "tla": "PAR",
+     "crest": "https://flagcdn.com/py.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 4,
+     "gd": -3,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group E",
+   "rows": [
+    {
+     "name": "Germany",
+     "tla": "GER",
+     "crest": "https://flagcdn.com/de.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 7,
+     "ga": 1,
+     "gd": 6,
+     "points": 3
+    },
+    {
+     "name": "Ivory Coast",
+     "tla": "CIV",
+     "crest": "https://flagcdn.com/ci.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 1,
+     "ga": 0,
+     "gd": 1,
+     "points": 3
+    },
+    {
+     "name": "Ecuador",
+     "tla": "ECU",
+     "crest": "https://flagcdn.com/ec.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 0,
+     "ga": 1,
+     "gd": -1,
+     "points": 0
+    },
+    {
+     "name": "Curaçao",
+     "tla": "CUW",
+     "crest": "https://flagcdn.com/cw.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 7,
+     "gd": -6,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group F",
+   "rows": [
+    {
+     "name": "Sweden",
+     "tla": "SWE",
+     "crest": "https://flagcdn.com/se.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 5,
+     "ga": 1,
+     "gd": 4,
+     "points": 3
+    },
+    {
+     "name": "Japan",
+     "tla": "JPN",
+     "crest": "https://flagcdn.com/jp.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 2,
+     "ga": 2,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Netherlands",
+     "tla": "NED",
+     "crest": "https://flagcdn.com/nl.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 2,
+     "ga": 2,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Tunisia",
+     "tla": "TUN",
+     "crest": "https://flagcdn.com/tn.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 5,
+     "gd": -4,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group G",
+   "rows": [
+    {
+     "name": "New Zealand",
+     "tla": "NZL",
+     "crest": "https://flagcdn.com/nz.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 2,
+     "ga": 2,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Iran",
+     "tla": "IRN",
+     "crest": "https://flagcdn.com/ir.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 2,
+     "ga": 2,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Belgium",
+     "tla": "BEL",
+     "crest": "https://flagcdn.com/be.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Egypt",
+     "tla": "EGY",
+     "crest": "https://flagcdn.com/eg.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    }
+   ]
+  },
+  {
+   "group": "Group H",
+   "rows": [
+    {
+     "name": "Uruguay",
+     "tla": "URU",
+     "crest": "https://flagcdn.com/uy.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Saudi Arabia",
+     "tla": "KSA",
+     "crest": "https://flagcdn.com/sa.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 1,
+     "ga": 1,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Spain",
+     "tla": "ESP",
+     "crest": "https://flagcdn.com/es.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 1
+    },
+    {
+     "name": "Cape Verde",
+     "tla": "CPV",
+     "crest": "https://flagcdn.com/cv.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 1,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 1
+    }
+   ]
+  },
+  {
+   "group": "Group I",
+   "rows": [
+    {
+     "name": "Norway",
+     "tla": "NOR",
+     "crest": "https://flagcdn.com/no.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 4,
+     "ga": 1,
+     "gd": 3,
+     "points": 3
+    },
+    {
+     "name": "France",
+     "tla": "FRA",
+     "crest": "https://flagcdn.com/fr.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 3,
+     "ga": 1,
+     "gd": 2,
+     "points": 3
+    },
+    {
+     "name": "Senegal",
+     "tla": "SEN",
+     "crest": "https://flagcdn.com/sn.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 3,
+     "gd": -2,
+     "points": 0
+    },
+    {
+     "name": "Iraq",
+     "tla": "IRQ",
+     "crest": "https://flagcdn.com/iq.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 4,
+     "gd": -3,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group J",
+   "rows": [
+    {
+     "name": "Argentina",
+     "tla": "ARG",
+     "crest": "https://flagcdn.com/ar.svg",
+     "rank": 1,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 3,
+     "ga": 0,
+     "gd": 3,
+     "points": 3
+    },
+    {
+     "name": "Austria",
+     "tla": "AUT",
+     "crest": "https://flagcdn.com/at.svg",
+     "rank": 2,
+     "played": 1,
+     "win": 1,
+     "draw": 0,
+     "loss": 0,
+     "gf": 3,
+     "ga": 1,
+     "gd": 2,
+     "points": 3
+    },
+    {
+     "name": "Jordan",
+     "tla": "JOR",
+     "crest": "https://flagcdn.com/jo.svg",
+     "rank": 3,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 1,
+     "ga": 3,
+     "gd": -2,
+     "points": 0
+    },
+    {
+     "name": "Algeria",
+     "tla": "ALG",
+     "crest": "https://flagcdn.com/dz.svg",
+     "rank": 4,
+     "played": 1,
+     "win": 0,
+     "draw": 0,
+     "loss": 1,
+     "gf": 0,
+     "ga": 3,
+     "gd": -3,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group K",
+   "rows": [
+    {
+     "name": "Portugal",
+     "tla": "POR",
+     "crest": "https://flagcdn.com/pt.svg",
+     "rank": 1,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    },
+    {
+     "name": "Congo DR",
+     "tla": "COD",
+     "crest": "https://flagcdn.com/cd.svg",
+     "rank": 2,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    },
+    {
+     "name": "Uzbekistan",
+     "tla": "UZB",
+     "crest": "https://flagcdn.com/uz.svg",
+     "rank": 3,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    },
+    {
+     "name": "Colombia",
+     "tla": "COL",
+     "crest": "https://flagcdn.com/co.svg",
+     "rank": 4,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    }
+   ]
+  },
+  {
+   "group": "Group L",
+   "rows": [
+    {
+     "name": "England",
+     "tla": "ENG",
+     "crest": "https://flagcdn.com/gb-eng.svg",
+     "rank": 1,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    },
+    {
+     "name": "Croatia",
+     "tla": "CRO",
+     "crest": "https://flagcdn.com/hr.svg",
+     "rank": 2,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    },
+    {
+     "name": "Ghana",
+     "tla": "GHA",
+     "crest": "https://flagcdn.com/gh.svg",
+     "rank": 3,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    },
+    {
+     "name": "Panama",
+     "tla": "PAN",
+     "crest": "https://flagcdn.com/pa.svg",
+     "rank": 4,
+     "played": 0,
+     "win": 0,
+     "draw": 0,
+     "loss": 0,
+     "gf": 0,
+     "ga": 0,
+     "gd": 0,
+     "points": 0
+    }
+   ]
+  }
+ ],
+ "favorites": [
+  {
+   "team": "Netherlands",
+   "hasGame": true,
+   "when": "Sat, Jun 20",
+   "kickoffLocal": "10:00 AM",
+   "group": "Group F",
+   "stage": "GROUP_STAGE",
+   "venue": {
+    "id": "houston",
+    "stadium": "NRG Stadium",
+    "fifaName": "Houston Stadium",
+    "city": "Houston",
+    "country": "USA",
+    "capacity": 72220,
+    "lat": 29.6847,
+    "lng": -95.4107,
+    "timezone": "America/Chicago"
+   },
+   "isLive": false,
+   "minute": null,
+   "fav": {
+    "name": "Netherlands",
+    "tla": "NED",
+    "crest": "https://flagcdn.com/nl.svg",
+    "score": null
+   },
+   "opp": {
+    "name": "Sweden",
+    "tla": "SWE",
+    "crest": "https://flagcdn.com/se.svg",
+    "score": null
+   }
+  },
+  {
+   "team": "USA",
+   "hasGame": true,
+   "when": "Fri, Jun 19",
+   "kickoffLocal": "12:00 PM",
+   "group": "Group D",
+   "stage": "GROUP_STAGE",
+   "venue": {
+    "id": "seattle",
+    "stadium": "Lumen Field",
+    "fifaName": "Seattle Stadium",
+    "city": "Seattle",
+    "country": "USA",
+    "capacity": 68740,
+    "lat": 47.5952,
+    "lng": -122.3316,
+    "timezone": "America/Los_Angeles"
+   },
+   "isLive": false,
+   "minute": null,
+   "fav": {
+    "name": "United States",
+    "tla": "USA",
+    "crest": "https://flagcdn.com/us.svg",
+    "score": null
+   },
+   "opp": {
+    "name": "Australia",
+    "tla": "AUS",
+    "crest": "https://flagcdn.com/au.svg",
+    "score": null
+   }
+  }
+ ],
+ "city": "Seattle",
+ "cityGames": [
+  {
+   "hasGame": true,
+   "when": "Fri, Jun 19",
+   "kickoffLocal": "12:00 PM",
+   "group": "Group D",
+   "venue": {
+    "id": "seattle",
+    "stadium": "Lumen Field",
+    "fifaName": "Seattle Stadium",
+    "city": "Seattle",
+    "country": "USA",
+    "capacity": 68740,
+    "lat": 47.5952,
+    "lng": -122.3316,
+    "timezone": "America/Los_Angeles"
+   },
+   "isLive": false,
+   "minute": null,
+   "home": {
+    "name": "United States",
+    "tla": "USA",
+    "crest": "https://flagcdn.com/us.svg",
+    "score": null
+   },
+   "away": {
+    "name": "Australia",
+    "tla": "AUS",
+    "crest": "https://flagcdn.com/au.svg",
+    "score": null
+   }
+  },
+  {
+   "hasGame": true,
+   "when": "Wed, Jun 24",
+   "kickoffLocal": "12:00 PM",
+   "group": "Group B",
+   "venue": {
+    "id": "seattle",
+    "stadium": "Lumen Field",
+    "fifaName": "Seattle Stadium",
+    "city": "Seattle",
+    "country": "USA",
+    "capacity": 68740,
+    "lat": 47.5952,
+    "lng": -122.3316,
+    "timezone": "America/Los_Angeles"
+   },
+   "isLive": false,
+   "minute": null,
+   "home": {
+    "name": "Bosnia-Herzegovina",
+    "tla": "BIH",
+    "crest": "https://flagcdn.com/ba.svg",
+    "score": null
+   },
+   "away": {
+    "name": "Qatar",
+    "tla": "QAT",
+    "crest": "https://flagcdn.com/qa.svg",
+    "score": null
+   }
+  }
+ ]
+}
