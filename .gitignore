@@ -22,5 +22,13 @@ plugin/_build/
 # nix
 /result
 
+# Vendored TRMNL framework assets (large; fetched via `npm run test:fetch-assets`)
+test/render/vendor/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+
 # local scratch notes
 todo.md

@@ -2,6 +2,7 @@
   "name": "trmnl-backend",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Cloudflare Workers backend for TRMNL plugins",
   "license": "MIT",
   "author": "Giovanni d'Amelio",
@@ -9,10 +10,18 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "secrets": "wrangler secret bulk .env",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots"
   },
   "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.16.16",
     "@cloudflare/workers-types": "^4.20260610.0",
-    "typescript": "^5.7.0"
+    "@playwright/test": "1.59.1",
+    "liquidjs": "^10.27.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.9"
   }
 }
